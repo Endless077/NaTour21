@@ -1,0 +1,1 @@
+Varie utils per le schermate app.

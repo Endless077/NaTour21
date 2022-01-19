@@ -1,0 +1,13 @@
+{
+  "client_id" : "75101aa4-d599-4b3b-92d5-224128bc6427",
+  "redirect_uri" : "msauth://com.azuresamples.msalandroidapp/1wIqXSqBj7w%2Bh11ZifsnqwgyKrY%3D",
+  "account_mode" : "MULTIPLE",
+  "broker_redirect_uri_registered": false,
+  "authorities": [
+    {
+      "type": "B2C",
+      "authority_url": "https://NaTour21INGSWN05.b2clogin.com/NaTour21INGSWN05.onmicrosoft.com/B2C_1_UserPool/",
+      "default": true
+    }
+  ]
+}
