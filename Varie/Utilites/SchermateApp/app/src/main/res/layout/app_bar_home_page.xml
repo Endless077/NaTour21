@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePageActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/prova"
+        android:theme="@style/Theme.SchermateApp.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="372dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/prova"
+            app:popupTheme="@style/Theme.SchermateApp.PopupOverlay">
+
+            <EditText
+                android:id="@+id/EditTextCerca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/cerca_plain_text_shape"
+                android:hint="@string/cerca"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="32dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_home_page" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/toolbarColor"
+        android:text="@string/aggiungiPercorso"
+        android:textSize="@dimen/activity_vertical_margin"
+        app:cornerRadius="100dip"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="textEnd" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
