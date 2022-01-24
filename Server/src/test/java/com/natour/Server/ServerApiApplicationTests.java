@@ -1,10 +1,10 @@
-package com.natour21.api.Server;
+package com.natour.Server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerSpringbootApplicationTests {
+class ServerApiApplicationTests {
 
 	@Test
 	void contextLoads() {
