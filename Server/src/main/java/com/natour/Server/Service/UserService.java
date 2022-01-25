@@ -26,7 +26,7 @@ public class UserService {
 		return this.userRep.findById(username);
 	}
 
-	public List<User> getALL() {
+	public List<User> getAllUser() {
 		return this.userRep.findAll();
 	}
 	

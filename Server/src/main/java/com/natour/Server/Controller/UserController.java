@@ -31,7 +31,7 @@ public class UserController {
 	//Get Mapping
 	@GetMapping("listaUtenti")
 	public List<User> getAll() {
-		return this.userService.getALL();
+		return this.userService.getAllUser();
 	}
 	
 	@GetMapping("getUtente/{username}")
@@ -43,6 +43,7 @@ public class UserController {
 	
 	
 	//Delete Mapping
+	
 	
 	//Getter e Setter
 	public UserService getUserService() {
