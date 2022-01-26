@@ -16,24 +16,42 @@ public class CompilationController {
 
 	private CompilationService compilationService;
 
-	
+	/*********************************************************************************************/
+
 	//Constructor
 	@Autowired
 	public CompilationController(CompilationService compilationService) {
 		super();
 		this.compilationService = compilationService;
 	}
-	
 
-	public CompilationController() {
-		
-	}
-	
+	public CompilationController() {}
+
+	/*********************************************************************************************/
+
 	//Get Mapping
 	@GetMapping("listaCompilation")
 	public List<Compilation> getAll(){
 		return this.compilationService.getAllCompilation();
 	}
-	
-	
+
+	//Put Mapping
+
+
+	//Delete Mapping
+
+
+	/*********************************************************************************************/
+
+	//Getter e Setter
+	public CompilationService getCompilationService() {
+		return compilationService;
+	}
+
+	public void setCompilationService(CompilationService compilationService) {
+		this.compilationService = compilationService;
+	}
+
+	/*********************************************************************************************/
+
 }

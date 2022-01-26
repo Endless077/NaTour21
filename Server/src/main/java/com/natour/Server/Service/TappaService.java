@@ -10,19 +10,30 @@ import com.natour.Server.Repository.TappaRepository;
 @Service
 public class TappaService {
 
-private final TappaRepository tappaRep;
-	
+	private final TappaRepository tappaRep;
+
+	/*********************************************************************************************/
+
+	//Constructor
 	public TappaService(TappaRepository tappaRep) {
 		super();
 		this.tappaRep = tappaRep;
 	}
-	
+
+	/*********************************************************************************************/
+
+	//Methods
 	public List<Tappa> getAllTappe() {
 		return this.tappaRep.findAll();
 	}
 
+	/*********************************************************************************************/
+
+	//Getter e Setter
 	public TappaRepository getTappaRep() {
 		return tappaRep;
 	}
-	
+
+	/*********************************************************************************************/
+
 }

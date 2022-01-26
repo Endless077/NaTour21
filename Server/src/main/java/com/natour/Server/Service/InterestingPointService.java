@@ -11,8 +11,9 @@ import com.natour.Server.Repository.InterestingPointRepository;
 @Service
 public class InterestingPointService {
 
-
 	private final InterestingPointRepository interestinpointRep;
+
+	/*********************************************************************************************/
 
 	//Constructor
 	@Autowired
@@ -21,8 +22,19 @@ public class InterestingPointService {
 		this.interestinpointRep = interestinpointRep;
 	}
 
+	/*********************************************************************************************/
+
 	//Methods
 	public List<InterestingPoint> getAllInterestinPoint() {
 		return this.interestinpointRep.findAll();
 	}
+
+	/*********************************************************************************************/
+
+	//Getter e Setter
+	public InterestingPointRepository getInterestinpointRep() {
+		return interestinpointRep;
+	}
+
+	/*********************************************************************************************/
 }

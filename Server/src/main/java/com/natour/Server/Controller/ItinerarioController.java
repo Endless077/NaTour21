@@ -13,22 +13,45 @@ import com.natour.Server.Service.ItinerarioService;
 @RestController
 @RequestMapping("api/itinerario")
 public class ItinerarioController {
-	
+
 	private ItinerarioService itinerarioService;
-	
+
+	/*********************************************************************************************/
+
 	//Constructor
 	@Autowired
 	public ItinerarioController(ItinerarioService itinerarioService) {
 		super();
 		this.itinerarioService = itinerarioService;
 	}
-	
+
 	public ItinerarioController() {}
+
+	/*********************************************************************************************/
 
 	//Get Mapping
 	@GetMapping("listaItinerari")
 	public List<Itinerario> getAll() {
 		return this.itinerarioService.getAllItinerari();
 	}
-	
+
+	//Put Mapping
+
+
+	//Delete Mapping
+
+
+	/*********************************************************************************************/
+
+	//Getter e Setter
+	public ItinerarioService getItinerarioService() {
+		return itinerarioService;
+	}
+
+	public void setItinerarioService(ItinerarioService itinerarioService) {
+		this.itinerarioService = itinerarioService;
+	}
+
+	/*********************************************************************************************/
+
 }

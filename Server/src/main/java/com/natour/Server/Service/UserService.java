@@ -11,25 +11,30 @@ import com.natour.Server.Repository.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	private final UserRepository userRep;
-	
+
 	//Constructor
 	@Autowired
 	public UserService(UserRepository userRep) {
 		super();
 		this.userRep = userRep;
 	}
-	
+
+	/*********************************************************************************************/
+
 	//Methods
+	public List<User> getAllUser() {
+		return this.userRep.findAll();
+	}
+
 	public Optional<User> getUtente(String username) {
 		return this.userRep.findById(username);
 	}
 
-	public List<User> getAllUser() {
-		return this.userRep.findAll();
-	}
-	
+	/*********************************************************************************************/
+
+	//Getter e Setter
 	public UserRepository getUserRep() {
 		return userRep;
 	}

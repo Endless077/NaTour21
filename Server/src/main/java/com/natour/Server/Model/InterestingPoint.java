@@ -1,20 +1,22 @@
 package com.natour.Server.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="interestingpoint")
-public class InterestingPoint {
-	
+public class InterestingPoint implements Serializable {
+
 	//Class Primary Key
 	@Id
 	@Column(name="id_interestingpoint")
 	private Long id_interestingpoint;
-	
+
 	//Class Foreign Key
 	@JoinColumn(name = "id_itinerario")
 	private Long id_itinerario;
-	
+
 	//Campi Locali
 	@Column(name="latitudine")
 	private Double latitudine;
@@ -24,7 +26,10 @@ public class InterestingPoint {
 	private String descrizione;
 	@Column(name="titolo")
 	private String titolo;
-	
+
+	/*********************************************************************************************/
+
+	//Constructor
 	public InterestingPoint(Long id_interestingpoint, Long id_itinerario, Double latitudine, Double longitudine,
 			String descrizione, String titolo) {
 		super();
@@ -35,9 +40,12 @@ public class InterestingPoint {
 		this.descrizione = descrizione;
 		this.titolo = titolo;
 	}
-	
+
 	public InterestingPoint() {}
 
+	/*********************************************************************************************/
+
+	//Getter e Setter
 	public Long getId_interestingpoint() {
 		return id_interestingpoint;
 	}
@@ -85,5 +93,7 @@ public class InterestingPoint {
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
+
+	/*********************************************************************************************/
 
 }

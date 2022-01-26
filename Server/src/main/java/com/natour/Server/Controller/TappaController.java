@@ -14,21 +14,44 @@ import com.natour.Server.Service.TappaService;
 @RequestMapping("api/tappa")
 public class TappaController {
 
-private TappaService tappaService;
-	
+	private TappaService tappaService;
+
+	/*********************************************************************************************/
+
 	//Constructor
 	@Autowired
 	public TappaController(TappaService tappaService) {
 		super();
 		this.tappaService = tappaService;
 	}
-	
+
 	public TappaController() {}
+
+	/*********************************************************************************************/
 
 	//Get Mapping
 	@GetMapping("listaTappe")
 	public List<Tappa> getAll() {
 		return this.tappaService.getAllTappe();
 	}
-	
+
+	//Put Mapping
+
+
+	//Delete Mapping
+
+
+	/*********************************************************************************************/
+
+	//Getter e Setter
+	public TappaService getTappaService() {
+		return tappaService;
+	}
+
+	public void setTappaService(TappaService tappaService) {
+		this.tappaService = tappaService;
+	}
+
+	/*********************************************************************************************/
+
 }

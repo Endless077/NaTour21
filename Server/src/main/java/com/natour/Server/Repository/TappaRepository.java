@@ -1,7 +1,9 @@
 package com.natour.Server.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.natour.Server.Model.Tappa;
 
+@Repository
 public interface TappaRepository extends JpaRepository<Tappa,Long> {}

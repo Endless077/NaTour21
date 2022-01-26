@@ -15,35 +15,41 @@ import com.natour.Server.Service.UserService;
 @RestController
 @RequestMapping("api/user")
 public class UserController {
-	
+
 	private UserService userService;
-	
+
+	/*********************************************************************************************/
+
 	//Constructor
 	@Autowired
 	public UserController(UserService userService) {
 		super();
 		this.userService = userService;
 	}
-	
+
 	public UserController() {}
-	
+
+	/*********************************************************************************************/
+
 	//Get Mapping
 	@GetMapping("listaUtenti")
-	public List<User> getAll() {
+	public List<User> getAllUser() {
 		return this.userService.getAllUser();
 	}
-	
+
 	@GetMapping("getUtente/{username}")
 	public Optional<User> getUser(@PathVariable String username) {
 		return this.userService.getUtente(username);
 	}
-	
+
 	//Put Mapping
-	
-	
+
+
 	//Delete Mapping
-	
-	
+
+
+	/*********************************************************************************************/
+
 	//Getter e Setter
 	public UserService getUserService() {
 		return userService;
@@ -53,5 +59,7 @@ public class UserController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
+	/*********************************************************************************************/
 
 }

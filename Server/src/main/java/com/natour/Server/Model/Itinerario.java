@@ -1,20 +1,22 @@
 package com.natour.Server.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="itinerario")
-public class Itinerario {
-	
+public class Itinerario implements Serializable {
+
 	//Class Primary Key
 	@Id
 	@Column(name="id_itinerario")
 	private Long id_itinerario;
-	
+
 	//Class Foreign Key
 	@JoinColumn(name = "id_utente")
 	private String id_utente;
-	
+
 	//Campi Locali
 	@Column(name="titolo")
 	private String titolo;
@@ -34,7 +36,10 @@ public class Itinerario {
 	private Double lunghezza;
 	@Column(name="areageografica")
 	private String areageografica;
-	
+
+	/*********************************************************************************************/
+
+	//Constructor
 	public Itinerario(Long id_itinerario, String id_utente, String titolo, String descrizione, String puntoinizio,
 			String puntofine, Boolean accessibilitadisabili, String difficoltà, String durata, Double lunghezza, String areageografica) {
 		super();
@@ -50,9 +55,12 @@ public class Itinerario {
 		this.lunghezza = lunghezza;
 		this.areageografica = areageografica;
 	}
-	
+
 	public Itinerario() {}
-	
+
+	/*********************************************************************************************/
+
+	//Getter e Setter
 	public Long getId_itinerario() {
 		return id_itinerario;
 	}
@@ -109,7 +117,7 @@ public class Itinerario {
 	public void setDurata(String durata) {
 		this.durata = durata;
 	}
-	
+
 	public Double getLunghezza() {
 		return lunghezza;
 	}
@@ -124,5 +132,7 @@ public class Itinerario {
 	public void setAreageografica(String areageografica) {
 		this.areageografica = areageografica;
 	}
-	
+
+	/*********************************************************************************************/
+
 }

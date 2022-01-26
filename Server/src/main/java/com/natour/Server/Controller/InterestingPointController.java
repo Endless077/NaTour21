@@ -25,9 +25,22 @@ public class InterestingPointController {
 
 	public InterestingPointController() {}
 
+	/*********************************************************************************************/
+
 	//Get Mapping
 	@GetMapping("listaInterestingPoint")
 	public List<InterestingPoint> getAll() {
 		return this.interestingpointService.getAllInterestinPoint();
 	}
+
+	//Put Mapping
+
+
+	//Delete Mapping
+
+	/*********************************************************************************************/
+
+
+	/*********************************************************************************************/
+
 }

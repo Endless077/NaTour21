@@ -1,20 +1,22 @@
 package com.natour.Server.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="tappa")
-public class Tappa {
-	
+public class Tappa implements Serializable {
+
 	//Class Primary Key
 	@Id
 	@Column(name="id_tappa")
 	private Long id_tappa;
-	
+
 	//Class Foreign Key
 	@JoinColumn(name="id_itinerario")
 	private Long id_itinerario;
-	
+
 	//Campi Locali
 	@Column(name="nometappa")
 	private String nometappa;
@@ -26,7 +28,10 @@ public class Tappa {
 	private String tipotappa;
 	@Column(name="sequenza")
 	private Integer sequenza;
-	
+
+	/*********************************************************************************************/
+
+	//Constructor
 	public Tappa(Long id_tappa, Long id_itinerario, String nometappa, Double latitudine, Double longitudine,
 			String tipotappa, Integer sequenza) {
 		super();
@@ -38,9 +43,12 @@ public class Tappa {
 		this.tipotappa = tipotappa;
 		this.sequenza = sequenza;
 	}
-	
+
 	public Tappa() {}
 
+	/*********************************************************************************************/
+
+	//Getter e Setter
 	public Long getId_tappa() {
 		return id_tappa;
 	}
@@ -96,5 +104,6 @@ public class Tappa {
 	public void setSequenza(Integer sequenza) {
 		this.sequenza = sequenza;
 	}
-	
+
+	/*********************************************************************************************/
 }
