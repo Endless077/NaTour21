@@ -1,5 +1,9 @@
 package com.natour.Server.Repository;
 
-public interface CompilationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.natour.Server.Model.Compilation;
+
+public interface CompilationRepository extends JpaRepository<Compilation, Long> {
 
 }
