@@ -30,7 +30,7 @@ public class CompilationItinerarioController  {
 	/*********************************************************************************************/
 
 	//Get Mapping
-	@GetMapping("listaCompilationItinerario")
+	@GetMapping(path = "listaCompilationItinerario")
 	public List<CompilationItinerario> getAll(){
 		return this.compilationItinerarioService.getAllCompilationItinerario();
 	}

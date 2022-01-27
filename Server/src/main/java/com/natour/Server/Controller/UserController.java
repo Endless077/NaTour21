@@ -3,60 +3,98 @@ package com.natour.Server.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.natour.Server.Model.User;
 import com.natour.Server.Service.UserService;
+import com.natour.Server.ServiceInterface.IUserService;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping(path = "api/user", produces = { "application/json" })
 public class UserController {
 
-	private UserService userService;
+	@Autowired
+	@Qualifier("mainUserService")
+	private IUserService userService;
 
 	/*********************************************************************************************/
 
 	//Constructor
-	@Autowired
-	public UserController(UserService userService) {
-		super();
-		this.userService = userService;
-	}
+	//	@Autowired
+	//	public UserController(UserService userService) {
+	//		super();
+	//		this.userService = userService;
+	//	}
 
 	public UserController() {}
 
 	/*********************************************************************************************/
 
 	//Get Mapping
-	@GetMapping("listaUtenti")
+	@GetMapping(path = "listaUtenti")
+	@ResponseBody
 	public List<User> getAllUser() {
 		return this.userService.getAllUser();
 	}
 
-	@GetMapping("getUtente/{username}")
+	@GetMapping(path = "getUtente/{username}")
+	@ResponseBody
 	public Optional<User> getUser(@PathVariable String username) {
 		return this.userService.getUtente(username);
 	}
 
-	//Put Mapping
+	//Post Mapping
+	@PostMapping(path = "createUtente")
+	@ResponseBody
+	public ResponseEntity<String> createUser(@RequestBody User utente) {
 
+		boolean creato = this.userService.creaUtente(utente);
+
+		if(creato)
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		else
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utente non salvato.");
+	}
+
+	//Put Mapping
+	//Not implemented.
 
 	//Delete Mapping
+	@DeleteMapping(path = "deleteUtente/{username}")
+	@ResponseBody
+	public ResponseEntity<String> deleteUser(@PathVariable String username) {
+		
+		boolean eliminato = this.userService.deleteUtente(username);
 
+		if(eliminato)
+			return ResponseEntity.status(HttpStatus.OK).build();
+		else
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utente non eliminato.");
+	}
 
 	/*********************************************************************************************/
 
 	//Getter e Setter
-	public UserService getUserService() {
+	public IUserService getUserService() {
 		return userService;
 	}
 
 
-	public void setUserService(UserService userService) {
+	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.natour.Server.Model.FotoInterestingPoint;
 import com.natour.Server.Repository.FotoInterestingPointRepository;
 
-@Service
+@Service("mainFotoInterestingPointService")
 public class FotoInterestingPointService {
 
 	private final FotoInterestingPointRepository fotoInterestingPointRep;

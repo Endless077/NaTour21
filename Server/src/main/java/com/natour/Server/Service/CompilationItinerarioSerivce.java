@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.natour.Server.Model.CompilationItinerario;
 import com.natour.Server.Repository.CompilationItinerarioRepository;
 
-@Service
+@Service("mainCompilationItinerarioService")
 public class CompilationItinerarioSerivce {
 
 	private final CompilationItinerarioRepository compilationItinerarioRep;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.natour.Server.Model.Tappa;
 import com.natour.Server.Repository.TappaRepository;
 
-@Service
+@Service("mainTappaService")
 public class TappaService {
 
 	private final TappaRepository tappaRep;

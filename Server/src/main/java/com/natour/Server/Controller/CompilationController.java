@@ -30,7 +30,7 @@ public class CompilationController {
 	/*********************************************************************************************/
 
 	//Get Mapping
-	@GetMapping("listaCompilation")
+	@GetMapping(path = "listaCompilation")
 	public List<Compilation> getAll(){
 		return this.compilationService.getAllCompilation();
 	}

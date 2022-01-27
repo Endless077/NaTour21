@@ -30,7 +30,7 @@ public class TappaController {
 	/*********************************************************************************************/
 
 	//Get Mapping
-	@GetMapping("listaTappe")
+	@GetMapping(path = "listaTappe")
 	public List<Tappa> getAll() {
 		return this.tappaService.getAllTappe();
 	}

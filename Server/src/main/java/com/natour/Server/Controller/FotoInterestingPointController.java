@@ -30,7 +30,7 @@ public class FotoInterestingPointController {
 	/*********************************************************************************************/
 
 	//Get Mapping
-	@GetMapping("listaFotoInterestingPoint")
+	@GetMapping(path = "listaFotoInterestingPoint")
 	public List<FotoInterestingPoint> getAll() {
 		return this.fotoInterestingPointService.getAllFotoInterestingPoint();
 	}

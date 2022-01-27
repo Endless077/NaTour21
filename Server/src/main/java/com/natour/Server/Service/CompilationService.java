@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.natour.Server.Model.Compilation;
 import com.natour.Server.Repository.CompilationRepository;
 
-@Service
+@Service("mainCompilationService")
 public class CompilationService {
 
 	private final CompilationRepository compilationRep;

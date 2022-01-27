@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Repository.ItinerarioRepository;
 
-@Service
+@Service("mainItinerarioService")
 public class ItinerarioService {
 
 	private final ItinerarioRepository itinerarioRep;

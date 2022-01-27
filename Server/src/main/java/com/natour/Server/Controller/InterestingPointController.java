@@ -28,7 +28,7 @@ public class InterestingPointController {
 	/*********************************************************************************************/
 
 	//Get Mapping
-	@GetMapping("listaInterestingPoint")
+	@GetMapping(path = "listaInterestingPoint")
 	public List<InterestingPoint> getAll() {
 		return this.interestingpointService.getAllInterestinPoint();
 	}
