@@ -11,16 +11,14 @@ import com.natour.Server.Repository.InterestingPointRepository;
 @Service("mainInterestingPointService")
 public class InterestingPointService {
 
-	private final InterestingPointRepository interestinpointRep;
+	@Autowired
+	private InterestingPointRepository interestinpointRep;
 
 	/*********************************************************************************************/
 
 	//Constructor
 	@Autowired
-	public InterestingPointService(InterestingPointRepository interestinpointRep) {
-		super();
-		this.interestinpointRep = interestinpointRep;
-	}
+	public InterestingPointService() {}
 
 	/*********************************************************************************************/
 

@@ -2,6 +2,7 @@ package com.natour.Server.Service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.Tappa;
@@ -9,16 +10,14 @@ import com.natour.Server.Repository.TappaRepository;
 
 @Service("mainTappaService")
 public class TappaService {
-
-	private final TappaRepository tappaRep;
+	
+	@Autowired
+	private TappaRepository tappaRep;
 
 	/*********************************************************************************************/
 
 	//Constructor
-	public TappaService(TappaRepository tappaRep) {
-		super();
-		this.tappaRep = tappaRep;
-	}
+	public TappaService() {}
 
 	/*********************************************************************************************/
 

@@ -1,54 +1,32 @@
-package com.natour.Server.Model;
+package com.natour.Server.Model.DTO;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
-
-//import java.util.ArrayList;
-//import java.util.List;
-//import com.natour.Server.Model.Compilation;
-
-@Entity
-@Table(name="utente")
-public class User implements Serializable {
+public class UserDTO {
 
 	//Class Primary Key
-	@Id
-	@Column(name="username")
 	private String username;
 
-	//Relations
-	//@OneToMany(mappedBy="utente",targetEntity=Compilation.class)
-	//private List<Compilation> compilation;
-
 	//Campi Locali
-	@Column(name="email")
 	private String email;
-	@Column(name="nome")
 	private String nome;
-	@Column(name="cognome")
 	private String cognome;
-	@Column(name="photolnk")
 	private String photoLnk;
-
+	
 	/*********************************************************************************************/
-
+	
 	//Constructor
-	public User(String username, String email, String name, String surname, String photolnk) {
+	public UserDTO(String username, String email, String nome, String cognome, String photoLnk) {
 		super();
 		this.username = username;
 		this.email = email;
-		this.nome = name;
-		this.cognome = surname;
-		this.photoLnk = photolnk;
-		
-		//this.compilation = new ArrayList<Compilation>();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.photoLnk = photoLnk;
 	}
-
-	public User() {}
+	
+	public UserDTO() {}
 
 	/*********************************************************************************************/
-
+	
 	//Getter e Setter
 	public String getUsername() {
 		return username;
@@ -90,15 +68,6 @@ public class User implements Serializable {
 		this.photoLnk = photoLnk;
 	}
 
-	//Relations
-//	public List<Compilation> getCompilation() {
-//		return compilation;
-//	}
-//
-//	public void setCompilation(List<Compilation> compilation) {
-//		this.compilation = compilation;
-//	}
-	
 	/*********************************************************************************************/
-
+	
 }

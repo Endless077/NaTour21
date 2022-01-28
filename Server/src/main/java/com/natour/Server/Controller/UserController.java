@@ -3,12 +3,10 @@ package com.natour.Server.Controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.natour.Server.Model.User;
-import com.natour.Server.Service.UserService;
 import com.natour.Server.ServiceInterface.IUserService;
 
 @RestController
@@ -30,7 +27,7 @@ public class UserController {
 	@Autowired
 	@Qualifier("mainUserService")
 	private IUserService userService;
-
+	
 	/*********************************************************************************************/
 
 	//Constructor
@@ -47,14 +44,17 @@ public class UserController {
 	//Get Mapping
 	@GetMapping(path = "listaUtenti")
 	@ResponseBody
-	public List<User> getAllUser() {
+	public List<User> getAll() {
 		return this.userService.getAllUser();
 	}
 
 	@GetMapping(path = "getUtente/{username}")
 	@ResponseBody
-	public Optional<User> getUser(@PathVariable String username) {
-		return this.userService.getUtente(username);
+	public Optional<User> getUser(@PathVariable(name = "username") String username) {
+		Optional<User> result = this.userService.getUtente(username);
+		if(result.isEmpty())
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Utente non trovato.");
+		return result;
 	}
 
 	//Post Mapping
@@ -63,7 +63,6 @@ public class UserController {
 	public ResponseEntity<String> createUser(@RequestBody User utente) {
 
 		boolean creato = this.userService.creaUtente(utente);
-
 		if(creato)
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		else
@@ -76,10 +75,9 @@ public class UserController {
 	//Delete Mapping
 	@DeleteMapping(path = "deleteUtente/{username}")
 	@ResponseBody
-	public ResponseEntity<String> deleteUser(@PathVariable String username) {
+	public ResponseEntity<String> deleteUser(@PathVariable(name = "username") String username) {
 		
 		boolean eliminato = this.userService.deleteUtente(username);
-
 		if(eliminato)
 			return ResponseEntity.status(HttpStatus.OK).build();
 		else
@@ -92,7 +90,6 @@ public class UserController {
 	public IUserService getUserService() {
 		return userService;
 	}
-
 
 	public void setUserService(IUserService userService) {
 		this.userService = userService;

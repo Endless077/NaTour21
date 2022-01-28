@@ -14,9 +14,9 @@ public class CompilationItinerario implements Serializable {
 	private Long username;
 
 	//Class Foreign Key
-	@JoinColumn(name = "id_compilation")
+	@Column(name = "id_compilation")
 	private Long id_compilation;
-	@JoinColumn(name = "id_itinerario")
+	@Column(name = "id_itinerario")
 	private Long id_itinerario;
 
 	/*********************************************************************************************/

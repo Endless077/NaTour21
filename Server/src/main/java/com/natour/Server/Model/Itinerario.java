@@ -14,7 +14,7 @@ public class Itinerario implements Serializable {
 	private Long id_itinerario;
 
 	//Class Foreign Key
-	@JoinColumn(name = "id_utente")
+	@Column(name = "id_utente")
 	private String id_utente;
 
 	//Campi Locali

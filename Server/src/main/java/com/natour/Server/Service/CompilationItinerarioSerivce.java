@@ -11,16 +11,13 @@ import com.natour.Server.Repository.CompilationItinerarioRepository;
 @Service("mainCompilationItinerarioService")
 public class CompilationItinerarioSerivce {
 
-	private final CompilationItinerarioRepository compilationItinerarioRep;
+	@Autowired
+	private CompilationItinerarioRepository compilationItinerarioRep;
 
 	/*********************************************************************************************/
 
 	//Constructor
-	@Autowired
-	public CompilationItinerarioSerivce(CompilationItinerarioRepository compilationItinerarioRep) {
-		super();
-		this.compilationItinerarioRep = compilationItinerarioRep;
-	}
+	public CompilationItinerarioSerivce() {}
 
 	/*********************************************************************************************/
 

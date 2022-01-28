@@ -4,18 +4,27 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+//import org.hibernate.annotations.OnDelete;
+//import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name="compilation")
 public class Compilation implements Serializable {
 
 	//Class Primary Key
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_compilation")
 	private Long id_compilation;
 
 	//Class Foreign Key
-	@JoinColumn(name = "id_utente")
+	@Column(name="id_utente")
 	private String id_utente;
+	
+	//@JoinColumn(name = "id_utente")
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	//@OnDelete(action = OnDeleteAction.CASCADE)
+	//private User utente;
 
 	//Campi Locali
 	@Column(name="titolo")

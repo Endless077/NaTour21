@@ -14,7 +14,7 @@ public class InterestingPoint implements Serializable {
 	private Long id_interestingpoint;
 
 	//Class Foreign Key
-	@JoinColumn(name = "id_itinerario")
+	@Column(name = "id_itinerario")
 	private Long id_itinerario;
 
 	//Campi Locali

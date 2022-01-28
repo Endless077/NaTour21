@@ -4,23 +4,28 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.natour.Server.Model.Compilation;
 import com.natour.Server.Model.User;
+import com.natour.Server.Model.DTO.UserDTO;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+
 import com.natour.Server.Repository.UserRepository;
 import com.natour.Server.ServiceInterface.IUserService;
 
 @Service("mainUserService")
 public class UserService implements IUserService {
 
-	private final UserRepository userRep;
-
-	//Constructor
 	@Autowired
-	public UserService(UserRepository userRep) {
-		super();
-		this.userRep = userRep;
-	}
+	private UserRepository userRep;
+	
+	@Autowired
+    private ModelMapper modelMapper;
 
 	/*********************************************************************************************/
 
@@ -68,5 +73,24 @@ public class UserService implements IUserService {
 	public UserRepository getUserRep() {
 		return userRep;
 	}
+	
+	/*********************************************************************************************/
+	
+	//Mapper
+	private UserDTO convertEntityToDto(User user){
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
+        UserDTO userLocationDTO = new UserDTO();
+        userLocationDTO = modelMapper.map(user, UserDTO.class);
+        return userLocationDTO;
+    }
+
+    private User convertDtoToEntity(UserDTO userLocationDTO){
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
+        User user = new User();
+        user = modelMapper.map(userLocationDTO, User.class);
+        return user;
+    }
 	
 }
