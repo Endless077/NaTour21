@@ -15,7 +15,7 @@ public class CompilationService implements ICompilationService{
 
 	@Autowired
 	private CompilationRepository compilationRep;
-
+	
 	/*********************************************************************************************/
 
 	//Constructor
@@ -28,12 +28,17 @@ public class CompilationService implements ICompilationService{
 	public List<Compilation> getAllCompilation(){
 		return this.compilationRep.findAll();
 	}
-	
+
 	@Override
-	public Optional<Compilation> getCompilation(Long idCompilation){
+	public Optional<Compilation> getCompilationByID(Long idCompilation){
 		return this.compilationRep.findById(idCompilation);
 	}
-	
+
+	@Override
+	public List<Compilation> getCompilationByUsername(String username) {
+		return this.compilationRep.findByUsername(username);
+	}
+
 	@Override
 	public boolean creaCompilation(Compilation compilation) {
 		try {
@@ -65,6 +70,10 @@ public class CompilationService implements ICompilationService{
 	//Getter e Setter
 	public CompilationRepository getCompilationRep() {
 		return compilationRep;
+	}
+
+	public void setCompilationRep(CompilationRepository compilationRep) {
+		this.compilationRep = compilationRep;
 	}
 
 	/*********************************************************************************************/

@@ -80,17 +80,19 @@ public class UserService implements IUserService {
 	private UserDTO convertEntityToDto(User user){
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.LOOSE);
-        UserDTO userLocationDTO = new UserDTO();
-        userLocationDTO = modelMapper.map(user, UserDTO.class);
-        return userLocationDTO;
+        UserDTO userDTO = new UserDTO();
+        userDTO = modelMapper.map(user, UserDTO.class);
+        return userDTO;
     }
 
-    private User convertDtoToEntity(UserDTO userLocationDTO){
+    private User convertDtoToEntity(UserDTO userDTO){
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.LOOSE);
         User user = new User();
-        user = modelMapper.map(userLocationDTO, User.class);
+        user = modelMapper.map(userDTO, User.class);
         return user;
     }
-	
+    
+    /*********************************************************************************************/
+    
 }

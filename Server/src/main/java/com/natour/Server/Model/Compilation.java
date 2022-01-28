@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-//import org.hibernate.annotations.OnDelete;
-//import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="compilation")
@@ -18,14 +20,14 @@ public class Compilation implements Serializable {
 	private Long id_compilation;
 
 	//Class Foreign Key
-	@Column(name="id_utente")
-	private String id_utente;
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "id_utente",
+    			nullable = false,
+    			referencedColumnName = "username")
+	private User utente;
 	
-	//@JoinColumn(name = "id_utente")
-	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	//@OnDelete(action = OnDeleteAction.CASCADE)
-	//private User utente;
-
 	//Campi Locali
 	@Column(name="titolo")
 	private String titolo;
@@ -35,10 +37,10 @@ public class Compilation implements Serializable {
 	/*********************************************************************************************/
 
 	//Constructor
-	public Compilation(Long id_compilation, String id_utente, String titolo, String descrizione) {
+	public Compilation(Long id_compilation, User utente, String titolo, String descrizione) {
 		super();
 		this.id_compilation = id_compilation;
-		this.id_utente = id_utente;
+		this.utente = utente;
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 	}
@@ -54,11 +56,11 @@ public class Compilation implements Serializable {
 	public void setId_compilation(Long id_compilation) {
 		this.id_compilation = id_compilation;
 	}
-	public String getId_utente() {
-		return id_utente;
+	public User getId_utente() {
+		return utente;
 	}
-	public void setId_utente(String id_utente) {
-		this.id_utente = id_utente;
+	public void setId_utente(User utente) {
+		this.utente = utente;
 	}
 	public String getTitolo() {
 		return titolo;
