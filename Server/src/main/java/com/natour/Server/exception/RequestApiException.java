@@ -1,18 +1,18 @@
-package exception;
+package com.natour.Server.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class ApiRequestException extends RuntimeException {
+public class RequestApiException extends RuntimeException {
 
 	private HttpStatus status;
 	
 	//Constructor
-	public ApiRequestException(String message, HttpStatus status) {
+	public RequestApiException(String message, HttpStatus status) {
 		super(message);
 		this.status = status;
 	}
 	
-	public ApiRequestException(String message, Throwable cause, HttpStatus status) {
+	public RequestApiException(String message, Throwable cause, HttpStatus status) {
 		super(message, cause);
 		this.status = status;
 	}
@@ -20,13 +20,13 @@ public class ApiRequestException extends RuntimeException {
 	/*********************************************************************************************/
 	
 	//RunTimeException
-	public ApiRequestException(String message) {
-		super(message);
-	}
-	
-	public ApiRequestException(String message, Throwable cause) {
-		super(message, cause);
-	}
+//	public RequestApiException(String message) {
+//		super(message);
+//	}
+//	
+//	public RequestApiException(String message, Throwable cause) {
+//		super(message, cause);
+//	}
 
 	/*********************************************************************************************/
 	

@@ -23,9 +23,6 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userRep;
-	
-	@Autowired
-    private ModelMapper modelMapper;
 
 	/*********************************************************************************************/
 
@@ -74,25 +71,6 @@ public class UserService implements IUserService {
 		return userRep;
 	}
 	
-	/*********************************************************************************************/
-	
-	//Mapper
-	private UserDTO convertEntityToDto(User user){
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
-        UserDTO userDTO = new UserDTO();
-        userDTO = modelMapper.map(user, UserDTO.class);
-        return userDTO;
-    }
-
-    private User convertDtoToEntity(UserDTO userDTO){
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
-        User user = new User();
-        user = modelMapper.map(userDTO, User.class);
-        return user;
-    }
-    
     /*********************************************************************************************/
     
 }

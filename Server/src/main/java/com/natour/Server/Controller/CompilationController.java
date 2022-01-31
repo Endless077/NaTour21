@@ -37,7 +37,7 @@ public class CompilationController {
 	@Autowired
 	@Qualifier("mainUserService")
 	private UserService userService;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -91,9 +91,9 @@ public class CompilationController {
 	@PostMapping(path = "creaCompilation")
 	@ResponseBody
 	public ResponseEntity<String> createCompilation(@RequestBody CompilationDTO compilationDTO) {
-		
+
 		Compilation compilation = this.convertDtoToEntity(compilationDTO);
-		
+
 		boolean creato = this.compilationService.creaCompilation(compilation);
 		if(creato)
 			return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -126,7 +126,7 @@ public class CompilationController {
 	public void setCompilationService(CompilationService compilationService) {
 		this.compilationService = compilationService;
 	}
-	
+
 	public ModelMapper getModelMapper() {
 		return modelMapper;
 	}
@@ -155,17 +155,17 @@ public class CompilationController {
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		Compilation compilation = new Compilation();
 		compilation = modelMapper.map(compilationDTO, Compilation.class);
-		
+
 		//Mapping
 		String username = compilationDTO.getId_utente();
 		Optional<User> userOptional = this.userService.getUtente(username);
-		
+
 		User utente = null;
 		if(!userOptional.isEmpty())
 			utente = userOptional.get();
 		compilation.setId_utente(utente);
 		compilation.setId_compilation(-1L);
-		
+
 		return compilation;
 	}
 

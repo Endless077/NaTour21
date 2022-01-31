@@ -7,17 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Repository.ItinerarioRepository;
+import com.natour.Server.ServiceInterface.IItinerarioService;
 
 @Service("mainItinerarioService")
-public class ItinerarioService {
+public class ItinerarioService implements IItinerarioService {
 
 	@Autowired
 	private ItinerarioRepository itinerarioRep;
-
-	/*********************************************************************************************/
-
-	//Constructor
-	public ItinerarioService() {}
 
 	/*********************************************************************************************/
 

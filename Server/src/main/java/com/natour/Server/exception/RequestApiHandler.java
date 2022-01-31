@@ -1,4 +1,4 @@
-package exception;
+package com.natour.Server.exception;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ApiExceptionHandler {
+public class RequestApiHandler {
 	
-	@ExceptionHandler(value = {ApiRequestException.class})
-	public ResponseEntity<Object> handleApiRequestException(ApiRequestException e) {
+	@ExceptionHandler(value = {RequestApiException.class})
+	public ResponseEntity<Object> handleApiRequestException(RequestApiException e) {
 		//1. Create payload containing exception details
 		HttpStatus status = e.getStatus();
-		ApiException apiException = new ApiException(
+		ExceptionCustom apiException = new ExceptionCustom(
 				e.getMessage(),
 				e,
 				status,

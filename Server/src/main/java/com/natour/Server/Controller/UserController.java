@@ -3,6 +3,8 @@ package com.natour.Server.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.natour.Server.Model.User;
+import com.natour.Server.Model.DTO.UserDTO;
 import com.natour.Server.ServiceInterface.IUserService;
 
 @RestController
@@ -27,7 +30,10 @@ public class UserController {
 	@Autowired
 	@Qualifier("mainUserService")
 	private IUserService userService;
-	
+
+	@Autowired
+	private ModelMapper modelMapper;
+
 	/*********************************************************************************************/
 
 	//Constructor
@@ -76,7 +82,7 @@ public class UserController {
 	@DeleteMapping(path = "deleteUtente/{username}")
 	@ResponseBody
 	public ResponseEntity<String> deleteUser(@PathVariable(name = "username") String username) {
-		
+
 		boolean eliminato = this.userService.deleteUtente(username);
 		if(eliminato)
 			return ResponseEntity.status(HttpStatus.OK).build();
@@ -93,6 +99,25 @@ public class UserController {
 
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
+	}
+
+	/*********************************************************************************************/
+
+	//Mapper
+	private UserDTO convertEntityToDto(User user){
+		modelMapper.getConfiguration()
+		.setMatchingStrategy(MatchingStrategies.LOOSE);
+		UserDTO userDTO = new UserDTO();
+		userDTO = modelMapper.map(user, UserDTO.class);
+		return userDTO;
+	}
+
+	private User convertDtoToEntity(UserDTO userDTO){
+		modelMapper.getConfiguration()
+		.setMatchingStrategy(MatchingStrategies.LOOSE);
+		User user = new User();
+		user = modelMapper.map(userDTO, User.class);
+		return user;
 	}
 
 	/*********************************************************************************************/

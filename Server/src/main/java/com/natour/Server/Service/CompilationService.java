@@ -18,11 +18,6 @@ public class CompilationService implements ICompilationService{
 	
 	/*********************************************************************************************/
 
-	//Constructor
-	public CompilationService() {}
-
-	/*********************************************************************************************/
-
 	//Methods
 	@Override
 	public List<Compilation> getAllCompilation(){
