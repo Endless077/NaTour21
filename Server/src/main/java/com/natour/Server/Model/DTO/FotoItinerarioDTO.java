@@ -1,27 +1,28 @@
 package com.natour.Server.Model.DTO;
 
-public class FotoInterestingPointDTO {
+public class FotoItinerarioDTO {
 
 	//Class Primary Key
-	private Long id_photo;
+	private Long id_photo = -1L;
 
 	//Class Foreign Key
 	private Long id_itinerario;
 
 	//Campi Locali
-	private String foto;
+	private String urlfoto;
 
 	/*********************************************************************************************/
 	
 	//Constructor
-	public FotoInterestingPointDTO(Long id_photo, Long id_itinerario, String foto) {
+	public FotoItinerarioDTO(Long id_photo, Long id_itinerario, String urlfoto) {
 		super();
 		this.id_photo = id_photo;
 		this.id_itinerario = id_itinerario;
-		this.foto = foto;
+		this.urlfoto = urlfoto;
 	}
 
-	public FotoInterestingPointDTO() {}
+
+	public FotoItinerarioDTO() {}
 
 	/*********************************************************************************************/
 	
@@ -30,24 +31,29 @@ public class FotoInterestingPointDTO {
 		return id_photo;
 	}
 
+
 	public void setId_photo(Long id_photo) {
 		this.id_photo = id_photo;
 	}
+
 
 	public Long getId_itinerario() {
 		return id_itinerario;
 	}
 
+
 	public void setId_itinerario(Long id_itinerario) {
 		this.id_itinerario = id_itinerario;
 	}
 
-	public String getFoto() {
-		return foto;
+
+	public String getUrlfoto() {
+		return urlfoto;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
 	}
 	
 	/*********************************************************************************************/

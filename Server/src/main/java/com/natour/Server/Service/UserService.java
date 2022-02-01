@@ -4,16 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.natour.Server.Model.Compilation;
 import com.natour.Server.Model.User;
-import com.natour.Server.Model.DTO.UserDTO;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 
 import com.natour.Server.Repository.UserRepository;
 import com.natour.Server.ServiceInterface.IUserService;
@@ -67,7 +61,6 @@ public class UserService implements IUserService {
 		}
 		return true;
 	}
-
 
 	/*********************************************************************************************/
 

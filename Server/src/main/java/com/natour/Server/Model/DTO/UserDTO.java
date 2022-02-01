@@ -1,15 +1,9 @@
 package com.natour.Server.Model.DTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserDTO {
 
 	//Class Primary Key
 	private String username;
-	
-	//Relationship
-	//private List<String> itinerariUtente;
 	
 	//Campi Locali
 	private String email;
@@ -27,7 +21,6 @@ public class UserDTO {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.photolnk = photolnk;
-		//this.itinerariUtente = new ArrayList<String>();
 	}
 	
 	public UserDTO() {}
@@ -74,14 +67,6 @@ public class UserDTO {
 	public void setPhotolnk(String photolnk) {
 		this.photolnk = photolnk;
 	}
-
-//	public List<String> getItinerariUtente() {
-//		return itinerariUtente;
-//	}
-//
-//	public void setItinerariUtente(List<String> itinerariUtente) {
-//		this.itinerariUtente = itinerariUtente;
-//	}
 
 	/*********************************************************************************************/
 	

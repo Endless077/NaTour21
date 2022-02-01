@@ -1,6 +1,7 @@
 package com.natour.Server.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,19 @@ public class ItinerarioService implements IItinerarioService {
 	/*********************************************************************************************/
 
 	//Methods
+	@Override
 	public List<Itinerario> getAllItinerari() {
 		return this.itinerarioRep.findAll();
+	}
+	
+	@Override
+	public Optional<Itinerario> getItinerarioByID(Long id) {
+		return this.itinerarioRep.findById(id);
+	}
+
+	@Override
+	public List<Itinerario> getItinerariByUsername(String username) {
+		return this.itinerarioRep.findByUsername(username);
 	}
 
 	/*********************************************************************************************/

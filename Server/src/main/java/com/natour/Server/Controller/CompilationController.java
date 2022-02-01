@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.Compilation;
@@ -44,17 +44,6 @@ public class CompilationController {
 
 	/*********************************************************************************************/
 
-	//Constructor
-	//	@Autowired
-	//	public CompilationController(CompilationService compilationService) {
-	//		super();
-	//		this.compilationService = compilationService;
-	//	}
-
-	public CompilationController() {}
-
-	/*********************************************************************************************/
-
 	//Get Mapping
 	@GetMapping(path = "listaCompilation")
 	@ResponseBody
@@ -64,11 +53,15 @@ public class CompilationController {
 
 	@GetMapping(path = "getCompilation/byID/{idCompilation}")
 	@ResponseBody
-	public Optional<Compilation> getCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation){
+	public CompilationDTO getCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation){
 		Optional<Compilation> result = this.compilationService.getCompilationByID(idCompilation);
+
 		if(result.isEmpty())
 			throw new RequestApiException("Compilation non trovata.", HttpStatus.NOT_FOUND);
-		return result;
+
+		CompilationDTO compilation = convertEntityToDto(result.get());
+		return compilation;
+
 	}
 
 	@GetMapping(path = "getComplation/byUsername/{username}")
@@ -80,7 +73,6 @@ public class CompilationController {
 			throw new RequestApiException("L'utente non possiede compilation.", HttpStatus.NOT_FOUND);
 
 		List<CompilationDTO> ret = new ArrayList<CompilationDTO>();
-
 		for(Compilation c : listaCompilation)
 			ret.add(convertEntityToDto(c));
 
@@ -102,14 +94,25 @@ public class CompilationController {
 	}
 
 	//Put Mapping
+	@PutMapping(path = "modifyCompilation")
+	@ResponseBody
+	public ResponseEntity<String> modifyCompilation(@RequestBody CompilationDTO compilationDTO) {
 
+		Compilation compilation = this.convertDtoToEntity(compilationDTO);
+
+		boolean modificato = this.compilationService.modificaCompilation(compilation);
+		if(modificato)
+			return ResponseEntity.status(HttpStatus.OK).build();
+		else
+			throw new RequestApiException("Compilation non modificata.", HttpStatus.BAD_REQUEST);
+	}
 
 	//Delete Mapping
-	@DeleteMapping(path = "deleteCompilatiod/{id_compilation}")
+	@DeleteMapping(path = "deleteCompilation/{id_compilation}")
 	@ResponseBody
 	public ResponseEntity<String> deleteCompilation(@PathVariable(name = "id_compilation") Long id_compilation) {
 
-		boolean eliminato = this.compilationService.deleteCompilation(id_compilation);
+		boolean eliminato = this.compilationService.cancellaCompilation(id_compilation);
 		if(eliminato)
 			return ResponseEntity.status(HttpStatus.OK).build();
 		else
@@ -164,7 +167,6 @@ public class CompilationController {
 		if(!userOptional.isEmpty())
 			utente = userOptional.get();
 		compilation.setUtente(utente);
-
 		return compilation;
 	}
 

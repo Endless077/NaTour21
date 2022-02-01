@@ -37,17 +37,6 @@ public class UserController {
 
 	/*********************************************************************************************/
 
-	//Constructor
-	//	@Autowired
-	//	public UserController(UserService userService) {
-	//		super();
-	//		this.userService = userService;
-	//	}
-
-	public UserController() {}
-
-	/*********************************************************************************************/
-
 	//Get Mapping
 	@GetMapping(path = "listaUtenti")
 	@ResponseBody
@@ -58,7 +47,9 @@ public class UserController {
 	@GetMapping(path = "getUtente/{username}")
 	@ResponseBody
 	public Optional<User> getUser(@PathVariable(name = "username") String username) {
+		
 		Optional<User> result = this.userService.getUtente(username);
+		
 		if(result.isEmpty())
 			throw new RequestApiException("Utente non trovato.", HttpStatus.NOT_FOUND);
 		return result;
@@ -70,6 +61,7 @@ public class UserController {
 	public ResponseEntity<String> createUser(@RequestBody UserDTO utente) {
 
 		User newUser = convertDtoToEntity(utente);
+		
 		boolean creato = this.userService.creaUtente(newUser);
 		if(creato)
 			return ResponseEntity.status(HttpStatus.CREATED).build();

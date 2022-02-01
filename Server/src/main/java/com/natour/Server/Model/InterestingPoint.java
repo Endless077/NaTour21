@@ -7,7 +7,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -16,6 +15,7 @@ public class InterestingPoint implements Serializable {
 
 	//Class Primary Key
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_interestingpoint")
 	private Long id_interestingpoint;
 
@@ -23,18 +23,19 @@ public class InterestingPoint implements Serializable {
 	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "id_itineraio",
+	@JoinColumn(name = "id_itinerario",
 				nullable = false,
 				referencedColumnName = "id_itinerario")
 	private Itinerario itinerario;
 
 	//Relationship
-	@JsonBackReference
-	@OneToOne(mappedBy = "interestingPoint",
-				cascade = CascadeType.ALL,
-				fetch = FetchType.LAZY)
-	private FotoInterestingPoint fotoInterestingPoint;
+//	@JsonIgnore
+//	@OneToOne(mappedBy = "interestingPoint",
+//				cascade = CascadeType.ALL,
+//				fetch = FetchType.LAZY)
+//	private FotoInterestingPoint fotoInterestingPoint;
 
+	
 	//Campi Locali
 	@Column(name="latitudine", nullable = false)
 	private Double latitudine;
@@ -44,23 +45,24 @@ public class InterestingPoint implements Serializable {
 	private String titolo;
 	@Column(name="descrizione")
 	private String descrizione;
+	@Column(name="urlfoto")
+	private String urlfoto;
 
 	/*********************************************************************************************/
 
 	//Constructor
 	public InterestingPoint(Long id_interestingpoint, Itinerario itinerario, Double latitudine, Double longitudine,
-			String descrizione, String titolo) {
+			String titolo, String descrizione, String urlfoto) {
 		super();
 		this.id_interestingpoint = id_interestingpoint;
 		this.itinerario = itinerario;
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
-		this.descrizione = descrizione;
 		this.titolo = titolo;
-
-		this.fotoInterestingPoint = new FotoInterestingPoint();
+		this.descrizione = descrizione;
+		this.urlfoto = urlfoto;
 	}
-
+	
 	public InterestingPoint() {}
 
 	/*********************************************************************************************/
@@ -80,14 +82,6 @@ public class InterestingPoint implements Serializable {
 
 	public void setItinerario(Itinerario itinerario) {
 		this.itinerario = itinerario;
-	}
-
-	public FotoInterestingPoint getFotoInterestingPoint() {
-		return fotoInterestingPoint;
-	}
-
-	public void setFotoInterestingPoint(FotoInterestingPoint fotoInterestingPoint) {
-		this.fotoInterestingPoint = fotoInterestingPoint;
 	}
 
 	public Double getLatitudine() {
@@ -120,8 +114,16 @@ public class InterestingPoint implements Serializable {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}	
+	}
 
+	public String getUrlfoto() {
+		return urlfoto;
+	}
+
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
+	}
+	
 	/*********************************************************************************************/
 
 }

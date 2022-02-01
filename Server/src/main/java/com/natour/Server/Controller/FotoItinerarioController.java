@@ -10,37 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.natour.Server.Model.FotoInterestingPoint;
-import com.natour.Server.Model.DTO.FotoInterestingPointDTO;
-import com.natour.Server.Service.FotoInterestingPointService;
+import com.natour.Server.Model.FotoItinerario;
+import com.natour.Server.Model.DTO.FotoItinerarioDTO;
+import com.natour.Server.Service.FotoItinerarioService;
 
 @RestController
 @RequestMapping(path = "api/fotoInterestingPoint", produces = { "application/json" })
-public class FotoInterestingPointController {
+public class FotoItinerarioController {
 
 	@Autowired
 	@Qualifier("mainFotoInterestingPointService")
-	private FotoInterestingPointService fotoInterestingPointService;
+	private FotoItinerarioService fotoInterestingPointService;
 
 	@Autowired
 	private ModelMapper modelMapper;
-
-	/*********************************************************************************************/
-
-	//Constructor
-	//	@Autowired
-	//	public FotoInterestingPointController(FotoInterestingPointService fotoInterestingPointService) {
-	//		super();
-	//		this.fotoInterestingPointService = fotoInterestingPointService;
-	//	}
-
-	public FotoInterestingPointController() {}
-
+	
 	/*********************************************************************************************/
 
 	//Get Mapping
 	@GetMapping(path = "listaFotoInterestingPoint")
-	public List<FotoInterestingPoint> getAll() {
+	public List<FotoItinerario> getAll() {
 		return this.fotoInterestingPointService.getAllFotoInterestingPoint();
 	}
 
@@ -56,11 +45,11 @@ public class FotoInterestingPointController {
 	/*********************************************************************************************/
 
 	//Getter e Setter
-	public FotoInterestingPointService getFotoInterestingPointService() {
+	public FotoItinerarioService getFotoInterestingPointService() {
 		return fotoInterestingPointService;
 	}
 
-	public void setFotoInterestingPointService(FotoInterestingPointService fotoInterestingPointService) {
+	public void setFotoInterestingPointService(FotoItinerarioService fotoInterestingPointService) {
 		this.fotoInterestingPointService = fotoInterestingPointService;
 	}
 
@@ -75,19 +64,19 @@ public class FotoInterestingPointController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private FotoInterestingPointDTO convertEntityToDto(FotoInterestingPoint fotoIP){
+	private FotoItinerarioDTO convertEntityToDto(FotoItinerario fotoIP){
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
-		FotoInterestingPointDTO fotoIPDTO = new FotoInterestingPointDTO();
-		fotoIPDTO = modelMapper.map(fotoIP, FotoInterestingPointDTO.class);
+		FotoItinerarioDTO fotoIPDTO = new FotoItinerarioDTO();
+		fotoIPDTO = modelMapper.map(fotoIP, FotoItinerarioDTO.class);
 		return fotoIPDTO;
 	}
 
-	private FotoInterestingPoint convertDtoToEntity(FotoInterestingPointDTO fotoIPDTO){
+	private FotoItinerario convertDtoToEntity(FotoItinerarioDTO fotoIPDTO){
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
-		FotoInterestingPoint fotoIP = new FotoInterestingPoint();
-		fotoIP = modelMapper.map(fotoIPDTO, FotoInterestingPoint.class);
+		FotoItinerario fotoIP = new FotoItinerario();
+		fotoIP = modelMapper.map(fotoIPDTO, FotoItinerario.class);
 		return fotoIP;
 	}
 

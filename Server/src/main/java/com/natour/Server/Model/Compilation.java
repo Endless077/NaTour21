@@ -31,14 +31,13 @@ public class Compilation implements Serializable {
 	private User utente;
 	
 	//Relationship
-	//@JsonIgnore
+	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "compilation_itinerario_map",
-	          	joinColumns = @JoinColumn(name = "id_compilation",
-	            							referencedColumnName = "id_compilation"),
-	          	inverseJoinColumns = @JoinColumn(name = "id_itinerario",
-	            									referencedColumnName = "id_itinerario" )
-				)
+				uniqueConstraints = {@UniqueConstraint(columnNames = {"id_compilation", "id_itinerario"})},
+	          	joinColumns = @JoinColumn(name = "id_compilation", referencedColumnName = "id_compilation"),
+	          	inverseJoinColumns = @JoinColumn(name = "id_itinerario", referencedColumnName = "id_itinerario")
+	)
 	private List<Itinerario> itinerari = new ArrayList<Itinerario>();;
 	
 	//Campi Locali

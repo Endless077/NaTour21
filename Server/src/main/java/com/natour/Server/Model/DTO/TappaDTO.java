@@ -3,7 +3,7 @@ package com.natour.Server.Model.DTO;
 public class TappaDTO {
 
 	//Class Primary Key
-	private Long id_tappa;
+	private Long id_tappa = -1L;
 
 	//Class Foreign Key
 	private Long id_itinerario;

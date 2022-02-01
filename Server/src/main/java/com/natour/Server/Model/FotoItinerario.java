@@ -10,38 +10,41 @@ import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="fotointerestingpoint")
-public class FotoInterestingPoint implements Serializable {
+@Table(name="fotoitinerario")
+public class FotoItinerario implements Serializable {
 
 	//Class Primary Key
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_photo")
 	private Long id_photo;
 
 	//Class Foreign Key
 	@JsonManagedReference
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_interestingpoint",
-    			nullable = false,
-    			referencedColumnName = "id_interestingpoint")
-	private InterestingPoint interestingPoint;
+	@JoinColumn(name = "id_itinerario",
+				nullable = false,
+				referencedColumnName = "id_itinerario")
+	private Itinerario itinerario;
 
 	//Campi Locali
-	@Column(name = "foto", nullable = false)
-	private String foto;
+	@Column(name = "urlfoto", nullable = false)
+	private String urlfoto;
+
+	//altri attributi di foto (i.e Metadati)
 
 	/*********************************************************************************************/
 
 	//Constructor
-	public FotoInterestingPoint(Long id_photo, InterestingPoint interestingPoint, String foto) {
+	public FotoItinerario(Long id_photo, Itinerario itinerario, String urlfoto) {
 		super();
 		this.id_photo = id_photo;
-		this.interestingPoint = interestingPoint;
-		this.foto = foto;
+		this.itinerario = itinerario;
+		this.urlfoto = urlfoto;
 	}
 
-	public FotoInterestingPoint() {}
+	public FotoItinerario() {}
 
 	/*********************************************************************************************/
 
@@ -54,20 +57,20 @@ public class FotoInterestingPoint implements Serializable {
 		this.id_photo = id_photo;
 	}
 
-	public InterestingPoint getInterestingPoint() {
-		return interestingPoint;
+	public Itinerario getItinerario() {
+		return itinerario;
 	}
 
-	public void setInterestingPoint(InterestingPoint interestingPoint) {
-		this.interestingPoint = interestingPoint;
+	public void setItinerario(Itinerario itinerario) {
+		this.itinerario = itinerario;
 	}
 
-	public String getFoto() {
-		return foto;
+	public String getUrlfoto() {
+		return urlfoto;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
 	}
 
 	/*********************************************************************************************/

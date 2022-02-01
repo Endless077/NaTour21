@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -19,6 +19,7 @@ public class Itinerario implements Serializable {
 
 	//Class Primary Key
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_itinerario")
 	private Long id_itinerario;
 
@@ -36,20 +37,28 @@ public class Itinerario implements Serializable {
 	@OneToMany(mappedBy = "itinerario",
 				cascade = CascadeType.ALL,
 				fetch = FetchType.LAZY)
-	private List<Tappa> tappe = new ArrayList<Tappa>();;
+	private List<InterestingPoint> interestingPoint = new ArrayList<InterestingPoint>();
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
 				cascade = CascadeType.ALL,
 				fetch = FetchType.LAZY)
-	private List<InterestingPoint> interestingPoint = new ArrayList<InterestingPoint>();
-
-	//@JsonIgnore
+	private List<Tappa> tappe = new ArrayList<Tappa>();;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "itinerario",
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<FotoItinerario> fotoItinerario = new ArrayList<FotoItinerario>();
+	
+	@JsonBackReference
 	@ManyToMany(mappedBy = "itinerari",
 				cascade = CascadeType.ALL,
 				fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Compilation> compilation = new ArrayList<Compilation>();
-
+	
 	//Campi Locali
 	@Column(name="titolo", nullable = false)
 	private String titolo;
@@ -67,6 +76,8 @@ public class Itinerario implements Serializable {
 	private String durata;
 	@Column(name="lunghezza")
 	private Double lunghezza;
+	@Column(name="mezzoditrasporto")
+	private String mezzoditrasporto;
 	@Column(name="areageografica")
 	private String areageografica;
 
@@ -74,7 +85,7 @@ public class Itinerario implements Serializable {
 
 	//Constructor
 	public Itinerario(Long id_itinerario, User utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String areageografica) {
+			String puntofine, Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String mezzoditrasporto, String areageografica) {
 		super();
 		this.id_itinerario = id_itinerario;
 		this.utente = utente;
@@ -86,6 +97,7 @@ public class Itinerario implements Serializable {
 		this.difficulty = difficulty;
 		this.durata = durata;
 		this.lunghezza = lunghezza;
+		this.mezzoditrasporto = mezzoditrasporto;
 		this.areageografica = areageografica;
 	}
 
@@ -196,6 +208,14 @@ public class Itinerario implements Serializable {
 
 	public void setLunghezza(Double lunghezza) {
 		this.lunghezza = lunghezza;
+	}
+
+	public String getMezzoditrasporto() {
+		return mezzoditrasporto;
+	}
+
+	public void setMezzoditrasporto(String mezzoditrasporto) {
+		this.mezzoditrasporto = mezzoditrasporto;
 	}
 
 	public String getAreageografica() {

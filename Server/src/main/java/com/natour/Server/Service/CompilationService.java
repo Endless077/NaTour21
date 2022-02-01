@@ -48,7 +48,20 @@ public class CompilationService implements ICompilationService{
 	}
 
 	@Override
-	public boolean deleteCompilation(Long id_compilation) {
+	public boolean modificaCompilation(Compilation compilation) {
+		try {
+			if(this.compilationRep.existsById(compilation.getId_compilation()))
+				this.compilationRep.save(compilation);
+			else
+				return false;
+		}catch(IllegalArgumentException e){
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean cancellaCompilation(Long id_compilation) {
 		try {
 			if(this.compilationRep.existsById(id_compilation))
 				this.compilationRep.deleteById(id_compilation);

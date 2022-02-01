@@ -15,6 +15,7 @@ public class Tappa implements Serializable {
 
 	//Class Primary Key
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_tappa")
 	private Long id_tappa;
 
@@ -22,7 +23,7 @@ public class Tappa implements Serializable {
 	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "id_itineraio",
+	@JoinColumn(name = "id_itinerario",
 				nullable = false,
 				referencedColumnName = "id_itinerario")
 	private Itinerario itinerario;

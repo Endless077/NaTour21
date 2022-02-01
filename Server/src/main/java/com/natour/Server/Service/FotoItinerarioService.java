@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.natour.Server.Model.FotoInterestingPoint;
-import com.natour.Server.Repository.FotoInterestingPointRepository;
-import com.natour.Server.ServiceInterface.IFotoInterestingPoint;
+import com.natour.Server.Model.FotoItinerario;
+import com.natour.Server.Repository.FotoItinerarioRepository;
+import com.natour.Server.ServiceInterface.IFotoItinerario;
 
 @Service("mainFotoInterestingPointService")
-public class FotoInterestingPointService implements IFotoInterestingPoint {
+public class FotoItinerarioService implements IFotoItinerario {
 
 	@Autowired
-	private FotoInterestingPointRepository fotoInterestingPointRep;
+	private FotoItinerarioRepository fotoInterestingPointRep;
 
 	/*********************************************************************************************/
 
 	//Methods
-	public List<FotoInterestingPoint> getAllFotoInterestingPoint() {
+	public List<FotoItinerario> getAllFotoInterestingPoint() {
 		return this.fotoInterestingPointRep.findAll();
 	}
 
 	/*********************************************************************************************/
 
 	//Getter e Setter
-	public FotoInterestingPointRepository getFotoInterestingPointRep() {
+	public FotoItinerarioRepository getFotoInterestingPointRep() {
 		return fotoInterestingPointRep;
 	}
 
