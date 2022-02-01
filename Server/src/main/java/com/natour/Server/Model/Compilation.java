@@ -1,13 +1,15 @@
 package com.natour.Server.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="compilation")
@@ -20,7 +22,7 @@ public class Compilation implements Serializable {
 	private Long id_compilation;
 
 	//Class Foreign Key
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_utente",
@@ -28,8 +30,19 @@ public class Compilation implements Serializable {
     			referencedColumnName = "username")
 	private User utente;
 	
+	//Relationship
+	//@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "compilation_itinerario_map",
+	          	joinColumns = @JoinColumn(name = "id_compilation",
+	            							referencedColumnName = "id_compilation"),
+	          	inverseJoinColumns = @JoinColumn(name = "id_itinerario",
+	            									referencedColumnName = "id_itinerario" )
+				)
+	private List<Itinerario> itinerari = new ArrayList<Itinerario>();;
+	
 	//Campi Locali
-	@Column(name="titolo")
+	@Column(name="titolo", nullable = false)
 	private String titolo;
 	@Column(name="descrizione")
 	private String descrizione;
@@ -53,24 +66,39 @@ public class Compilation implements Serializable {
 	public Long getId_compilation() {
 		return id_compilation;
 	}
+
 	public void setId_compilation(Long id_compilation) {
 		this.id_compilation = id_compilation;
 	}
-	public User getId_utente() {
+
+	public User getUtente() {
 		return utente;
 	}
-	public void setId_utente(User utente) {
+
+	public void setUtente(User utente) {
 		this.utente = utente;
 	}
+
+	public List<Itinerario> getItinerari() {
+		return itinerari;
+	}
+
+	public void setItinerari(List<Itinerario> itinerari) {
+		this.itinerari = itinerari;
+	}
+
 	public String getTitolo() {
 		return titolo;
 	}
+
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
+
 	public String getDescrizione() {
 		return descrizione;
 	}
+
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}

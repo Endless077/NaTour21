@@ -1,4 +1,4 @@
-package com.natour.Server.exception;
+package com.natour.Server.Exception;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -13,7 +13,7 @@ public class RequestApiHandler {
 	
 	@ExceptionHandler(value = {RequestApiException.class})
 	public ResponseEntity<Object> handleApiRequestException(RequestApiException e) {
-		//1. Create payload containing exception details
+		//1. Create Payload containing exception details
 		HttpStatus status = e.getStatus();
 		ExceptionCustom apiException = new ExceptionCustom(
 				e.getMessage(),

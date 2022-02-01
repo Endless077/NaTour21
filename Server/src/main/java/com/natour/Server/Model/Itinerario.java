@@ -1,8 +1,17 @@
 package com.natour.Server.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="itinerario")
@@ -14,22 +23,46 @@ public class Itinerario implements Serializable {
 	private Long id_itinerario;
 
 	//Class Foreign Key
-	@Column(name = "id_utente")
-	private String id_utente;
+	@JsonManagedReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "id_utente",
+				nullable = false,
+				referencedColumnName = "username")
+	private User utente;
+
+	//Relationship
+	@JsonBackReference
+	@OneToMany(mappedBy = "itinerario",
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
+	private List<Tappa> tappe = new ArrayList<Tappa>();;
+
+	@JsonBackReference
+	@OneToMany(mappedBy = "itinerario",
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
+	private List<InterestingPoint> interestingPoint = new ArrayList<InterestingPoint>();
+
+	//@JsonIgnore
+	@ManyToMany(mappedBy = "itinerari",
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
+	private List<Compilation> compilation = new ArrayList<Compilation>();
 
 	//Campi Locali
-	@Column(name="titolo")
+	@Column(name="titolo", nullable = false)
 	private String titolo;
 	@Column(name="descrizione")
 	private String descrizione;
-	@Column(name="puntoinizio")
+	@Column(name="puntoinizio", nullable = false)
 	private String puntoinizio;
-	@Column(name="puntofine")
+	@Column(name="puntofine", nullable = false)
 	private String puntofine;
-	@Column(name="accessibilitadisabili")
-	private Boolean accessibilitadisabili;
-	@Column(name="difficolta")
-	private String difficoltà;
+	@Column(name="accessodisabili")
+	private Boolean accessodisabili;
+	@Column(name="difficulty")
+	private String difficulty;
 	@Column(name="durata")
 	private String durata;
 	@Column(name="lunghezza")
@@ -40,17 +73,17 @@ public class Itinerario implements Serializable {
 	/*********************************************************************************************/
 
 	//Constructor
-	public Itinerario(Long id_itinerario, String id_utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessibilitadisabili, String difficoltà, String durata, Double lunghezza, String areageografica) {
+	public Itinerario(Long id_itinerario, User utente, String titolo, String descrizione, String puntoinizio,
+			String puntofine, Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String areageografica) {
 		super();
 		this.id_itinerario = id_itinerario;
-		this.id_utente = id_utente;
+		this.utente = utente;
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 		this.puntoinizio = puntoinizio;
 		this.puntofine = puntofine;
-		this.accessibilitadisabili = accessibilitadisabili;
-		this.difficoltà = difficoltà;
+		this.accessodisabili = accessodisabili;
+		this.difficulty = difficulty;
 		this.durata = durata;
 		this.lunghezza = lunghezza;
 		this.areageografica = areageografica;
@@ -69,51 +102,90 @@ public class Itinerario implements Serializable {
 		this.id_itinerario = id_itinerario;
 	}
 
-	public String getId_utente() {
-		return id_utente;
+	public User getUtente() {
+		return utente;
 	}
-	public void setId_utente(String id_utente) {
-		this.id_utente = id_utente;
+
+	public void setUtente(User utente) {
+		this.utente = utente;
 	}
+
+	public List<Tappa> getTappe() {
+		return tappe;
+	}
+
+	public void setTappe(List<Tappa> tappe) {
+		this.tappe = tappe;
+	}
+
+	public List<InterestingPoint> getInterestingPoint() {
+		return interestingPoint;
+	}
+
+	public void setInterestingPoint(List<InterestingPoint> interestingPoint) {
+		this.interestingPoint = interestingPoint;
+	}
+
+	public List<Compilation> getCompilation() {
+		return compilation;
+	}
+
+	public void setCompilation(List<Compilation> compilation) {
+		this.compilation = compilation;
+	}
+
 	public String getTitolo() {
 		return titolo;
 	}
+
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
+
 	public String getDescrizione() {
 		return descrizione;
 	}
+
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
 	public String getPuntoinizio() {
 		return puntoinizio;
 	}
+
 	public void setPuntoinizio(String puntoinizio) {
 		this.puntoinizio = puntoinizio;
 	}
+
 	public String getPuntofine() {
 		return puntofine;
 	}
+
 	public void setPuntofine(String puntofine) {
 		this.puntofine = puntofine;
 	}
-	public Boolean isAccessibilitadisabili() {
-		return accessibilitadisabili;
+
+	public Boolean getAccessodisabili() {
+		return accessodisabili;
 	}
-	public void setAccessibilitadisabili(Boolean accessibilitadisabili) {
-		this.accessibilitadisabili = accessibilitadisabili;
+
+	public void setAccessodisabili(Boolean accessodisabili) {
+		this.accessodisabili = accessodisabili;
 	}
-	public String getDifficoltà() {
-		return difficoltà;
+
+	public String getDifficulty() {
+		return difficulty;
 	}
-	public void setDifficoltà(String difficoltà) {
-		this.difficoltà = difficoltà;
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
 	}
+
 	public String getDurata() {
 		return durata;
 	}
+
 	public void setDurata(String durata) {
 		this.durata = durata;
 	}
@@ -129,10 +201,11 @@ public class Itinerario implements Serializable {
 	public String getAreageografica() {
 		return areageografica;
 	}
+
 	public void setAreageografica(String areageografica) {
 		this.areageografica = areageografica;
 	}
-
+	
 	/*********************************************************************************************/
 
 }

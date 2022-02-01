@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="tappa")
 public class Tappa implements Serializable {
@@ -14,8 +19,13 @@ public class Tappa implements Serializable {
 	private Long id_tappa;
 
 	//Class Foreign Key
-	@Column(name="id_itinerario")
-	private Long id_itinerario;
+	@JsonManagedReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "id_itineraio",
+				nullable = false,
+				referencedColumnName = "id_itinerario")
+	private Itinerario itinerario;
 
 	//Campi Locali
 	@Column(name="nometappa")
@@ -32,11 +42,11 @@ public class Tappa implements Serializable {
 	/*********************************************************************************************/
 
 	//Constructor
-	public Tappa(Long id_tappa, Long id_itinerario, String nometappa, Double latitudine, Double longitudine,
+	public Tappa(Long id_tappa, Itinerario itinerario, String nometappa, Double latitudine, Double longitudine,
 			String tipotappa, Integer sequenza) {
 		super();
 		this.id_tappa = id_tappa;
-		this.id_itinerario = id_itinerario;
+		this.itinerario = itinerario;
 		this.nometappa = nometappa;
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
@@ -57,12 +67,12 @@ public class Tappa implements Serializable {
 		this.id_tappa = id_tappa;
 	}
 
-	public Long getId_itinerario() {
-		return id_itinerario;
+	public Itinerario getItinerario() {
+		return itinerario;
 	}
 
-	public void setId_itinerario(Long id_itinerario) {
-		this.id_itinerario = id_itinerario;
+	public void setItinerario(Itinerario itinerario) {
+		this.itinerario = itinerario;
 	}
 
 	public String getNometappa() {
@@ -73,7 +83,7 @@ public class Tappa implements Serializable {
 		this.nometappa = nometappa;
 	}
 
-	public double getLatitudine() {
+	public Double getLatitudine() {
 		return latitudine;
 	}
 
@@ -81,7 +91,7 @@ public class Tappa implements Serializable {
 		this.latitudine = latitudine;
 	}
 
-	public double getLongitudine() {
+	public Double getLongitudine() {
 		return longitudine;
 	}
 
@@ -104,6 +114,6 @@ public class Tappa implements Serializable {
 	public void setSequenza(Integer sequenza) {
 		this.sequenza = sequenza;
 	}
-
+	
 	/*********************************************************************************************/
 }

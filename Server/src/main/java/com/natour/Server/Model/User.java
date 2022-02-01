@@ -6,8 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="utente")
@@ -19,15 +18,20 @@ public class User implements Serializable {
 	private String username;
 
 	//Relationship
-	//@JsonIgnore
-	@JsonManagedReference 
+	@JsonBackReference
 	@OneToMany(mappedBy = "utente",
 				cascade = CascadeType.ALL,
 			 	fetch = FetchType.LAZY)
-	List<Compilation> compilation;
+	private List<Compilation> compilation = new ArrayList<Compilation>();
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "utente",
+				cascade = CascadeType.ALL,
+			 	fetch = FetchType.LAZY)
+	private List<Itinerario> itinerari = new ArrayList<Itinerario>();
 	
 	//Campi Locali
-	@Column(name="email")
+	@Column(name="email", nullable = false)
 	private String email;
 	@Column(name="nome")
 	private String nome;
@@ -46,12 +50,10 @@ public class User implements Serializable {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.photolnk = photolnk;
-		
-		this.compilation = new ArrayList<Compilation>();
 	}
 
 	public User() {}
-
+	
 	/*********************************************************************************************/
 
 	//Getter e Setter
@@ -61,6 +63,22 @@ public class User implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public List<Compilation> getCompilation() {
+		return compilation;
+	}
+
+	public void setCompilation(List<Compilation> compilation) {
+		this.compilation = compilation;
+	}
+
+	public List<Itinerario> getItinerari() {
+		return itinerari;
+	}
+
+	public void setItinerari(List<Itinerario> itinerari) {
+		this.itinerari = itinerari;
 	}
 
 	public String getEmail() {
@@ -94,15 +112,7 @@ public class User implements Serializable {
 	public void setPhotolnk(String photolnk) {
 		this.photolnk = photolnk;
 	}
-
-	public List<Compilation> getCompilation() {
-		return compilation;
-	}
-
-	public void setCompilation(List<Compilation> compilation) {
-		this.compilation = compilation;
-	}
-
+	
 	/*********************************************************************************************/
 
 }

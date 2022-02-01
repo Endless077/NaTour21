@@ -51,6 +51,11 @@ public class UserService implements IUserService {
 	}
 	
 	@Override
+	public boolean modificaUtente(User utente) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public boolean deleteUtente(String username) {
 		try {
 			if(this.userRep.existsById(username))

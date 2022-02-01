@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.Compilation;
 import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.CompilationDTO;
@@ -66,7 +67,7 @@ public class CompilationController {
 	public Optional<Compilation> getCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation){
 		Optional<Compilation> result = this.compilationService.getCompilationByID(idCompilation);
 		if(result.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compilation non trovata.");
+			throw new RequestApiException("Compilation non trovata.", HttpStatus.NOT_FOUND);
 		return result;
 	}
 
@@ -76,19 +77,18 @@ public class CompilationController {
 		List<Compilation> listaCompilation = this.compilationService.getCompilationByUsername(username);
 
 		if(listaCompilation.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'utente non possiede compilation.");
+			throw new RequestApiException("L'utente non possiede compilation.", HttpStatus.NOT_FOUND);
 
 		List<CompilationDTO> ret = new ArrayList<CompilationDTO>();
 
 		for(Compilation c : listaCompilation)
 			ret.add(convertEntityToDto(c));
 
-
 		return ret;
 	}
 
 	//Post Mapping
-	@PostMapping(path = "creaCompilation")
+	@PostMapping(path = "createCompilation")
 	@ResponseBody
 	public ResponseEntity<String> createCompilation(@RequestBody CompilationDTO compilationDTO) {
 
@@ -98,7 +98,7 @@ public class CompilationController {
 		if(creato)
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		else
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Compilation non salvata.");
+			throw new RequestApiException("Compilation non salvata.", HttpStatus.BAD_REQUEST);
 	}
 
 	//Put Mapping
@@ -113,7 +113,7 @@ public class CompilationController {
 		if(eliminato)
 			return ResponseEntity.status(HttpStatus.OK).build();
 		else
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Compilation non eliminata.");
+			throw new RequestApiException("Compilation non eliminata.", HttpStatus.BAD_REQUEST);
 	}
 
 	/*********************************************************************************************/
@@ -145,7 +145,7 @@ public class CompilationController {
 		compilationDTO = modelMapper.map(compilation, CompilationDTO.class);
 
 		//Mapping
-		String username = compilation.getId_utente().getUsername();
+		String username = compilation.getUtente().getUsername();
 		compilationDTO.setId_utente(username);
 		return compilationDTO;
 	}
@@ -163,8 +163,7 @@ public class CompilationController {
 		User utente = null;
 		if(!userOptional.isEmpty())
 			utente = userOptional.get();
-		compilation.setId_utente(utente);
-		compilation.setId_compilation(-1L);
+		compilation.setUtente(utente);
 
 		return compilation;
 	}

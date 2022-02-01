@@ -4,6 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="interestingpoint")
 public class InterestingPoint implements Serializable {
@@ -14,31 +20,45 @@ public class InterestingPoint implements Serializable {
 	private Long id_interestingpoint;
 
 	//Class Foreign Key
-	@Column(name = "id_itinerario")
-	private Long id_itinerario;
+	@JsonManagedReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "id_itineraio",
+				nullable = false,
+				referencedColumnName = "id_itinerario")
+	private Itinerario itinerario;
+
+	//Relationship
+	@JsonBackReference
+	@OneToOne(mappedBy = "interestingPoint",
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
+	private FotoInterestingPoint fotoInterestingPoint;
 
 	//Campi Locali
-	@Column(name="latitudine")
+	@Column(name="latitudine", nullable = false)
 	private Double latitudine;
-	@Column(name="longitudine")
+	@Column(name="longitudine", nullable = false)
 	private Double longitudine;
-	@Column(name="descrizione")
-	private String descrizione;
 	@Column(name="titolo")
 	private String titolo;
+	@Column(name="descrizione")
+	private String descrizione;
 
 	/*********************************************************************************************/
 
 	//Constructor
-	public InterestingPoint(Long id_interestingpoint, Long id_itinerario, Double latitudine, Double longitudine,
+	public InterestingPoint(Long id_interestingpoint, Itinerario itinerario, Double latitudine, Double longitudine,
 			String descrizione, String titolo) {
 		super();
 		this.id_interestingpoint = id_interestingpoint;
-		this.id_itinerario = id_itinerario;
+		this.itinerario = itinerario;
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
 		this.descrizione = descrizione;
 		this.titolo = titolo;
+
+		this.fotoInterestingPoint = new FotoInterestingPoint();
 	}
 
 	public InterestingPoint() {}
@@ -54,12 +74,20 @@ public class InterestingPoint implements Serializable {
 		this.id_interestingpoint = id_interestingpoint;
 	}
 
-	public Long getId_itinerario() {
-		return id_itinerario;
+	public Itinerario getItinerario() {
+		return itinerario;
 	}
 
-	public void setId_itinerario(Long id_itinerario) {
-		this.id_itinerario = id_itinerario;
+	public void setItinerario(Itinerario itinerario) {
+		this.itinerario = itinerario;
+	}
+
+	public FotoInterestingPoint getFotoInterestingPoint() {
+		return fotoInterestingPoint;
+	}
+
+	public void setFotoInterestingPoint(FotoInterestingPoint fotoInterestingPoint) {
+		this.fotoInterestingPoint = fotoInterestingPoint;
 	}
 
 	public Double getLatitudine() {
@@ -78,14 +106,6 @@ public class InterestingPoint implements Serializable {
 		this.longitudine = longitudine;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
 	public String getTitolo() {
 		return titolo;
 	}
@@ -93,6 +113,14 @@ public class InterestingPoint implements Serializable {
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}	
 
 	/*********************************************************************************************/
 

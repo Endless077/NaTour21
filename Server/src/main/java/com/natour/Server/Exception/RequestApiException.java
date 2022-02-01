@@ -1,4 +1,4 @@
-package com.natour.Server.exception;
+package com.natour.Server.Exception;
 
 import org.springframework.http.HttpStatus;
 

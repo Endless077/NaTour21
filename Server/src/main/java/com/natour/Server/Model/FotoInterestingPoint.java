@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="fotointerestingpoint")
 public class FotoInterestingPoint implements Serializable {
@@ -14,20 +19,25 @@ public class FotoInterestingPoint implements Serializable {
 	private Long id_photo;
 
 	//Class Foreign Key
-	@Column(name = "id_interestingpoint")
-	private Long id_itinerario;
+	@JsonManagedReference
+	@OneToOne(fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "id_interestingpoint",
+    			nullable = false,
+    			referencedColumnName = "id_interestingpoint")
+	private InterestingPoint interestingPoint;
 
 	//Campi Locali
-	@Column(name = "foto")
+	@Column(name = "foto", nullable = false)
 	private String foto;
 
 	/*********************************************************************************************/
 
 	//Constructor
-	public FotoInterestingPoint(Long id_photo, Long id_itinerario, String foto) {
+	public FotoInterestingPoint(Long id_photo, InterestingPoint interestingPoint, String foto) {
 		super();
 		this.id_photo = id_photo;
-		this.id_itinerario = id_itinerario;
+		this.interestingPoint = interestingPoint;
 		this.foto = foto;
 	}
 
@@ -44,12 +54,12 @@ public class FotoInterestingPoint implements Serializable {
 		this.id_photo = id_photo;
 	}
 
-	public Long getId_itinerario() {
-		return id_itinerario;
+	public InterestingPoint getInterestingPoint() {
+		return interestingPoint;
 	}
 
-	public void setId_itinerario(Long id_itinerario) {
-		this.id_itinerario = id_itinerario;
+	public void setInterestingPoint(InterestingPoint interestingPoint) {
+		this.interestingPoint = interestingPoint;
 	}
 
 	public String getFoto() {

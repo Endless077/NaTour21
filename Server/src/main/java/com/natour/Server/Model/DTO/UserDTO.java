@@ -9,25 +9,25 @@ public class UserDTO {
 	private String username;
 	
 	//Relationship
-	private List<String> itinerariUtente;
+	//private List<String> itinerariUtente;
 	
 	//Campi Locali
 	private String email;
 	private String nome;
 	private String cognome;
-	private String photoLnk;
+	private String photolnk;
 	
 	/*********************************************************************************************/
 	
 	//Constructor
-	public UserDTO(String username, String email, String nome, String cognome, String photoLnk) {
+	public UserDTO(String username, String email, String nome, String cognome, String photolnk) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.photoLnk = photoLnk;
-		this.itinerariUtente = new ArrayList<String>();
+		this.photolnk = photolnk;
+		//this.itinerariUtente = new ArrayList<String>();
 	}
 	
 	public UserDTO() {}
@@ -67,21 +67,21 @@ public class UserDTO {
 		this.cognome = cognome;
 	}
 
-	public String getPhotoLnk() {
-		return photoLnk;
+	public String getPhotolnk() {
+		return photolnk;
 	}
 
-	public void setPhotoLnk(String photoLnk) {
-		this.photoLnk = photoLnk;
+	public void setPhotolnk(String photolnk) {
+		this.photolnk = photolnk;
 	}
 
-	public List<String> getItinerariUtente() {
-		return itinerariUtente;
-	}
-
-	public void setItinerariUtente(List<String> itinerariUtente) {
-		this.itinerariUtente = itinerariUtente;
-	}
+//	public List<String> getItinerariUtente() {
+//		return itinerariUtente;
+//	}
+//
+//	public void setItinerariUtente(List<String> itinerariUtente) {
+//		this.itinerariUtente = itinerariUtente;
+//	}
 
 	/*********************************************************************************************/
 	

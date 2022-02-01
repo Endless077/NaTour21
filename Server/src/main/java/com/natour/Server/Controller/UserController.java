@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.UserDTO;
 import com.natour.Server.ServiceInterface.IUserService;
@@ -59,20 +60,21 @@ public class UserController {
 	public Optional<User> getUser(@PathVariable(name = "username") String username) {
 		Optional<User> result = this.userService.getUtente(username);
 		if(result.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Utente non trovato.");
+			throw new RequestApiException("Utente non trovato.", HttpStatus.NOT_FOUND);
 		return result;
 	}
 
 	//Post Mapping
 	@PostMapping(path = "createUtente")
 	@ResponseBody
-	public ResponseEntity<String> createUser(@RequestBody User utente) {
+	public ResponseEntity<String> createUser(@RequestBody UserDTO utente) {
 
-		boolean creato = this.userService.creaUtente(utente);
+		User newUser = convertDtoToEntity(utente);
+		boolean creato = this.userService.creaUtente(newUser);
 		if(creato)
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		else
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utente non salvato.");
+			throw new RequestApiException("Utente non salvato.", HttpStatus.BAD_REQUEST);
 	}
 
 	//Put Mapping
@@ -87,7 +89,7 @@ public class UserController {
 		if(eliminato)
 			return ResponseEntity.status(HttpStatus.OK).build();
 		else
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utente non eliminato.");
+			throw new RequestApiException("Utente non eliminato.", HttpStatus.BAD_REQUEST);
 	}
 
 	/*********************************************************************************************/
