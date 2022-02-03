@@ -62,18 +62,6 @@ public class InterestingPointController {
 		return interestingPoint;
 	}
 	
-	@GetMapping(path = "getInterestingPoint/getSingleFoto/{idInterestingPoint}")
-	@ResponseBody
-	public String getFotoItinerarioSingle(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint){
-		Optional<InterestingPoint> result = this.interestingpointService.getInterestingPointByID(idInterestingPoint);
-
-		if(result.isEmpty())
-			throw new RequestApiException("Interesting Point non trovato.", HttpStatus.NOT_FOUND);
-
-		InterestingPointDTO interestingPoint = convertEntityToDto(result.get());
-		return interestingPoint.getUrlfoto();
-	}
-
 	@GetMapping(path = "getInterestingPoint/byItinerario/{idItinerario}")
 	@ResponseBody
 	public List<InterestingPointDTO> getInterestingPointByItinerario(@PathVariable(name = "idItinerario") Long idItinerario){
@@ -87,8 +75,20 @@ public class InterestingPointController {
 			ret.add(convertEntityToDto(i));
 		return ret;
 	}
+	
+	@GetMapping(path = "getInterestingPoint/getSingleFoto/{idInterestingPoint}")
+	@ResponseBody
+	public String getFotoItinerarioSingle(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint){
+		Optional<InterestingPoint> result = this.interestingpointService.getInterestingPointByID(idInterestingPoint);
 
-	@GetMapping(path = "getInterestingPoint/getAllFoto/{idItinerario}")
+		if(result.isEmpty())
+			throw new RequestApiException("Interesting Point non trovato.", HttpStatus.NOT_FOUND);
+
+		InterestingPointDTO interestingPoint = convertEntityToDto(result.get());
+		return interestingPoint.getUrlfoto();
+	}
+
+	@GetMapping(path = "w")
 	@ResponseBody
 	public List<String> getFotoItinerarioMultiple(@PathVariable(name = "idItinerario") Long idItinerario){
 		List<InterestingPointDTO> listaInterestingPoint = this.getInterestingPointByItinerario(idItinerario);
@@ -131,7 +131,7 @@ public class InterestingPointController {
 	}
 
 	//Delete Mapping
-	@DeleteMapping(path = "deleteInterestingPoint/{idInterestingPoint}")
+	@DeleteMapping(path = "")
 	@ResponseBody
 	public ResponseEntity<String> deleteInterestingPoint(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint) {
 

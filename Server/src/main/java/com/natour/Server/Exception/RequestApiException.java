@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public class RequestApiException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	private HttpStatus status;
 	
 	//Constructor

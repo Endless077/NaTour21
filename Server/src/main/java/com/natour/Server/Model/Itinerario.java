@@ -1,6 +1,7 @@
 package com.natour.Server.Model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -73,7 +73,7 @@ public class Itinerario implements Serializable {
 	@Column(name="difficulty")
 	private String difficulty;
 	@Column(name="durata")
-	private String durata;
+	private Time durata;
 	@Column(name="lunghezza")
 	private Double lunghezza;
 	@Column(name="mezzoditrasporto")
@@ -85,7 +85,7 @@ public class Itinerario implements Serializable {
 
 	//Constructor
 	public Itinerario(Long id_itinerario, User utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String mezzoditrasporto, String areageografica) {
+			String puntofine, Boolean accessodisabili, String difficulty, Time durata, Double lunghezza, String mezzoditrasporto, String areageografica) {
 		super();
 		this.id_itinerario = id_itinerario;
 		this.utente = utente;
@@ -102,9 +102,9 @@ public class Itinerario implements Serializable {
 	}
 
 	public Itinerario() {}
-
+	
 	/*********************************************************************************************/
-
+	
 	//Getter e Setter
 	public Long getId_itinerario() {
 		return id_itinerario;
@@ -194,11 +194,11 @@ public class Itinerario implements Serializable {
 		this.difficulty = difficulty;
 	}
 
-	public String getDurata() {
+	public Time getDurata() {
 		return durata;
 	}
 
-	public void setDurata(String durata) {
+	public void setDurata(Time durata) {
 		this.durata = durata;
 	}
 

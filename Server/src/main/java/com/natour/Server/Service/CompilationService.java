@@ -15,7 +15,7 @@ public class CompilationService implements ICompilationService{
 
 	@Autowired
 	private CompilationRepository compilationRep;
-	
+
 	/*********************************************************************************************/
 
 	//Methods
@@ -35,6 +35,11 @@ public class CompilationService implements ICompilationService{
 	}
 
 	@Override
+	public List<String> getItinerariInCompilation(Long idCompilation) {
+		return this.compilationRep.getItinerarioInCompilation(idCompilation);
+	}
+
+	@Override
 	public boolean creaCompilation(Compilation compilation) {
 		try {
 			if(!this.compilationRep.existsById(compilation.getId_compilation()))
@@ -46,6 +51,19 @@ public class CompilationService implements ICompilationService{
 		}
 		return true;
 	}
+	
+	@Override
+	public boolean addItinerarioInCompilation(Long idCompilation, Long idItinerario) {
+
+		Optional<String> str = this.compilationRep.ifExistIC(idCompilation, idItinerario);
+
+		if(!str.isEmpty()) {
+			this.compilationRep.insertItinerarioInCompilation(idCompilation,idItinerario);
+			return true;
+		}
+		return false;
+	}
+
 
 	@Override
 	public boolean modificaCompilation(Compilation compilation) {
@@ -59,7 +77,7 @@ public class CompilationService implements ICompilationService{
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean cancellaCompilation(Long id_compilation) {
 		try {
@@ -71,6 +89,18 @@ public class CompilationService implements ICompilationService{
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean removeItinerarioInCompilation(Long idCompilation, Long idItinerario) {
+		
+		Optional<String> str = this.compilationRep.ifExistIC(idCompilation, idItinerario);
+
+		if(str.isEmpty()) {
+			this.compilationRep.deleteItinerarioInCompilation(idCompilation, idItinerario);
+			return true;
+		}
+		return false;
 	}
 
 	/*********************************************************************************************/

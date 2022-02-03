@@ -9,7 +9,10 @@ public interface IItinerarioService {
 	
 	//Methods GET
 	List<Itinerario> getAllItinerari();
-	Optional<Itinerario> getItinerarioByID(Long id);
+	List<Itinerario> getAllRecentItinerari();
+	
 	List<Itinerario> getItinerariByUsername(String username);
+	List<Itinerario> getItinerariByName(String nomeItinerario);
+	Optional<Itinerario> getItinerarioByID(Long id);
 
 }

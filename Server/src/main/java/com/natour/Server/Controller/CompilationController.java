@@ -79,6 +79,17 @@ public class CompilationController {
 		return ret;
 	}
 
+	@GetMapping(path = "getComplation/itinerari/{idCompilation}")
+	@ResponseBody
+	public List<String> getCompilationByUsername(@PathVariable(name = "idCompilation") Long idCompilation) {
+		List<String> itinerariInCompilation = this.compilationService.getItinerariInCompilation(idCompilation);
+
+		if(itinerariInCompilation.isEmpty())
+			throw new RequestApiException("Compilation vuota.", HttpStatus.NOT_FOUND);
+
+		return itinerariInCompilation;
+	}
+
 	//Post Mapping
 	@PostMapping(path = "createCompilation")
 	@ResponseBody
@@ -91,6 +102,18 @@ public class CompilationController {
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		else
 			throw new RequestApiException("Compilation non salvata.", HttpStatus.BAD_REQUEST);
+	}
+
+	@PostMapping(path = "addItinerario/{idCompilation}/{idItinerario}")
+	@ResponseBody
+	public ResponseEntity<String> addItinerario(@PathVariable(name = "idCompilation") Long idCompilation,
+												@PathVariable(name = "idItinerario") Long idItinerario) {
+
+		boolean creato = this.compilationService.addItinerarioInCompilation(idCompilation,idItinerario);
+		if(creato)
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		else
+			throw new RequestApiException("Itinerario non salvato in Compilation.", HttpStatus.BAD_REQUEST);
 	}
 
 	//Put Mapping
@@ -110,13 +133,25 @@ public class CompilationController {
 	//Delete Mapping
 	@DeleteMapping(path = "deleteCompilation/{id_compilation}")
 	@ResponseBody
-	public ResponseEntity<String> deleteCompilation(@PathVariable(name = "id_compilation") Long id_compilation) {
+	public ResponseEntity<String> removeItinerario(@PathVariable(name = "id_compilation") Long id_compilation) {
 
 		boolean eliminato = this.compilationService.cancellaCompilation(id_compilation);
 		if(eliminato)
 			return ResponseEntity.status(HttpStatus.OK).build();
 		else
 			throw new RequestApiException("Compilation non eliminata.", HttpStatus.BAD_REQUEST);
+	}
+
+	@DeleteMapping(path = "removeItinerario/{idCompilation}/{idItinerario}")
+	@ResponseBody
+	public ResponseEntity<String> deleteCompilation(@PathVariable(name = "idCompilation") Long idCompilation,
+													@PathVariable(name = "idItinerario") Long idItinerario) {
+
+		boolean eliminato =  this.compilationService.removeItinerarioInCompilation(idCompilation,idItinerario);
+		if(eliminato)
+			return ResponseEntity.status(HttpStatus.OK).build();
+		else
+			throw new RequestApiException("Itinerario non rimosso in Compilation.", HttpStatus.BAD_REQUEST);
 	}
 
 	/*********************************************************************************************/

@@ -34,9 +34,9 @@ public class Compilation implements Serializable {
 	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "compilation_itinerario_map",
-				uniqueConstraints = {@UniqueConstraint(columnNames = {"id_compilation", "id_itinerario"})},
-	          	joinColumns = @JoinColumn(name = "id_compilation", referencedColumnName = "id_compilation"),
-	          	inverseJoinColumns = @JoinColumn(name = "id_itinerario", referencedColumnName = "id_itinerario")
+				uniqueConstraints = {@UniqueConstraint(columnNames = {"id_compilation_map", "id_itinerario_map"})},
+	          	joinColumns = @JoinColumn(name = "id_compilation_map", referencedColumnName = "id_compilation"),
+	          	inverseJoinColumns = @JoinColumn(name = "id_itinerario_map", referencedColumnName = "id_itinerario")
 	)
 	private List<Itinerario> itinerari = new ArrayList<Itinerario>();;
 	

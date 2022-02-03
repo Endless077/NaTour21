@@ -14,4 +14,9 @@ public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 	@Query(value = "SELECT * FROM itinerario i WHERE i.id_utente = ?1", nativeQuery = true)
 	List<Itinerario> findByUsername(String username);
 	
+	@Query(value = "SELECT * FROM itinerario ORDER BY id_itinerario DESC", nativeQuery = true)
+	List<Itinerario> findAllByRecent();
+	
+	@Query(value = "SELECT * FROM itinerario i WHERE i.titolo = ?1", nativeQuery = true)
+	List<Itinerario> findAllByName(String nomeItinerario);
 }

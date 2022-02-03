@@ -19,15 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.natour.Server.Exception.RequestApiException;
-import com.natour.Server.Model.Compilation;
 import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Model.Tappa;
-import com.natour.Server.Model.User;
-import com.natour.Server.Model.DTO.CompilationDTO;
 import com.natour.Server.Model.DTO.TappaDTO;
 import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Service.TappaService;
-import com.natour.Server.Service.UserService;
 
 @RestController
 @RequestMapping(path = "api/tappa", produces = { "application/json" })

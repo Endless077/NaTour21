@@ -11,15 +11,15 @@ public class InterestingPointDTO {
 	//Campi Locali
 	private Double latitudine;
 	private Double longitudine;
-	private String descrizione;
 	private String titolo;
+	private String descrizione;
 	private String urlfoto;
 
 	/*********************************************************************************************/
 
 	//Constructor
 	public InterestingPointDTO(Long id_interestingpoint, Long id_itinerario, Double latitudine, Double longitudine,
-			String descrizione, String titolo, String urlfoto) {
+			String titolo, String descrizione, String urlfoto) {
 		super();
 		this.id_interestingpoint = id_interestingpoint;
 		this.id_itinerario = id_itinerario;
@@ -77,16 +77,6 @@ public class InterestingPointDTO {
 	}
 
 
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
-
 	public String getTitolo() {
 		return titolo;
 	}
@@ -94,6 +84,16 @@ public class InterestingPointDTO {
 
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
+	}
+	
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 

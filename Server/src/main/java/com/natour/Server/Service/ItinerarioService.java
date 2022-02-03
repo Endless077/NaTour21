@@ -25,6 +25,16 @@ public class ItinerarioService implements IItinerarioService {
 	}
 	
 	@Override
+	public List<Itinerario> getAllRecentItinerari() {
+		return this.itinerarioRep.findAllByRecent();
+	}
+	
+	@Override
+	public List<Itinerario> getItinerariByName(String nomeItinerario) {
+		return this.itinerarioRep.findAllByName(nomeItinerario);
+		
+	}
+	@Override
 	public Optional<Itinerario> getItinerarioByID(Long id) {
 		return this.itinerarioRep.findById(id);
 	}
