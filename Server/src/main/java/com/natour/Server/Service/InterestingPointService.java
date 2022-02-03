@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.InterestingPoint;
 import com.natour.Server.Repository.InterestingPointRepository;
-import com.natour.Server.ServiceInterface.IInterestingPointService;
+import com.natour.Server.Utils.IInterestingPointService;
 
 @Service("mainInterestingPointService")
 public class InterestingPointService implements IInterestingPointService {

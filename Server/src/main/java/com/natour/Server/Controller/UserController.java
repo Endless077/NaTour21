@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.UserDTO;
-import com.natour.Server.ServiceInterface.IUserService;
+import com.natour.Server.Utils.IUserService;
 
 @RestController
 @RequestMapping(path = "api/user", produces = { "application/json" })

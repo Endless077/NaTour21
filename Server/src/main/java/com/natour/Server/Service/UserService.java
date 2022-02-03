@@ -10,7 +10,7 @@ import com.natour.Server.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.natour.Server.Repository.UserRepository;
-import com.natour.Server.ServiceInterface.IUserService;
+import com.natour.Server.Utils.IUserService;
 
 @Service("mainUserService")
 public class UserService implements IUserService {

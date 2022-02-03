@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.Tappa;
 import com.natour.Server.Repository.TappaRepository;
-import com.natour.Server.ServiceInterface.ITappaService;
+import com.natour.Server.Utils.ITappaService;
 
 @Service("mainTappaService")
 public class TappaService implements ITappaService{

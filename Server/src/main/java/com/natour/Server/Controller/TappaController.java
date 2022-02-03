@@ -74,7 +74,6 @@ public class TappaController {
 		return ret;
 	}
 
-
 	//Post Mapping
 	@PostMapping(path = "createTappa")
 	@ResponseBody

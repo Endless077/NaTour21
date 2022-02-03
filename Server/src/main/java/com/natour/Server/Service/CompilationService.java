@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.Compilation;
 import com.natour.Server.Repository.CompilationRepository;
-import com.natour.Server.ServiceInterface.ICompilationService;
+import com.natour.Server.Utils.ICompilationService;
 
 @Service("mainCompilationService")
 public class CompilationService implements ICompilationService{
@@ -96,7 +96,7 @@ public class CompilationService implements ICompilationService{
 		
 		Optional<String> str = this.compilationRep.ifExistIC(idCompilation, idItinerario);
 
-		if(str.isEmpty()) {
+		if(!str.isEmpty()) {
 			this.compilationRep.deleteItinerarioInCompilation(idCompilation, idItinerario);
 			return true;
 		}

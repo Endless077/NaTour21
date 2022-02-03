@@ -76,8 +76,6 @@ public class Itinerario implements Serializable {
 	private Time durata;
 	@Column(name="lunghezza")
 	private Double lunghezza;
-	@Column(name="mezzoditrasporto")
-	private String mezzoditrasporto;
 	@Column(name="areageografica")
 	private String areageografica;
 
@@ -85,7 +83,7 @@ public class Itinerario implements Serializable {
 
 	//Constructor
 	public Itinerario(Long id_itinerario, User utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessodisabili, String difficulty, Time durata, Double lunghezza, String mezzoditrasporto, String areageografica) {
+			String puntofine, Boolean accessodisabili, String difficulty, Time durata, Double lunghezza, String areageografica) {
 		super();
 		this.id_itinerario = id_itinerario;
 		this.utente = utente;
@@ -97,7 +95,6 @@ public class Itinerario implements Serializable {
 		this.difficulty = difficulty;
 		this.durata = durata;
 		this.lunghezza = lunghezza;
-		this.mezzoditrasporto = mezzoditrasporto;
 		this.areageografica = areageografica;
 	}
 
@@ -208,14 +205,6 @@ public class Itinerario implements Serializable {
 
 	public void setLunghezza(Double lunghezza) {
 		this.lunghezza = lunghezza;
-	}
-
-	public String getMezzoditrasporto() {
-		return mezzoditrasporto;
-	}
-
-	public void setMezzoditrasporto(String mezzoditrasporto) {
-		this.mezzoditrasporto = mezzoditrasporto;
 	}
 
 	public String getAreageografica() {

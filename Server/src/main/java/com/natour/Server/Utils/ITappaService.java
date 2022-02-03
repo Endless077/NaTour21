@@ -1,4 +1,4 @@
-package com.natour.Server.ServiceInterface;
+package com.natour.Server.Utils;
 
 import java.util.List;
 import java.util.Optional;

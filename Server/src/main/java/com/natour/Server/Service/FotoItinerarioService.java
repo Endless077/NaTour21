@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.FotoItinerario;
 import com.natour.Server.Repository.FotoItinerarioRepository;
-import com.natour.Server.ServiceInterface.IFotoItinerario;
+import com.natour.Server.Utils.IFotoItinerario;
 
 @Service("mainFotoInterestingPointService")
 public class FotoItinerarioService implements IFotoItinerario {

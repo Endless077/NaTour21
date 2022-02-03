@@ -1,16 +1,9 @@
-package com.natour.Server.Model.DTO;
+package com.natour.Server.Utils;
 
-public class ItinerarioDTO {
+public class Filter {
 
-	//Class Primary Key
-	private Long id_itinerario = -1L;
-
-	//Class Foreign Key
-	private String id_utente;
-
-	//Campi Locali
+	//Filtri
 	private String titolo;
-	private String descrizione;
 	private String puntoinizio;
 	private String puntofine;
 	private Boolean accessodisabili;
@@ -18,17 +11,14 @@ public class ItinerarioDTO {
 	private String durata;
 	private Double lunghezza;
 	private String areageografica;
-
+	
 	/*********************************************************************************************/
-
+	
 	//Constructor
-	public ItinerarioDTO(Long id_itinerario, String id_utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String areageografica) {
+	public Filter(String titolo, String puntoinizio, String puntofine,
+			Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String areageografica) {
 		super();
-		this.id_itinerario = id_itinerario;
-		this.id_utente = id_utente;
 		this.titolo = titolo;
-		this.descrizione = descrizione;
 		this.puntoinizio = puntoinizio;
 		this.puntofine = puntofine;
 		this.accessodisabili = accessodisabili;
@@ -36,44 +26,19 @@ public class ItinerarioDTO {
 		this.durata = durata;
 		this.lunghezza = lunghezza;
 		this.areageografica = areageografica;
-	}	
-
-	public ItinerarioDTO() {}
+	}
+	
+	public Filter() {}
 
 	/*********************************************************************************************/
-
-	//Getter e Setter
 	
-	public Long getId_itinerario() {
-		return id_itinerario;
-	}
-
-	public void setId_itinerario(Long id_itinerario) {
-		this.id_itinerario = id_itinerario;
-	}
-
-	public String getId_utente() {
-		return id_utente;
-	}
-
-	public void setId_utente(String id_utente) {
-		this.id_utente = id_utente;
-	}
-
+	//Getter e Setter
 	public String getTitolo() {
 		return titolo;
 	}
 
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
 	}
 
 	public String getPuntoinizio() {
@@ -133,5 +98,5 @@ public class ItinerarioDTO {
 	}
 
 	/*********************************************************************************************/
-
+	
 }
