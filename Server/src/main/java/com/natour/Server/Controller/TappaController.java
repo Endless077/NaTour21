@@ -44,6 +44,7 @@ public class TappaController {
 
 	//Get Mapping
 	@GetMapping(path = "listaTappe")
+	@ResponseBody
 	public List<Tappa> getAll() {
 		return this.tappaService.getAllTappe();
 	}

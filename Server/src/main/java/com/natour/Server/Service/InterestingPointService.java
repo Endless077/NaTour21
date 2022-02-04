@@ -105,7 +105,6 @@ public class InterestingPointService implements IInterestingPointService {
 	public void setInterestingPointRep(InterestingPointRepository interestingPointRep) {
 		this.interestingPointRep = interestingPointRep;
 	}
-		
 
 	/*********************************************************************************************/
 }

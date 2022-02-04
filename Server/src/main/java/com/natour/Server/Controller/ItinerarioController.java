@@ -27,10 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.natour.Server.Exception.RequestApiException;
-import com.natour.Server.Model.Compilation;
 import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Model.User;
-import com.natour.Server.Model.DTO.CompilationDTO;
 import com.natour.Server.Model.DTO.ItinerarioDTO;
 import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Service.UserService;
@@ -55,6 +53,7 @@ public class ItinerarioController {
 
 	//Get Mapping
 	@GetMapping(path = "listaItinerari")
+	@ResponseBody
 	public List<ItinerarioDTO> getAll() {
 		List<Itinerario> listaItinerari = this.itinerarioService.getAllItinerari();
 		
@@ -142,9 +141,11 @@ public class ItinerarioController {
 			e.printStackTrace();
 		}
 		
-		List<Itinerario> listaItinerari = this.itinerarioService.getByFilter(filtro.getTitolo(), filtro.getPuntoinizio(), filtro.getPuntofine(),
-																				durata, filtro.getLunghezza(), filtro.getDifficulty(),
-																				filtro.getAccessodisabili(), filtro.getAreageografica());
+		List<Itinerario> listaItinerari = this.itinerarioService.getByFilter(
+											filtro.getTitolo(), filtro.getPuntoinizio(), filtro.getPuntofine(),
+											durata, filtro.getLunghezza(), filtro.getDifficulty(),
+											filtro.getAccessodisabili(), filtro.getAreageografica());
+		
 		if(listaItinerari.isEmpty())
 			throw new RequestApiException("L'utente non possiede itinerari.", HttpStatus.NOT_FOUND);
 
@@ -228,7 +229,6 @@ public class ItinerarioController {
 		String username = itinerario.getUtente().getUsername();
 		itinerarioDTO.setId_utente(username);
 		itinerarioDTO.setDurata(timeToString(itinerario.getDurata()));
-		
 		return itinerarioDTO;
 	}
 

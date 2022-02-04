@@ -28,37 +28,37 @@ public class Itinerario implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "id_utente",
-				nullable = false,
-				referencedColumnName = "username")
+	nullable = false,
+	referencedColumnName = "username")
 	private User utente;
 
 	//Relationship
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
-				cascade = CascadeType.ALL,
-				fetch = FetchType.LAZY)
+	cascade = CascadeType.ALL,
+	fetch = FetchType.LAZY)
 	private List<InterestingPoint> interestingPoint = new ArrayList<InterestingPoint>();
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
-				cascade = CascadeType.ALL,
-				fetch = FetchType.LAZY)
+	cascade = CascadeType.ALL,
+	fetch = FetchType.LAZY)
 	private List<Tappa> tappe = new ArrayList<Tappa>();;
-	
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
-				cascade = CascadeType.ALL,
-				fetch = FetchType.LAZY)
+	cascade = CascadeType.ALL,
+	fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<FotoItinerario> fotoItinerario = new ArrayList<FotoItinerario>();
-	
+
 	@JsonBackReference
 	@ManyToMany(mappedBy = "itinerari",
-				cascade = CascadeType.ALL,
-				fetch = FetchType.LAZY)
+	cascade = CascadeType.ALL,
+	fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Compilation> compilation = new ArrayList<Compilation>();
-	
+
 	//Campi Locali
 	@Column(name="titolo", nullable = false)
 	private String titolo;
@@ -66,8 +66,16 @@ public class Itinerario implements Serializable {
 	private String descrizione;
 	@Column(name="puntoinizio", nullable = false)
 	private String puntoinizio;
+	@Column(name="latitudine_pi", nullable = false)
+	private Double latitudine_pi;
+	@Column(name="longitudine_pi", nullable = false)
+	private Double longitudine_pi;
 	@Column(name="puntofine", nullable = false)
 	private String puntofine;
+	@Column(name="latitudine_pf", nullable = false)
+	private Double latitudine_pf;
+	@Column(name="longitudine_pf", nullable = false)
+	private Double longitudine_pf;
 	@Column(name="accessodisabili")
 	private Boolean accessodisabili;
 	@Column(name="difficulty")
@@ -82,15 +90,26 @@ public class Itinerario implements Serializable {
 	/*********************************************************************************************/
 
 	//Constructor
-	public Itinerario(Long id_itinerario, User utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessodisabili, String difficulty, Time durata, Double lunghezza, String areageografica) {
+	public Itinerario(Long id_itinerario, User utente, List<InterestingPoint> interestingPoint, List<Tappa> tappe,
+			List<FotoItinerario> fotoItinerario, List<Compilation> compilation, String titolo, String descrizione,
+			String puntoinizio, Double latitudine_pi, Double longitudine_pi, String puntofine, Double latitudine_pf,
+			Double longitudine_pf, Boolean accessodisabili, String difficulty, Time durata, Double lunghezza,
+			String areageografica) {
 		super();
 		this.id_itinerario = id_itinerario;
 		this.utente = utente;
+		this.interestingPoint = interestingPoint;
+		this.tappe = tappe;
+		this.fotoItinerario = fotoItinerario;
+		this.compilation = compilation;
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 		this.puntoinizio = puntoinizio;
+		this.latitudine_pi = latitudine_pi;
+		this.longitudine_pi = longitudine_pi;
 		this.puntofine = puntofine;
+		this.latitudine_pf = latitudine_pf;
+		this.longitudine_pf = longitudine_pf;
 		this.accessodisabili = accessodisabili;
 		this.difficulty = difficulty;
 		this.durata = durata;
@@ -99,9 +118,9 @@ public class Itinerario implements Serializable {
 	}
 
 	public Itinerario() {}
-	
+
 	/*********************************************************************************************/
-	
+
 	//Getter e Setter
 	public Long getId_itinerario() {
 		return id_itinerario;
@@ -119,6 +138,14 @@ public class Itinerario implements Serializable {
 		this.utente = utente;
 	}
 
+	public List<InterestingPoint> getInterestingPoint() {
+		return interestingPoint;
+	}
+
+	public void setInterestingPoint(List<InterestingPoint> interestingPoint) {
+		this.interestingPoint = interestingPoint;
+	}
+
 	public List<Tappa> getTappe() {
 		return tappe;
 	}
@@ -127,12 +154,12 @@ public class Itinerario implements Serializable {
 		this.tappe = tappe;
 	}
 
-	public List<InterestingPoint> getInterestingPoint() {
-		return interestingPoint;
+	public List<FotoItinerario> getFotoItinerario() {
+		return fotoItinerario;
 	}
 
-	public void setInterestingPoint(List<InterestingPoint> interestingPoint) {
-		this.interestingPoint = interestingPoint;
+	public void setFotoItinerario(List<FotoItinerario> fotoItinerario) {
+		this.fotoItinerario = fotoItinerario;
 	}
 
 	public List<Compilation> getCompilation() {
@@ -167,12 +194,44 @@ public class Itinerario implements Serializable {
 		this.puntoinizio = puntoinizio;
 	}
 
+	public Double getLatitudine_pi() {
+		return latitudine_pi;
+	}
+
+	public void setLatitudine_pi(Double latitudine_pi) {
+		this.latitudine_pi = latitudine_pi;
+	}
+
+	public Double getLongitudine_pi() {
+		return longitudine_pi;
+	}
+
+	public void setLongitudine_pi(Double longitudine_pi) {
+		this.longitudine_pi = longitudine_pi;
+	}
+
 	public String getPuntofine() {
 		return puntofine;
 	}
 
 	public void setPuntofine(String puntofine) {
 		this.puntofine = puntofine;
+	}
+
+	public Double getLatitudine_pf() {
+		return latitudine_pf;
+	}
+
+	public void setLatitudine_pf(Double latitudine_pf) {
+		this.latitudine_pf = latitudine_pf;
+	}
+
+	public Double getLongitudine_pf() {
+		return longitudine_pf;
+	}
+
+	public void setLongitudine_pf(Double longitudine_pf) {
+		this.longitudine_pf = longitudine_pf;
 	}
 
 	public Boolean getAccessodisabili() {
@@ -214,7 +273,7 @@ public class Itinerario implements Serializable {
 	public void setAreageografica(String areageografica) {
 		this.areageografica = areageografica;
 	}
-	
+
 	/*********************************************************************************************/
 
 }

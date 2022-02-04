@@ -46,6 +46,7 @@ public class InterestingPointController {
 
 	//Get Mapping
 	@GetMapping(path = "listaInterestingPoint")
+	@ResponseBody
 	public List<InterestingPoint> getAll() {
 		return this.interestingpointService.getAllInterestinPoint();
 	}

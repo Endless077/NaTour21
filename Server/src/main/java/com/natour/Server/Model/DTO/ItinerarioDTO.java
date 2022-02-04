@@ -12,7 +12,11 @@ public class ItinerarioDTO {
 	private String titolo;
 	private String descrizione;
 	private String puntoinizio;
+	private Double latitudine_pi;
+	private Double longitudine_pi;
 	private String puntofine;
+	private Double latitudine_pf;
+	private Double longitudine_pf;
 	private Boolean accessodisabili;
 	private String difficulty;
 	private String durata;
@@ -23,27 +27,31 @@ public class ItinerarioDTO {
 
 	//Constructor
 	public ItinerarioDTO(Long id_itinerario, String id_utente, String titolo, String descrizione, String puntoinizio,
-			String puntofine, Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String areageografica) {
+			Double latitudine_pi, Double longitudine_pi, String puntofine, Double latitudine_pf, Double longitudine_pf,
+			Boolean accessodisabili, String difficulty, String durata, Double lunghezza, String areageografica) {
 		super();
 		this.id_itinerario = id_itinerario;
 		this.id_utente = id_utente;
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 		this.puntoinizio = puntoinizio;
+		this.latitudine_pi = latitudine_pi;
+		this.longitudine_pi = longitudine_pi;
 		this.puntofine = puntofine;
+		this.latitudine_pf = latitudine_pf;
+		this.longitudine_pf = longitudine_pf;
 		this.accessodisabili = accessodisabili;
 		this.difficulty = difficulty;
 		this.durata = durata;
 		this.lunghezza = lunghezza;
 		this.areageografica = areageografica;
-	}	
-
+	}
+	
 	public ItinerarioDTO() {}
-
+	
 	/*********************************************************************************************/
 
 	//Getter e Setter
-	
 	public Long getId_itinerario() {
 		return id_itinerario;
 	}
@@ -84,12 +92,44 @@ public class ItinerarioDTO {
 		this.puntoinizio = puntoinizio;
 	}
 
+	public Double getLatitudine_pi() {
+		return latitudine_pi;
+	}
+
+	public void setLatitudine_pi(Double latitudine_pi) {
+		this.latitudine_pi = latitudine_pi;
+	}
+
+	public Double getLongitudine_pi() {
+		return longitudine_pi;
+	}
+
+	public void setLongitudine_pi(Double longitudine_pi) {
+		this.longitudine_pi = longitudine_pi;
+	}
+
 	public String getPuntofine() {
 		return puntofine;
 	}
 
 	public void setPuntofine(String puntofine) {
 		this.puntofine = puntofine;
+	}
+
+	public Double getLatitudine_pf() {
+		return latitudine_pf;
+	}
+
+	public void setLatitudine_pf(Double latitudine_pf) {
+		this.latitudine_pf = latitudine_pf;
+	}
+
+	public Double getLongitudine_pf() {
+		return longitudine_pf;
+	}
+
+	public void setLongitudine_pf(Double longitudine_pf) {
+		this.longitudine_pf = longitudine_pf;
 	}
 
 	public Boolean getAccessodisabili() {
@@ -131,7 +171,7 @@ public class ItinerarioDTO {
 	public void setAreageografica(String areageografica) {
 		this.areageografica = areageografica;
 	}
-
+	
 	/*********************************************************************************************/
 
 }

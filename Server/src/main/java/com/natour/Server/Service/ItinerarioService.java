@@ -1,15 +1,10 @@
 package com.natour.Server.Service;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.natour.Server.Model.Itinerario;
@@ -63,10 +58,17 @@ public class ItinerarioService implements IItinerarioService {
 	@Override
 	public boolean creaItinerario(Itinerario insertItinerario) {
 		try {
-			if(!this.itinerarioRep.existsById(insertItinerario.getId_itinerario()))
-				this.itinerarioRep.save(insertItinerario);
-			else
+			Optional<String> equals = this.itinerarioRep.checkEquals(insertItinerario.getPuntoinizio(),
+																	 insertItinerario.getLatitudine_pi(),
+																	 insertItinerario.getLongitudine_pi(),
+																	 insertItinerario.getPuntofine(),
+																	 insertItinerario.getLatitudine_pf(),
+																	 insertItinerario.getLongitudine_pf());
+			if(!equals.isEmpty())
 				return false;
+			
+			this.itinerarioRep.save(insertItinerario);
+			
 		}catch(IllegalArgumentException e){
 			return false;
 		}
@@ -104,6 +106,10 @@ public class ItinerarioService implements IItinerarioService {
 	//Getter e Setter
 	public ItinerarioRepository getItinerarioRep() {
 		return itinerarioRep;
+	}
+
+	public void setItinerarioRep(ItinerarioRepository itinerarioRep) {
+		this.itinerarioRep = itinerarioRep;
 	}
 
 	/*********************************************************************************************/

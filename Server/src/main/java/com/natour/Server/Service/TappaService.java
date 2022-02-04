@@ -77,6 +77,11 @@ public class TappaService implements ITappaService{
 		return tappaRep;
 	}
 
+	public void setTappaRep(TappaRepository tappaRep) {
+		this.tappaRep = tappaRep;
+	}
+
+
 	/*********************************************************************************************/
 
 }

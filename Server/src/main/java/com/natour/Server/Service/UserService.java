@@ -68,6 +68,10 @@ public class UserService implements IUserService {
 	public UserRepository getUserRep() {
 		return userRep;
 	}
+
+	public void setUserRep(UserRepository userRep) {
+		this.userRep = userRep;
+	}
 	
     /*********************************************************************************************/
     

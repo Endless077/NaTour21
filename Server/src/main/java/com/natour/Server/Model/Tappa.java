@@ -35,23 +35,19 @@ public class Tappa implements Serializable {
 	private Double latitudine;
 	@Column(name="longitudine")
 	private Double longitudine;
-	@Column(name="tipotappa")
-	private String tipotappa;
 	@Column(name="sequenza")
 	private Integer sequenza;
 
 	/*********************************************************************************************/
 
 	//Constructor
-	public Tappa(Long id_tappa, Itinerario itinerario, String nometappa, Double latitudine, Double longitudine,
-			String tipotappa, Integer sequenza) {
+	public Tappa(Long id_tappa, Itinerario itinerario, String nometappa, Double latitudine, Double longitudine, Integer sequenza) {
 		super();
 		this.id_tappa = id_tappa;
 		this.itinerario = itinerario;
 		this.nometappa = nometappa;
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
-		this.tipotappa = tipotappa;
 		this.sequenza = sequenza;
 	}
 
@@ -98,14 +94,6 @@ public class Tappa implements Serializable {
 
 	public void setLongitudine(Double longitudine) {
 		this.longitudine = longitudine;
-	}
-
-	public String getTipotappa() {
-		return tipotappa;
-	}
-
-	public void setTipotappa(String tipotappa) {
-		this.tipotappa = tipotappa;
 	}
 
 	public Integer getSequenza() {
