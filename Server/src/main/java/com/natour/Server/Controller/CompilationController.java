@@ -81,7 +81,7 @@ public class CompilationController {
 
 	@GetMapping(path = "getComplation/itinerari/{idCompilation}")
 	@ResponseBody
-	public List<String> getCompilationByUsername(@PathVariable(name = "idCompilation") Long idCompilation) {
+	public List<String> getCompilationItinerariByUsername(@PathVariable(name = "idCompilation") Long idCompilation) {
 		List<String> itinerariInCompilation = this.compilationService.getItinerariInCompilation(idCompilation);
 
 		if(itinerariInCompilation.isEmpty())
