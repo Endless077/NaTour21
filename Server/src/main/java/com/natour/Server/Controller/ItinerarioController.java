@@ -100,7 +100,7 @@ public class ItinerarioController {
 	
 	@GetMapping(path = "getItinerario/byID/{idItinerario}")
 	@ResponseBody
-	public ItinerarioDTO getItinerarioByID(@PathVariable(name = "idItinerario") Long idItinerario){
+	public ItinerarioDTO getItinerarioByID(@PathVariable(name = "idItinerario") Long idItinerario) {
 		Optional<Itinerario> result = this.itinerarioService.getItinerarioByID(idItinerario);
 		
 		if(result.isEmpty())
@@ -219,7 +219,7 @@ public class ItinerarioController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private ItinerarioDTO convertEntityToDto(Itinerario itinerario){
+	private ItinerarioDTO convertEntityToDto(Itinerario itinerario) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		ItinerarioDTO itinerarioDTO = new ItinerarioDTO();
@@ -232,7 +232,7 @@ public class ItinerarioController {
 		return itinerarioDTO;
 	}
 
-	private Itinerario convertDtoToEntity(ItinerarioDTO itinerarioDTO){
+	private Itinerario convertDtoToEntity(ItinerarioDTO itinerarioDTO) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		Itinerario itinerario = new Itinerario();

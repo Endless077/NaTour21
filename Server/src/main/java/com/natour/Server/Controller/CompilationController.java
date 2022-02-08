@@ -47,13 +47,13 @@ public class CompilationController {
 	//Get Mapping
 	@GetMapping(path = "listaCompilation")
 	@ResponseBody
-	public List<Compilation> getAll(){
+	public List<Compilation> getAll() {
 		return this.compilationService.getAllCompilation();
 	}
 
 	@GetMapping(path = "getCompilation/byID/{idCompilation}")
 	@ResponseBody
-	public CompilationDTO getCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation){
+	public CompilationDTO getCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation) {
 		Optional<Compilation> result = this.compilationService.getCompilationByID(idCompilation);
 
 		if(result.isEmpty())
@@ -176,7 +176,7 @@ public class CompilationController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private CompilationDTO convertEntityToDto(Compilation compilation){
+	private CompilationDTO convertEntityToDto(Compilation compilation) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		CompilationDTO compilationDTO = new CompilationDTO();
@@ -188,7 +188,7 @@ public class CompilationController {
 		return compilationDTO;
 	}
 
-	private Compilation convertDtoToEntity(CompilationDTO compilationDTO){
+	private Compilation convertDtoToEntity(CompilationDTO compilationDTO) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		Compilation compilation = new Compilation();

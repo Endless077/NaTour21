@@ -147,7 +147,7 @@ public class FotoItinerarioController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private FotoItinerarioDTO convertEntityToDto(FotoItinerario fotoIP){
+	private FotoItinerarioDTO convertEntityToDto(FotoItinerario fotoIP) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		FotoItinerarioDTO fotoIPDTO = new FotoItinerarioDTO();
@@ -159,7 +159,7 @@ public class FotoItinerarioController {
 		return fotoIPDTO;
 	}
 
-	private FotoItinerario convertDtoToEntity(FotoItinerarioDTO fotoIPDTO){
+	private FotoItinerario convertDtoToEntity(FotoItinerarioDTO fotoIPDTO) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		FotoItinerario fotoIP = new FotoItinerario();

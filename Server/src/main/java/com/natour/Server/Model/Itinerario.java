@@ -28,34 +28,34 @@ public class Itinerario implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "id_utente",
-	nullable = false,
-	referencedColumnName = "username")
+				nullable = false,
+				referencedColumnName = "username")
 	private User utente;
 
 	//Relationship
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
-	cascade = CascadeType.ALL,
-	fetch = FetchType.LAZY)
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
 	private List<InterestingPoint> interestingPoint = new ArrayList<InterestingPoint>();
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
-	cascade = CascadeType.ALL,
-	fetch = FetchType.LAZY)
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
 	private List<Tappa> tappe = new ArrayList<Tappa>();;
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "itinerario",
-	cascade = CascadeType.ALL,
-	fetch = FetchType.LAZY)
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<FotoItinerario> fotoItinerario = new ArrayList<FotoItinerario>();
 
 	@JsonBackReference
 	@ManyToMany(mappedBy = "itinerari",
-	cascade = CascadeType.ALL,
-	fetch = FetchType.LAZY)
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Compilation> compilation = new ArrayList<Compilation>();
 

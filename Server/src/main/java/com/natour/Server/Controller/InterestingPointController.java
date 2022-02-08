@@ -53,7 +53,7 @@ public class InterestingPointController {
 
 	@GetMapping(path = "getInterestingPoint/byID/{idInterestingPoint}")
 	@ResponseBody
-	public InterestingPointDTO getCompilationByID(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint){
+	public InterestingPointDTO getCompilationByID(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint) {
 		Optional<InterestingPoint> result = this.interestingpointService.getInterestingPointByID(idInterestingPoint);
 
 		if(result.isEmpty())
@@ -65,7 +65,7 @@ public class InterestingPointController {
 	
 	@GetMapping(path = "getInterestingPoint/byItinerario/{idItinerario}")
 	@ResponseBody
-	public List<InterestingPointDTO> getInterestingPointByItinerario(@PathVariable(name = "idItinerario") Long idItinerario){
+	public List<InterestingPointDTO> getInterestingPointByItinerario(@PathVariable(name = "idItinerario") Long idItinerario) {
 		List<InterestingPoint> listaInterestingPoint = this.interestingpointService.getInterestingPointByItinerario(idItinerario);
 
 		if(listaInterestingPoint.isEmpty())
@@ -79,7 +79,7 @@ public class InterestingPointController {
 	
 	@GetMapping(path = "getInterestingPoint/getSingleFoto/{idInterestingPoint}")
 	@ResponseBody
-	public String getFotoItinerarioSingle(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint){
+	public String getFotoItinerarioSingle(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint) {
 		Optional<InterestingPoint> result = this.interestingpointService.getInterestingPointByID(idInterestingPoint);
 
 		if(result.isEmpty())
@@ -89,9 +89,9 @@ public class InterestingPointController {
 		return interestingPoint.getUrlfoto();
 	}
 
-	@GetMapping(path = "w")
+	@GetMapping(path = "getInterestingPoint/getMultipleFoto/{idInterestingPoint}")
 	@ResponseBody
-	public List<String> getFotoItinerarioMultiple(@PathVariable(name = "idItinerario") Long idItinerario){
+	public List<String> getFotoItinerarioMultiple(@PathVariable(name = "idItinerario") Long idItinerario) {
 		List<InterestingPointDTO> listaInterestingPoint = this.getInterestingPointByItinerario(idItinerario);
 		
 		if(listaInterestingPoint.isEmpty())
@@ -132,7 +132,7 @@ public class InterestingPointController {
 	}
 
 	//Delete Mapping
-	@DeleteMapping(path = "")
+	@DeleteMapping(path = "deleteInterestingPoint/{idInterestingPoint}")
 	@ResponseBody
 	public ResponseEntity<String> deleteInterestingPoint(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint) {
 
@@ -176,7 +176,7 @@ public class InterestingPointController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private InterestingPointDTO convertEntityToDto(InterestingPoint interestingPoint){
+	private InterestingPointDTO convertEntityToDto(InterestingPoint interestingPoint) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		InterestingPointDTO interestingPointDTO = new InterestingPointDTO();
@@ -188,7 +188,7 @@ public class InterestingPointController {
 		return interestingPointDTO;
 	}
 
-	private InterestingPoint convertDtoToEntity(InterestingPointDTO interestingPointDTO){
+	private InterestingPoint convertDtoToEntity(InterestingPointDTO interestingPointDTO) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		InterestingPoint interestingPoint = new InterestingPoint();

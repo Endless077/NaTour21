@@ -97,7 +97,7 @@ public class UserController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private UserDTO convertEntityToDto(User user){
+	private UserDTO convertEntityToDto(User user) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		UserDTO userDTO = new UserDTO();
@@ -105,7 +105,7 @@ public class UserController {
 		return userDTO;
 	}
 
-	private User convertDtoToEntity(UserDTO userDTO){
+	private User convertDtoToEntity(UserDTO userDTO) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		User user = new User();

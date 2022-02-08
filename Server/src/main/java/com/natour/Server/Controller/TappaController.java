@@ -50,7 +50,7 @@ public class TappaController {
 	}
 
 	@GetMapping(path = "getTappa/ByID/{idTappa}")
-	public TappaDTO getTappaByID(@PathVariable(name = "idTappa") Long idTappa ) {
+	public TappaDTO getTappaByID(@PathVariable(name = "idTappa") Long idTappa) {
 		Optional<Tappa> result = this.tappaService.getTappaByID(idTappa);
 
 		if(result.isEmpty())
@@ -132,7 +132,7 @@ public class TappaController {
 	/*********************************************************************************************/
 
 	//Mapper
-	private TappaDTO convertEntityToDto(Tappa tappa){
+	private TappaDTO convertEntityToDto(Tappa tappa) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		TappaDTO tappaDTO = new TappaDTO();
@@ -144,7 +144,7 @@ public class TappaController {
 		return tappaDTO;
 	}
 
-	private Tappa convertDtoToEntity(TappaDTO tappaDTO){
+	private Tappa convertDtoToEntity(TappaDTO tappaDTO) {
 		modelMapper.getConfiguration()
 		.setMatchingStrategy(MatchingStrategies.LOOSE);
 		Tappa tappa = new Tappa();
