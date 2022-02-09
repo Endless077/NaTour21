@@ -1,15 +1,26 @@
 package com.example.test.Entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Compilation {
 
 	//Class Primary Key
-	private Long id_compilation = -1L;
+	@Expose
+	@SerializedName("id_compilation")
+	private Long id_compilation;
 
 	//Class Foreign Key
+	@Expose
+	@SerializedName("id_utente")
 	private String id_utente;
 
 	//Campi Locali
+	@Expose
+	@SerializedName("titolo")
 	private String titolo;
+	@Expose
+	@SerializedName("descrizione")
 	private String descrizione;
 	
 	/*********************************************************************************************/

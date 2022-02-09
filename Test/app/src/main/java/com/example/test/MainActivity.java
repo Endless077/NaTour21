@@ -5,9 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.test.Entity.Utente;
+import com.example.test.Retrofit.Enumeration.API;
+import com.example.test.Retrofit.Instance.UserRetrofit;
+import com.example.test.Retrofit.RequestGenerator;
+
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
@@ -33,14 +44,13 @@ public class MainActivity extends AppCompatActivity {
         //Toasty.custom(yourContext, "I'm a custom Toast", yourIconDrawable, tintColor, duration, withIcon, shouldTint).show();
         //Toasty.success(MainActivity.this, "This is an success toast.", Toast.LENGTH_SHORT, true).show();
 
-        /*
         UserRetrofit service1 = RequestGenerator.retrofitInstance(API.USER_API)
                                                 .create(UserRetrofit.class);
 
         UserRetrofit service2 = RequestGenerator.retrofitInstance(API.USER_API)
                                                 .create(UserRetrofit.class);
 
-        User user = new User();
+        Utente user = new Utente();
 
         user.setUsername("Francesco11");
         user.setEmail("fra.ncesco11@gmail.com");
@@ -48,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
         user.setCognome("Detto Cesco");
         user.setPhotolnk("https://photolnk.com");
 
+        /*
         //Call
         Call<Void> userAdd = service1.postUser(user);
-        Call<List<User>> listUser = service2.listUser();
+        Call<List<Utente>> listUser = service2.listUser();
 
         userAdd.enqueue(new Callback<Void>() {
             @Override
@@ -72,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listUser.enqueue(new Callback<List<User>>() {
+        listUser.enqueue(new Callback<List<Utente>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<Utente>> call, Response<List<Utente>> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "onSuccessful: " + response.body());
                 }else{
@@ -85,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<Utente>> call, Throwable t) {
                 Log.i(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
         */
+
     }
 }

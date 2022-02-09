@@ -1,18 +1,35 @@
 package com.example.test.Entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Tappa {
 
 	//Class Primary Key
-	private Long id_tappa = -1L;
+	@Expose
+	@SerializedName("id_tappa")
+	private Long id_tappa;
 
 	//Class Foreign Key
+	@Expose
+	@SerializedName("id_itinerario")
 	private Long id_itinerario;
 
 	//Campi Locali
+	@Expose
+	@SerializedName("nometappa")
 	private String nometappa;
+	@Expose
+	@SerializedName("latitudine")
 	private Double latitudine;
+	@Expose
+	@SerializedName("longitudine")
 	private Double longitudine;
+	@Expose
+	@SerializedName("tipotappa")
 	private String tipotappa;
+	@Expose
+	@SerializedName("sequenza")
 	private Integer sequenza;
 
 	/*********************************************************************************************/

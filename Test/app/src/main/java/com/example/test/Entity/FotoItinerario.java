@@ -1,14 +1,23 @@
 package com.example.test.Entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class FotoItinerario {
 
 	//Class Primary Key
-	private Long id_photo = -1L;
+	@Expose
+	@SerializedName("id_photo")
+	private Long id_photo;
 
 	//Class Foreign Key
+	@Expose
+	@SerializedName("id_itinerario")
 	private Long id_itinerario;
 
 	//Campi Locali
+	@Expose
+	@SerializedName("urlfoto")
 	private String urlfoto;
 
 	/*********************************************************************************************/

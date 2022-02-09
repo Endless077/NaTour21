@@ -4,7 +4,10 @@ import com.example.test.Entity.Compilation;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -15,32 +18,32 @@ import retrofit2.http.Path;
 public interface CompilationRetrofit {
 
     @GET("listaCompilation")
-    Call<List<Compilation>> listCompilation();
+    Observable<Response<List<Compilation>>> listCompilation();
 
     @GET("getCompilation/byID/{idCollection}")
-    Call<Compilation> getCompilationByID(@Path("idCollection") long username);
+    Single<Compilation> getCompilationByID(@Path("idCollection") long username);
 
     @GET("getComplation/byUsername/{username}")
-    Call<List<Compilation>> getCompilationByUsername(@Path("username") String username);
+    Observable<List<Compilation>> getCompilationByUsername(@Path("username") String username);
 
     @GET("getComplation/itinerari/{idCompilation}")
-    Call<List<String>> getCompilationByUsername(@Path("idCompilation") long idCompilation);
+    Observable<List<String>> getCompilationByUsername(@Path("idCompilation") long idCompilation);
 
     @POST("compilation/createCompilation")
-    Call<Void> postCompilation(@Body Compilation compilation);
+    Single<Response<Void>> postCompilation(@Body Compilation compilation);
 
     @POST("addItinerario/{idCompilation}/{idItinerario}")
-    Call<Void> postItinerarioInCompilation(@Path("idCompilation") long idCompilation,
-                                           @Path("idItinerario") long idItinerario);
+    Single<Response<Void>> postItinerarioInCompilation(@Path("idCompilation") long idCompilation,
+                                                       @Path("idItinerario") long idItinerario);
 
     @PUT("modifyCompilation")
-    Call<Void> putCompilation(@Body Compilation compilation);
+    Single<Response<Void>> putCompilation(@Body Compilation compilation);
 
     @DELETE("deleteCompilation/{idCompilation}")
-    Call<Void> deleteCompilation(@Path("idCompilation") long idCompilation);
+    Single<Response<Void>> deleteCompilation(@Path("idCompilation") long idCompilation);
 
     @DELETE("removeItinerario/{idCompilation}/{idItinerario}")
-    Call<Void> deleteItinerarioInCompilation(@Path("idCompilation") long idCompilation,
-                                             @Path("idItinerario") long idItinerario);
+    Single<Response<Void>> deleteItinerarioInCompilation(@Path("idCompilation") long idCompilation,
+                                                         @Path("idItinerario") long idItinerario);
 
 }

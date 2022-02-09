@@ -1,10 +1,13 @@
-package com.example.test.Entity;
+package com.example.test.Retrofit;
 
 import android.util.Log;
 
 import com.example.test.Retrofit.Enumeration.API;
 
+import io.reactivex.rxjava3.*;
+
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RequestGenerator {
@@ -23,6 +26,7 @@ public class RequestGenerator {
             CURRENT_URL = NEW_URL;
             retrofit = new Retrofit.Builder()
                     .baseUrl(NEW_URL)
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

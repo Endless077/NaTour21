@@ -4,7 +4,10 @@ import com.example.test.Entity.Tappa;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -13,18 +16,18 @@ import retrofit2.http.Path;
 public interface TappaRetrofit {
 
     @GET("listaTappe")
-    Call<List<Tappa>> listTappe();
+    Observable<Response<List<Tappa>>> listTappe();
 
     @GET("getTappa/ByID/{idTappa}")
-    Call<Tappa> getTappaByID(@Path("idTappa") Long idTappa);
+    Single<Response<Tappa>> getTappaByID(@Path("idTappa") Long idTappa);
 
     @GET("getComplation/byItinerario/{idItinerario}")
-    Call<List<Tappa>> getTappaByItinerario(@Path("idItinerario") Long idItinerario);
+    Observable<Response<List<Tappa>>> getTappaByItinerario(@Path("idItinerario") Long idItinerario);
 
     @POST("createTappa")
-    Call<Void> createTappa(@Body Tappa tappa);
+    Single<Response<Void>> createTappa(@Body Tappa tappa);
 
     @POST("createTappe")
-    Call<Void> createTappe(@Body Tappa tappe);
+    Single<Response<Void>> createTappe(@Body Tappa tappe);
 
 }

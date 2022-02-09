@@ -4,7 +4,10 @@ import com.example.test.Entity.InterestingPoint;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -15,30 +18,30 @@ import retrofit2.http.Path;
 public interface InterestingPointRetrofit {
 
     @GET("listaInterestingPoint")
-    Call<List<InterestingPoint>> listInterestingPoint();
+    Observable<Response<List<InterestingPoint>>> listInterestingPoint();
 
     @GET("getInterestingPoint/byID/{idInterestingPoint}")
-    Call<InterestingPoint> getCompilationByID(@Path("idInterestingPoint") long idInterestingPoint);
+    Single<Response<InterestingPoint>> getCompilationByID(@Path("idInterestingPoint") long idInterestingPoint);
 
     @GET("getInterestingPoint/byItinerario/{idItinerario}")
-    Call<List<InterestingPoint>> getInterestingPointByItinerario(@Path("idItinerario") long idItinerario);
+    Observable<Response<List<InterestingPoint>>> getInterestingPointByItinerario(@Path("idItinerario") long idItinerario);
 
     @GET("getInterestingPoint/getSingleFoto/{idInterestingPoint}")
-    Call<String> getFotoItinerarioSingle(@Path("idInterestingPoint") long idInterestingPoint);
+    Single<String> getFotoItinerarioSingle(@Path("idInterestingPoint") long idInterestingPoint);
 
     @GET("getInterestingPoint/getMultipleFoto/{idInterestingPoint}")
-    Call<List<String>> getFotoItinerarioMultiple(@Path("idItinerario") long idItinerario);
+    Observable<Response<List<String>>> getFotoItinerarioMultiple(@Path("idItinerario") long idItinerario);
 
     @POST("createInterestingPoint")
-    Call<Void> createCompilation(@Body InterestingPoint interestingPoint);
+    Single<Response<Void>> createCompilation(@Body InterestingPoint interestingPoint);
 
     @PUT("modifyInterestingPoint")
-    Call<Void> modifyCompilation(@Body InterestingPoint interestingPoint);
+    Single<Response<Void>> modifyCompilation(@Body InterestingPoint interestingPoint);
 
     @DELETE("deleteInterestingPoint/{idInterestingPoint}")
-    Call<Void> deleteInterestingPoint(@Path("idInterestingPoint") long idInterestingPoint);
+    Single<Response<Void>> deleteInterestingPoint(@Path("idInterestingPoint") long idInterestingPoint);
 
     @DELETE("deleteInterestingPoint/foto/{idInterestingPoint}")
-    Call<Void> deleteFotoInterestingPoint(@Path("idInterestingPoint") long idInterestingPoint);
+    Single<Response<Void>> deleteFotoInterestingPoint(@Path("idInterestingPoint") long idInterestingPoint);
 
 }

@@ -1,15 +1,34 @@
 package com.example.test.Entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class SearchFilter {
 
 	//Filtri
+	@Expose
+	@SerializedName("id_tappa")
 	private String titolo;
+	@Expose
+	@SerializedName("puntoinizio")
 	private String puntoinizio;
+	@Expose
+	@SerializedName("puntofine")
 	private String puntofine;
+	@Expose
+	@SerializedName("accessodisabili")
 	private Boolean accessodisabili;
+	@Expose
+	@SerializedName("difficulty")
 	private String difficulty;
+	@Expose
+	@SerializedName("durata")
 	private String durata;
+	@Expose
+	@SerializedName("lunghezza")
 	private Double lunghezza;
+	@Expose
+	@SerializedName("areageografica")
 	private String areageografica;
 	
 	/*********************************************************************************************/

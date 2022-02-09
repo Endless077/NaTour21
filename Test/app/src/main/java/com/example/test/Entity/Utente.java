@@ -1,14 +1,27 @@
 package com.example.test.Entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Utente {
 
 	//Class Primary Key
+	@Expose
+	@SerializedName("username")
 	private String username;
 	
 	//Campi Locali
+	@Expose
+	@SerializedName("email")
 	private String email;
+	@Expose
+	@SerializedName("nome")
 	private String nome;
+	@Expose
+	@SerializedName("cognome")
 	private String cognome;
+	@Expose
+	@SerializedName("photolnk")
 	private String photolnk;
 	
 	/*********************************************************************************************/
