@@ -17,13 +17,13 @@ import retrofit2.http.Path;
 public interface FotoItinerarioRetrofit {
 
     @GET("listaFotoItinerario")
-    Observable<Response<List<FotoItinerario>>> listFotoItinerario();
+    Single<List<FotoItinerario>> listFotoItinerario();
 
     @GET("getFoto/{idFoto}")
-    Single<Response<FotoItinerario>> getFotoItinerarioByID(@Path("idFoto") Long idFoto);
+    Single<FotoItinerario> getFotoItinerarioByID(@Path("idFoto") Long idFoto);
 
     @GET("listaFotoItinerario/{idItinerario}")
-    Observable<Response<List<FotoItinerario>>> getFotoItinerarioByItinerario(@Path("idItinerario") Long idItinerario);
+    Single<List<FotoItinerario>> getFotoItinerarioByItinerario(@Path("idItinerario") Long idItinerario);
 
     @GET("listaFotoItinerario/count/{idItinerario}")
     Single<Long> getCountFotoItinerario(@Path("idItinerario") Long idItinerario);

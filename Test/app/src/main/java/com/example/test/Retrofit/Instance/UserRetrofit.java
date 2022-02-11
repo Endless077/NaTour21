@@ -17,10 +17,10 @@ import retrofit2.http.Path;
 public interface UserRetrofit {
 
     @GET("listaUtenti")
-    Observable<Response<List<Utente>>> listUser();
+    Single<List<Utente>> listUser();
 
     @GET("getUtente/{username}")
-    Single<Response<Utente>> getUser(@Path("username") String username);
+    Single<Utente> getUser(@Path("username") String username);
 
     @POST("createUtente")
     Single<Response<Void>> postUser(@Body Utente user);

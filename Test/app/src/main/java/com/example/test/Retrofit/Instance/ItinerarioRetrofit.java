@@ -19,22 +19,22 @@ import retrofit2.http.Path;
 public interface ItinerarioRetrofit {
 
     @GET("listaItinerari")
-    Observable<Response<List<Itinerario>>> listItinerari();
+    Single<List<Itinerario>> listItinerari();
 
     @GET("listaItinerari/orderByRecent")
-    Observable<Response<List<Itinerario>>> getAllRecent();
+    Single<List<Itinerario>> getAllRecent();
 
     @GET("listaItinerari/ByName/{nomeItinerario}")
-    Observable<Response<List<Itinerario>>> getItinerariByName(@Path("nomeItinerario") String nomeItinerario);
+    Single<List<Itinerario>> getItinerariByName(@Path("nomeItinerario") String nomeItinerario);
 
     @GET("getItinerario/byID/{idItinerario}")
-    Single<Response<Itinerario>> getItinerarioByID(@Path("idItinerario") Long idItinerario);
+    Single<Itinerario> getItinerarioByID(@Path("idItinerario") Long idItinerario);
 
     @GET("getItinerario/byUsername/{username}")
-    Observable<Response<List<Itinerario>>> getItinerarioByUsername(@Path("username") String username);
+    Single<List<Itinerario>> getItinerarioByUsername(@Path("username") String username);
 
     @GET("getItinerario/byFilter")
-    Observable<Response<List<Itinerario>>> getItinerarioByFilter(@Body SearchFilter filtro);
+    Single<List<Itinerario>> getItinerarioByFilter(@Body SearchFilter filtro);
 
     @POST("createItinerario")
     Single<Response<Void>> createItinerario(@Body Itinerario itinerario);

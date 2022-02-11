@@ -18,19 +18,19 @@ import retrofit2.http.Path;
 public interface InterestingPointRetrofit {
 
     @GET("listaInterestingPoint")
-    Observable<Response<List<InterestingPoint>>> listInterestingPoint();
+    Single<List<InterestingPoint>> listInterestingPoint();
 
     @GET("getInterestingPoint/byID/{idInterestingPoint}")
-    Single<Response<InterestingPoint>> getCompilationByID(@Path("idInterestingPoint") long idInterestingPoint);
+    Single<InterestingPoint> getCompilationByID(@Path("idInterestingPoint") long idInterestingPoint);
 
     @GET("getInterestingPoint/byItinerario/{idItinerario}")
-    Observable<Response<List<InterestingPoint>>> getInterestingPointByItinerario(@Path("idItinerario") long idItinerario);
+    Single<List<InterestingPoint>> getInterestingPointByItinerario(@Path("idItinerario") long idItinerario);
 
     @GET("getInterestingPoint/getSingleFoto/{idInterestingPoint}")
     Single<String> getFotoItinerarioSingle(@Path("idInterestingPoint") long idInterestingPoint);
 
     @GET("getInterestingPoint/getMultipleFoto/{idInterestingPoint}")
-    Observable<Response<List<String>>> getFotoItinerarioMultiple(@Path("idItinerario") long idItinerario);
+    Single<List<String>> getFotoItinerarioMultiple(@Path("idItinerario") long idItinerario);
 
     @POST("createInterestingPoint")
     Single<Response<Void>> createCompilation(@Body InterestingPoint interestingPoint);

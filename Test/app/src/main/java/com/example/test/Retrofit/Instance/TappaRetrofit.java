@@ -16,13 +16,13 @@ import retrofit2.http.Path;
 public interface TappaRetrofit {
 
     @GET("listaTappe")
-    Observable<Response<List<Tappa>>> listTappe();
+    Single<List<Tappa>> listTappe();
 
     @GET("getTappa/ByID/{idTappa}")
-    Single<Response<Tappa>> getTappaByID(@Path("idTappa") Long idTappa);
+    Single<Tappa> getTappaByID(@Path("idTappa") Long idTappa);
 
     @GET("getComplation/byItinerario/{idItinerario}")
-    Observable<Response<List<Tappa>>> getTappaByItinerario(@Path("idItinerario") Long idItinerario);
+    Single<List<Tappa>> getTappaByItinerario(@Path("idItinerario") Long idItinerario);
 
     @POST("createTappa")
     Single<Response<Void>> createTappa(@Body Tappa tappa);

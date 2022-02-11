@@ -18,16 +18,16 @@ import retrofit2.http.Path;
 public interface CompilationRetrofit {
 
     @GET("listaCompilation")
-    Observable<Response<List<Compilation>>> listCompilation();
+    Single<List<Compilation>> listCompilation();
 
     @GET("getCompilation/byID/{idCollection}")
     Single<Compilation> getCompilationByID(@Path("idCollection") long username);
 
     @GET("getComplation/byUsername/{username}")
-    Observable<List<Compilation>> getCompilationByUsername(@Path("username") String username);
+    Single<List<Compilation>> getCompilationByUsername(@Path("username") String username);
 
     @GET("getComplation/itinerari/{idCompilation}")
-    Observable<List<String>> getCompilationByUsername(@Path("idCompilation") long idCompilation);
+    Single<List<String>> getCompilationByUsername(@Path("idCompilation") long idCompilation);
 
     @POST("compilation/createCompilation")
     Single<Response<Void>> postCompilation(@Body Compilation compilation);
