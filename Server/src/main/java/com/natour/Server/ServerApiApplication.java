@@ -17,6 +17,9 @@ public class ServerApiApplication {
 		return String.format("Hello %s!", name);
 	}
 	
+	@GetMapping("/health")
+	public void health() {}
+	
 	@Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

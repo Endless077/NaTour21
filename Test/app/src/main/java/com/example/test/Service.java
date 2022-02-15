@@ -9,20 +9,29 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketTimeoutException;
+
 import es.dmoral.toasty.Toasty;
 
-public class CheckService {
+public class Service {
+
+    private static final String TAG = "CHECK_SERVICE";
 
     //Constructor private
-    private CheckService() {}
+    private Service() {}
 
     //Check is permission is granted
     public static void checkCameraEnabled(Context context, int requestCode) {
+        Log.i(TAG, "checkCameraEnabled: started.");
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Toasty.success(context,"You have already granted CAMERA permission!",
@@ -33,6 +42,7 @@ public class CheckService {
     }
 
     public static void checkStorageEnabled(Context context, int requestCode) {
+        Log.i(TAG, "checkStorageEnabled: started.");
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             Toasty.success(context,"You have already granted STORAGE permission!",
@@ -43,6 +53,7 @@ public class CheckService {
     }
 
     public static void checkGpsEnabled(Context context, int requestCode) {
+        Log.i(TAG, "checkGpsEnabled: started.");
         if (checkFineLocation(context) && checkCoarseLocation(context)) {
             Toasty.success(context,"You have already granted GPS permission!",
                     Toasty.LENGTH_SHORT, true).show();
@@ -52,14 +63,17 @@ public class CheckService {
     }
 
     private static boolean checkFineLocation(Context context) {
+        Log.i(TAG, "checkFineLocation: started.");
         return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
     private static boolean checkCoarseLocation(Context context) {
+        Log.i(TAG, "checkCoarseLocation: started.");
         return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static void isNetworkEnabled(Context context, int requestCode) {
+    public static void checkNetworkEnabled(Context context, int requestCode) {
+        Log.i(TAG, "checkNetworkEnabled: started.");
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
             Toasty.success(context,"You have already granted NETWORK permission!",
                     Toasty.LENGTH_SHORT, true).show();
@@ -70,20 +84,48 @@ public class CheckService {
     }
 
     private static boolean checkChangeNetworkLocation(Context context) {
+        Log.i(TAG, "checkChangeNetworkLocation: started.");
         return ContextCompat.checkSelfPermission(context, Manifest.permission.CHANGE_NETWORK_STATE) == PackageManager.PERMISSION_GRANTED;
     }
 
     private static boolean checkAccessNetworkLocation(Context context) {
+        Log.i(TAG, "checkAccessNetworkLocation: started.");
         return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_NETWORK_STATE) == PackageManager.PERMISSION_GRANTED;
     }
 
     //Check if activated
     public static boolean isGpsOnline(Context context) {
+        Log.i(TAG, "isGpsOnline: started.");
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return (locationManager != null) && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
+    public static boolean isServerOnline() {
+        Log.i(TAG, "isServerOnline: started.");
+
+        String hostName = "192.168.1.53";
+        int port = 8080;
+        int timeout = 3000;
+
+        SocketAddress socketAddress = new InetSocketAddress(hostName, port);
+        Socket socket = new Socket();
+
+        try {
+            socket.connect(socketAddress, timeout);
+            socket.close();
+            Log.i(TAG, "isServerOnline: online.");
+            return true;
+        } catch (SocketTimeoutException exception) {
+            Log.e(TAG, "SocketTimeoutException " + hostName + ":" + port + ". " + exception.getMessage());
+            return false;
+        } catch (IOException exception) {
+            Log.e(TAG, "IOException - Unable to connect to " + hostName + ":" + port + ". " + exception.getMessage());
+            return false;
+        }
+    }
+
     public static boolean isOnline(Context context) {
+        Log.i(TAG, "isOnline: started.");
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return (ni != null && ni.isConnected());
@@ -91,7 +133,7 @@ public class CheckService {
 
     //Request permissions
     private static void requestCamera(Context context, int requestCode) {
-
+        Log.i(TAG, "requestCamera: started.");
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.CAMERA)) {
 
             new AlertDialog.Builder(context)
@@ -118,9 +160,8 @@ public class CheckService {
         }
     }
 
-
     private static void requestStorage(Context context, int requestCode) {
-
+        Log.i(TAG, "requestStorage: started.");
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
             new AlertDialog.Builder(context)
@@ -148,7 +189,7 @@ public class CheckService {
     }
 
     private static void requestGPS(Context context, int requestCode) {
-
+        Log.i(TAG, "requestGPS: started.");
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
             new AlertDialog.Builder(context)
@@ -180,6 +221,7 @@ public class CheckService {
     }
 
     private static void requestNetwork(Context context, int requestCode) {
+        Log.i(TAG, "requestNetwork: started.");
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
             new AlertDialog.Builder(context)
@@ -213,5 +255,4 @@ public class CheckService {
                     new String[] {Manifest.permission.INTERNET}, requestCode);
         }
     }
-
 }

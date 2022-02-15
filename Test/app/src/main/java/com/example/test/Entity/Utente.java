@@ -23,7 +23,7 @@ public class Utente {
 	@Expose
 	@SerializedName("photolnk")
 	private String photolnk;
-	
+
 	/*********************************************************************************************/
 	
 	//Constructor
@@ -37,6 +37,17 @@ public class Utente {
 	}
 	
 	public Utente() {}
+
+	@Override
+	public String toString() {
+		return "Utente{" +
+				"username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", nome='" + nome + '\'' +
+				", cognome='" + cognome + '\'' +
+				", photolnk='" + photolnk + '\'' +
+				'}';
+	}
 
 	/*********************************************************************************************/
 	
@@ -81,17 +92,6 @@ public class Utente {
 		this.photolnk = photolnk;
 	}
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"username='" + username + '\'' +
-				", email='" + email + '\'' +
-				", nome='" + nome + '\'' +
-				", cognome='" + cognome + '\'' +
-				", photolnk='" + photolnk + '\'' +
-				'}';
-	}
-
-/*********************************************************************************************/
+	/*********************************************************************************************/
 	
 }

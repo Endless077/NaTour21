@@ -1,44 +1,27 @@
 package com.example.test;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.Entity.Utente;
 import com.example.test.Retrofit.Enumeration.API;
 import com.example.test.Retrofit.Instance.UserRetrofit;
 import com.example.test.Retrofit.RequestGenerator;
-import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.HttpException;
-import retrofit2.Response;
-import www.sanju.motiontoast.MotionToast;
-import www.sanju.motiontoast.MotionToastStyle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,24 +44,20 @@ public class MainActivity extends AppCompatActivity {
         checkPermission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CheckService.isOnline(MainActivity.this))
+                if (Service.isOnline(MainActivity.this))
                     Log.i(TAG,"Sei online!");
                 else
                     Log.i(TAG,"Non sei online!");
 
-                if(CheckService.isGpsOnline(MainActivity.this))
+                if(Service.isGpsOnline(MainActivity.this))
                     Log.i(TAG,"Sei tracciato!");
                 else
                     Log.i(TAG,"Non sei tracciato!");
 
-
-//                if (ContextCompat.checkSelfPermission(MainActivity.this,
-//                        Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(MainActivity.this, "You have already granted this permission!",
-//                            Toast.LENGTH_SHORT).show();
-//                } else {
-//                    requestStoragePermission();
-//                }
+//                if(Service.isServerOnline())
+//                    Log.i(TAG,"Server Online!");
+//                else
+//                    Log.i(TAG,"Server non online!");
             }
         });
 
@@ -234,6 +213,40 @@ public class MainActivity extends AppCompatActivity {
 //                    new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
 //        }
 //    }
+
+    public void asyncReturn(String username, Callback call)  {
+        Utente user = new Utente();
+
+        UserRetrofit servizio = RequestGenerator.retrofitInstance(API.USER_API).create(UserRetrofit.class);
+
+//        Single<Utente> u = servizio.getUser(username)
+//                .observeOn(Schedulers.newThread())
+//                .subscribeOn(AndroidSchedulers.mainThread());
+
+        servizio.getUser(username)
+                .observeOn(Schedulers.newThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Utente>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {}
+                    @Override
+                    public void onSuccess(@NonNull Utente utente) {
+                        user.setUsername(utente.getUsername());
+                        user.setEmail(utente.getEmail());
+                        user.setNome(utente.getNome());
+                        user.setCognome(utente.getCognome());
+                        user.setPhotolnk(utente.getPhotolnk());
+
+                        call.onSuccess(user);
+                    }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: FetchAuthSession started.");
+                        Log.e(TAG, e.toString());
+                        call.onFailure(e);
+                    }
+                });
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
