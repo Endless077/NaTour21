@@ -24,6 +24,7 @@ import com.natour.Server.Model.Tappa;
 import com.natour.Server.Model.DTO.TappaDTO;
 import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Service.TappaService;
+import com.natour.Server.Utils.Headers;
 
 @RestController
 @RequestMapping(path = "api/tappa", produces = { "application/json" })
@@ -83,9 +84,10 @@ public class TappaController {
 		Tappa tappa = this.convertDtoToEntity(tappaDTO);
 
 		boolean creato = this.tappaService.creaTappa(tappa);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
+		if(creato) {
+			Headers h = new Headers("Tappa salvata.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Tappa non salvata.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -98,10 +100,11 @@ public class TappaController {
 			tappe.add(convertDtoToEntity(t));
 
 		boolean creato = this.tappaService.creaTappe(tappe);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
-			throw new RequestApiException("Compilation non salvata.", HttpStatus.BAD_REQUEST);
+		if(creato) {
+			Headers h = new Headers("Tappe salvate.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
+			throw new RequestApiException("Tappe non salvate.", HttpStatus.BAD_REQUEST);
 	}
 
 	//Put Mapping

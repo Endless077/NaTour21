@@ -26,6 +26,7 @@ import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Model.DTO.InterestingPointDTO;
 import com.natour.Server.Service.InterestingPointService;
 import com.natour.Server.Service.ItinerarioService;
+import com.natour.Server.Utils.Headers;
 
 @RestController
 @RequestMapping(path = "api/interestingpoint", produces = { "application/json" })
@@ -111,9 +112,10 @@ public class InterestingPointController {
 		InterestingPoint interestingPoint = this.convertDtoToEntity(interestingPointDTO);
 
 		boolean creato = this.interestingpointService.creaInterestingPoint(interestingPoint);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
+		if(creato) {
+			Headers h = new Headers("Interesting point salvato.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Compilation non salvata.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -125,9 +127,10 @@ public class InterestingPointController {
 		InterestingPoint interestingPoint = this.convertDtoToEntity(interestingPointDTO);
 
 		boolean modificato = this.interestingpointService.modificaInterestingPoint(interestingPoint);
-		if(modificato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(modificato) {
+			Headers h = new Headers("Interesting point modificato.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Compilation non modificata.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -137,9 +140,10 @@ public class InterestingPointController {
 	public ResponseEntity<String> deleteInterestingPoint(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint) {
 
 		boolean eliminato = this.interestingpointService.cancellaInterestingPoint(idInterestingPoint);
-		if(eliminato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(eliminato) {
+			Headers h = new Headers("Interesting point eliminato.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("InterestingPoint non eliminato.", HttpStatus.BAD_REQUEST);
 	}
 	
@@ -148,9 +152,10 @@ public class InterestingPointController {
 	public ResponseEntity<String> deleteFotoInterestingPoint(@PathVariable(name = "idInterestingPoint") Long idInterestingPoint) {
 
 		boolean eliminato = this.interestingpointService.cancellaFotoInterestingPoint(idInterestingPoint);	
-		if(eliminato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(eliminato) {
+			Headers h = new Headers("Foto dell' interesting point eliminata.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Foto di InterestingPoint non eliminata.", HttpStatus.BAD_REQUEST);
 	}
 	

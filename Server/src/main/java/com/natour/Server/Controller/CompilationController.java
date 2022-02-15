@@ -26,6 +26,7 @@ import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.CompilationDTO;
 import com.natour.Server.Service.CompilationService;
 import com.natour.Server.Service.UserService;
+import com.natour.Server.Utils.Headers;
 
 @RestController
 @RequestMapping(path = "api/compilation", produces = { "application/json" })
@@ -98,9 +99,10 @@ public class CompilationController {
 		Compilation compilation = this.convertDtoToEntity(compilationDTO);
 
 		boolean creato = this.compilationService.creaCompilation(compilation);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
+		if(creato) {
+			Headers h = new Headers("Compilation salvata.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Compilation non salvata.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -110,10 +112,11 @@ public class CompilationController {
 												@PathVariable(name = "idItinerario") Long idItinerario) {
 
 		boolean creato = this.compilationService.addItinerarioInCompilation(idCompilation,idItinerario);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
-			throw new RequestApiException("Itinerario non salvato in Compilation.", HttpStatus.BAD_REQUEST);
+		if(creato) {
+			Headers h = new Headers("Itinerario salvato nella Compilation.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
+			throw new RequestApiException("Itinerario non salvato nella Compilation.", HttpStatus.BAD_REQUEST);
 	}
 
 	//Put Mapping
@@ -124,9 +127,10 @@ public class CompilationController {
 		Compilation compilation = this.convertDtoToEntity(compilationDTO);
 
 		boolean modificato = this.compilationService.modificaCompilation(compilation);
-		if(modificato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(modificato) {
+			Headers h = new Headers("Compilation modificata.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Compilation non modificata.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -136,9 +140,10 @@ public class CompilationController {
 	public ResponseEntity<String> removeItinerario(@PathVariable(name = "id_compilation") Long id_compilation) {
 
 		boolean eliminato = this.compilationService.cancellaCompilation(id_compilation);
-		if(eliminato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(eliminato){
+			Headers h = new Headers("Compilation eliminata.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Compilation non eliminata.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -148,10 +153,11 @@ public class CompilationController {
 													@PathVariable(name = "idItinerario") Long idItinerario) {
 
 		boolean eliminato =  this.compilationService.removeItinerarioInCompilation(idCompilation,idItinerario);
-		if(eliminato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
-			throw new RequestApiException("Itinerario non rimosso in Compilation.", HttpStatus.BAD_REQUEST);
+		if(eliminato){
+			Headers h = new Headers("Itinerario rimosso dalla Compilation.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
+			throw new RequestApiException("Itinerario non rimosso dalla Compilation.", HttpStatus.BAD_REQUEST);
 	}
 
 	/*********************************************************************************************/

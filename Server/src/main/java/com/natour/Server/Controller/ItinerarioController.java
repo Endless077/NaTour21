@@ -33,6 +33,7 @@ import com.natour.Server.Model.DTO.ItinerarioDTO;
 import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Service.UserService;
 import com.natour.Server.Utils.Filter;
+import com.natour.Server.Utils.Headers;
 
 @RestController
 @RequestMapping(path = "api/itinerario", produces = { "application/json" })
@@ -165,9 +166,10 @@ public class ItinerarioController {
 		Itinerario itinerario = this.convertDtoToEntity(itinerarioDTO);
 
 		boolean creato = this.itinerarioService.creaItinerario(itinerario);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
+		if(creato) {
+			Headers h = new Headers("Itinerario salvato.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Itinerario non salvato.", HttpStatus.BAD_REQUEST);
 	}
 	
@@ -179,9 +181,10 @@ public class ItinerarioController {
 		Itinerario itinerario = this.convertDtoToEntity(itinerarioDTO);
 
 		boolean modificato = this.itinerarioService.modificaItinerario(itinerario);
-		if(modificato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(modificato) {
+			Headers h = new Headers("Itinerario modificato.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Itinerario non modificato.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -191,9 +194,10 @@ public class ItinerarioController {
 	public ResponseEntity<String> removeItinerario(@PathVariable(name = "id_itinerario") Long id_itinerario) {
 
 		boolean eliminato = this.itinerarioService.cancellaItinerario(id_itinerario);
-		if(eliminato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(eliminato) {
+			Headers h = new Headers("Itinerario eliminato.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Itinerario non eliminato.", HttpStatus.BAD_REQUEST);
 	}
 

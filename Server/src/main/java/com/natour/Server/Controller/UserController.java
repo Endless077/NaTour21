@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.UserDTO;
+import com.natour.Server.Utils.Headers;
 import com.natour.Server.Utils.IUserService;
 
 @RestController
@@ -62,9 +63,10 @@ public class UserController {
 		User newUser = convertDtoToEntity(utente);
 		
 		boolean creato = this.userService.creaUtente(newUser);
-		if(creato)
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		else
+		if(creato) {
+			Headers h = new Headers("Utente salvato.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Utente non salvato.", HttpStatus.BAD_REQUEST);
 	}
 
@@ -77,9 +79,10 @@ public class UserController {
 	public ResponseEntity<String> deleteUser(@PathVariable(name = "username") String username) {
 
 		boolean eliminato = this.userService.deleteUtente(username);
-		if(eliminato)
-			return ResponseEntity.status(HttpStatus.OK).build();
-		else
+		if(eliminato) {
+			Headers h = new Headers("Utente eliminato.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
 			throw new RequestApiException("Utente non eliminato.", HttpStatus.BAD_REQUEST);
 	}
 

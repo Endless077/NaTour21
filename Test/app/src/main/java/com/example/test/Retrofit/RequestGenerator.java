@@ -18,7 +18,7 @@ public class RequestGenerator {
     private RequestGenerator() {}
 
     public static Retrofit retrofitInstance(API api) {
-        String URL = "http://192.168.1.53:8080/";
+        String URL = "http://192.168.1.53:8080";
         String URL_BODY = getApiType(api);
         String NEW_URL = URL + URL_BODY;
 
@@ -36,19 +36,21 @@ public class RequestGenerator {
     private static String getApiType(API api) {
         switch (api) {
             case FOTO_ITINERARIO:
-                return "api/fotoItinerario/";
+                return "/api/fotoItinerario/";
             case INTERESTINGPOINT_API:
-                return "api/interestingpoint/";
+                return "/api/interestingpoint/";
             case TAPPA_API:
-                return "api/tappa/";
+                return "/api/tappa/";
             case ITINERARIO_API:
-                return "api/itinerario/";
+                return "/api/itinerario/";
             case COMPILATION_API:
-                return "api/compilation/";
+                return "/api/compilation/";
+            case SERVER_API:
+                return "/";
             case USER_API:
-                return "api/user/";
+                return "/api/user/";
             default:
-                return "api/undefinited/";
+                return "/api/undefinited/";
         }
     }
 

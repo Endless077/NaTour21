@@ -14,13 +14,26 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.test.Retrofit.Enumeration.API;
+import com.example.test.Retrofit.Instance.ServerUtils;
+import com.example.test.Retrofit.RequestGenerator;
+
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
+import java.net.URL;
 
 import es.dmoral.toasty.Toasty;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Service {
 
@@ -80,7 +93,6 @@ public class Service {
         } else {
             requestNetwork(context, requestCode);
         }
-
     }
 
     private static boolean checkChangeNetworkLocation(Context context) {
@@ -100,7 +112,28 @@ public class Service {
         return (locationManager != null) && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    public static boolean isServerOnline() {
+    public static void isServerOnline(Callback call) {
+        ServerUtils serverUtils = RequestGenerator.retrofitInstance(API.SERVER_API)
+                .create(ServerUtils.class);
+
+        serverUtils.getServiceStatus()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {}
+                    @Override
+                    public void onComplete() {
+                        call.onSuccess(null);
+                    }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        call.onFailure(e);
+                    }
+                });
+    }
+
+    public static boolean pingServer() {
         Log.i(TAG, "isServerOnline: started.");
 
         String hostName = "192.168.1.53";

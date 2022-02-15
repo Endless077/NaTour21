@@ -22,6 +22,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.HttpException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,20 +45,27 @@ public class MainActivity extends AppCompatActivity {
         checkPermission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Service.isOnline(MainActivity.this))
-                    Log.i(TAG,"Sei online!");
-                else
-                    Log.i(TAG,"Non sei online!");
-
-                if(Service.isGpsOnline(MainActivity.this))
-                    Log.i(TAG,"Sei tracciato!");
-                else
-                    Log.i(TAG,"Non sei tracciato!");
-
-//                if(Service.isServerOnline())
-//                    Log.i(TAG,"Server Online!");
+//                if (Service.isOnline(MainActivity.this))
+//                    Log.i(TAG,"Sei online!");
 //                else
-//                    Log.i(TAG,"Server non online!");
+//                    Log.i(TAG,"Non sei online!");
+//
+//                if(Service.isGpsOnline(MainActivity.this))
+//                    Log.i(TAG,"Sei tracciato!");
+//                else
+//                    Log.i(TAG,"Non sei tracciato!");
+//
+//                Service.isServerOnline(new Callback() {
+//                    @Override
+//                    public void onSuccess(Object o) {
+//                        Log.i(TAG,"Server online!");
+//                    }
+//                    @Override
+//                    public void onFailure(Throwable e) {
+//                        Log.i(TAG,"Server offline!");
+//                        Log.i(TAG,e.getLocalizedMessage());
+//                    }
+//                });
             }
         });
 
@@ -134,11 +142,13 @@ public class MainActivity extends AppCompatActivity {
 //                    @Override
 //                    public void onError(@NonNull Throwable e) {
 //                        if(e instanceof HttpException) {
-//                            if (((HttpException) e).code() == 404)
+//                            HttpException http = (HttpException) e;
+//                            if (http.code() == 404)
 //                                Log.i(TAG, "onError: Entrato nel error 404.");
 //                        }else {
 //                            Log.i(TAG, "onError: Entrato nel error generico.");
 //                        }
+//                        HandlerAPI handler = new HandlerAPI(e, MainActivity.this);
 //                    }
 //                });
 
@@ -214,39 +224,39 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    public void asyncReturn(String username, Callback call)  {
-        Utente user = new Utente();
-
-        UserRetrofit servizio = RequestGenerator.retrofitInstance(API.USER_API).create(UserRetrofit.class);
-
+//    public void asyncReturn(String username, Callback call)  {
+//        Utente user = new Utente();
+//
+//        UserRetrofit servizio = RequestGenerator.retrofitInstance(API.USER_API).create(UserRetrofit.class);
+//
 //        Single<Utente> u = servizio.getUser(username)
 //                .observeOn(Schedulers.newThread())
 //                .subscribeOn(AndroidSchedulers.mainThread());
-
-        servizio.getUser(username)
-                .observeOn(Schedulers.newThread())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Utente>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {}
-                    @Override
-                    public void onSuccess(@NonNull Utente utente) {
-                        user.setUsername(utente.getUsername());
-                        user.setEmail(utente.getEmail());
-                        user.setNome(utente.getNome());
-                        user.setCognome(utente.getCognome());
-                        user.setPhotolnk(utente.getPhotolnk());
-
-                        call.onSuccess(user);
-                    }
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "onError: FetchAuthSession started.");
-                        Log.e(TAG, e.toString());
-                        call.onFailure(e);
-                    }
-                });
-    }
+//
+//        servizio.getUser(username)
+//                .observeOn(Schedulers.newThread())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new SingleObserver<Utente>() {
+//                    @Override
+//                    public void onSubscribe(@NonNull Disposable d) {}
+//                    @Override
+//                    public void onSuccess(@NonNull Utente utente) {
+//                        user.setUsername(utente.getUsername());
+//                        user.setEmail(utente.getEmail());
+//                        user.setNome(utente.getNome());
+//                        user.setCognome(utente.getCognome());
+//                        user.setPhotolnk(utente.getPhotolnk());
+//
+//                        call.onSuccess(user);
+//                    }
+//                    @Override
+//                    public void onError(@NonNull Throwable e) {
+//                        Log.e(TAG, "onError: FetchAuthSession started.");
+//                        Log.e(TAG, e.toString());
+//                        call.onFailure(e);
+//                    }
+//                });
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

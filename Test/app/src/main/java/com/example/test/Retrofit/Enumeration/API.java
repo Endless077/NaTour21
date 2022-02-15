@@ -6,5 +6,6 @@ public enum API {
     TAPPA_API,
     ITINERARIO_API,
     COMPILATION_API,
+    SERVER_API,
     USER_API
 }
