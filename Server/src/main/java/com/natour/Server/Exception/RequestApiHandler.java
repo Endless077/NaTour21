@@ -24,6 +24,7 @@ public class RequestApiHandler {
 				status,
 				ZonedDateTime.now(ZoneId.of("Z"))
 		);
+		
 		//2. Create response header.
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Information-Service", e.getMessage());
