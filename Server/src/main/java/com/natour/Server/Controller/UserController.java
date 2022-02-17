@@ -55,6 +55,25 @@ public class UserController {
 		return result;
 	}
 
+	@PostMapping(path = "getUtente/social")
+	@ResponseBody
+	public ResponseEntity<String> getUserSocial(@RequestBody UserDTO utente) {
+		
+		Optional<User> result = this.userService.getUtente(utente.getUsername());
+		
+		if(result.isEmpty()) {
+			User newUser = convertDtoToEntity(utente);
+			boolean creato = this.userService.creaUtente(newUser);
+			if(creato) {
+				Headers h = new Headers("Utente social salvato.");
+				return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+			}else
+				throw new RequestApiException("Utente social non salvato.", HttpStatus.BAD_REQUEST);
+		}
+		Headers h = new Headers("Utente social già esistente.");
+		return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+	}
+	  
 	//Post Mapping
 	@PostMapping(path = "createUtente")
 	@ResponseBody
