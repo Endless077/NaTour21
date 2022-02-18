@@ -1,12 +1,16 @@
 package com.example.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.Entity.Utente;
@@ -33,18 +37,29 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MyTest";
 
-    Button checkPermission;
+    FrameLayout frameLayout;
+    PaginaInizialeFragment paginaInizialeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        frameLayout = findViewById(R.id.frameLayout);
 
-        checkPermission = findViewById(R.id.checkPermission);
+        paginaInizialeFragment = new PaginaInizialeFragment();
 
-        checkPermission.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, paginaInizialeFragment);
+        fragmentTransaction.commit();
+
+
+
+
+
+//        checkPermission.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 //                if (Service.isOnline(MainActivity.this))
 //                    Log.i(TAG,"Sei online!");
 //                else
@@ -66,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
 //                        Log.i(TAG,e.getLocalizedMessage());
 //                    }
 //                });
-            }
-        });
+//            }
+//        });
+
+
+
+
 
 //        MotionToast.Companion.createToast(this,
 //                "Hurray success 😍",
