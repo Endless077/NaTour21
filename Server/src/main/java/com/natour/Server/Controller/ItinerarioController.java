@@ -176,7 +176,7 @@ public class ItinerarioController {
 	//Put Mapping
 	@PutMapping(path = "modifyItinerario")
 	@ResponseBody
-	public ResponseEntity<String> modifyCompilation(@RequestBody ItinerarioDTO itinerarioDTO) {
+	public ResponseEntity<String> modifyItinerario(@RequestBody ItinerarioDTO itinerarioDTO) {
 
 		Itinerario itinerario = this.convertDtoToEntity(itinerarioDTO);
 

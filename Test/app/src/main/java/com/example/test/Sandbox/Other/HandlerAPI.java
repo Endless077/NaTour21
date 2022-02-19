@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.Sandbox.Other;
 
 import android.content.Context;
 import android.util.Log;

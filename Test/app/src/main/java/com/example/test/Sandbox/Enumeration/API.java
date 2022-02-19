@@ -1,4 +1,4 @@
-package com.example.test.Retrofit.Enumeration;
+package com.example.test.Sandbox.Enumeration;
 
 public enum API {
     FOTO_ITINERARIO,

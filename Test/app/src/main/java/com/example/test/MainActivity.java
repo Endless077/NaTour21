@@ -6,27 +6,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test.Entity.Utente;
-import com.example.test.Retrofit.Enumeration.API;
-import com.example.test.Retrofit.Instance.UserRetrofit;
-import com.example.test.Retrofit.RequestGenerator;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.HttpException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "MyTest";
 
     FrameLayout frameLayout;
-    PaginaInizialeFragment paginaInizialeFragment;
+    FragmentTest fragmentTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         frameLayout = findViewById(R.id.frameLayout);
 
-        paginaInizialeFragment = new PaginaInizialeFragment();
+        fragmentTest = new FragmentTest();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, paginaInizialeFragment);
+        fragmentTransaction.replace(R.id.frameLayout, fragmentTest);
         fragmentTransaction.commit();
 
-
-
-
-
+//        //Check Service
 //        checkPermission.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -84,10 +64,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-
-
-
-
 //        MotionToast.Companion.createToast(this,
 //                "Hurray success 😍",
 //                "Upload Completed successfully!",
@@ -110,172 +86,10 @@ public class MainActivity extends AppCompatActivity {
 //        Toasty.custom(yourContext, "I'm a custom Toast", yourIconDrawable, tintColor, duration, withIcon, shouldTint).show();
 //        Toasty.success(MainActivity.this, "This is an success toast.", Toast.LENGTH_SHORT, true).show();
 
-//        UserRetrofit service = RequestGenerator.retrofitInstance(API.USER_API)
-//                                                .create(UserRetrofit.class);
-//        Utente user = new Utente();
-//
-//        user.setUsername("Francesco11");
-//        user.setEmail("fra.ncesco11@gmail.com");
-//        user.setNome("Francesco");
-//        user.setCognome("Detto Cesco");
-//        user.setPhotolnk("https://photolnk.com");
-//
-//        //Esempi
-//        service.listUser()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SingleObserver<List<Utente>>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {
-//                        Log.i(TAG, "onSubscribe: Entrato nel subscribe.");
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(@NonNull List<Utente> utentes) {
-//                        Log.i(TAG, "onSuccess: " + utentes.size());
-//
-//                        for(Utente u : utentes)
-//                            Log.i(TAG, "onSuccess: " + u.getUsername());
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        Log.i(TAG, "onError: Entrato nel error generico");
-//                    }
-//                });
-//
-//        service.getUser("Endless077")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SingleObserver<Utente>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {
-//                        Log.i(TAG, "onSubscribe: Entrato nel subscribe.");
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(@NonNull Utente utente) {
-//                        Log.i(TAG, "onSuccess: " + utente.getUsername());
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        if(e instanceof HttpException) {
-//                            HttpException http = (HttpException) e;
-//                            if (http.code() == 404)
-//                                Log.i(TAG, "onError: Entrato nel error 404.");
-//                        }else {
-//                            Log.i(TAG, "onError: Entrato nel error generico.");
-//                        }
-//                        HandlerAPI handler = new HandlerAPI(e, MainActivity.this);
-//                    }
-//                });
-
-        //Esempio with Call
-//        Call<Void> userAdd = service.postUser(user);
-//        Call<List<Utente>> listUser = service.listUser();
-//
-//        userAdd.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                if (response.isSuccessful()) {
-//                    //Log.i(TAG, "onSuccessful: " + response.body());
-//                    Log.i(TAG, "onSuccessful: Add andato a buon fine.");
-//                }else{
-//                    //Log.i(TAG, "onSuccessful: " + response.code());
-//                    //Log.i(TAG, "onSuccessful: " + response.message());
-//                    //Log.i(TAG, "onSuccessful: " + response.errorBody());
-//                    Log.i(TAG, "onSuccessful: Add non andato a buon fine..");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                Log.i(TAG, "onFailure: Fallimento Critico.");
-//            }
-//        });
-//
-//        listUser.enqueue(new Callback<List<Utente>>() {
-//            @Override
-//            public void onResponse(Call<List<Utente>> call, Response<List<Utente>> response) {
-//                if (response.isSuccessful()) {
-//                    Log.i(TAG, "onSuccessful: " + response.body());
-//                }else{
-//                    Log.i(TAG, "onSuccessful: " + response.code());
-//                    Log.i(TAG, "onSuccessful: " + response.message());
-//                    Log.i(TAG, "onSuccessful: " + response.errorBody());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Utente>> call, Throwable t) {
-//                Log.i(TAG, "onFailure: " + t.getLocalizedMessage());
-//            }
-//        });
-
-    }
-
-//    private void requestStoragePermission() {
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-//                Manifest.permission.CAMERA)) {
-//
-//            new AlertDialog.Builder(this)
-//                    .setTitle("Permission needed")
-//                    .setMessage("This permission is needed because of this and that")
-//                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            ActivityCompat.requestPermissions(MainActivity.this,
-//                                    new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-//                        }
-//                    })
-//                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    })
-//                    .create().show();
-//
-//        } else {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
 //        }
 //    }
 
-//    public void asyncReturn(String username, Callback call)  {
-//        Utente user = new Utente();
-//
-//        UserRetrofit servizio = RequestGenerator.retrofitInstance(API.USER_API).create(UserRetrofit.class);
-//
-//        Single<Utente> u = servizio.getUser(username)
-//                .observeOn(Schedulers.newThread())
-//                .subscribeOn(AndroidSchedulers.mainThread());
-//
-//        servizio.getUser(username)
-//                .observeOn(Schedulers.newThread())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SingleObserver<Utente>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {}
-//                    @Override
-//                    public void onSuccess(@NonNull Utente utente) {
-//                        user.setUsername(utente.getUsername());
-//                        user.setEmail(utente.getEmail());
-//                        user.setNome(utente.getNome());
-//                        user.setCognome(utente.getCognome());
-//                        user.setPhotolnk(utente.getPhotolnk());
-//
-//                        call.onSuccess(user);
-//                    }
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        Log.e(TAG, "onError: FetchAuthSession started.");
-//                        Log.e(TAG, e.toString());
-//                        call.onFailure(e);
-//                    }
-//                });
-//    }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

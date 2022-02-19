@@ -1,10 +1,6 @@
-package com.example.test.Retrofit;
+package com.example.test.Sandbox;
 
-import android.util.Log;
-
-import com.example.test.Retrofit.Enumeration.API;
-
-import io.reactivex.rxjava3.*;
+import com.example.test.Sandbox.Enumeration.API;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;

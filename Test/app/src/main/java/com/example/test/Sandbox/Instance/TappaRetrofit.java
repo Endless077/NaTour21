@@ -1,12 +1,10 @@
-package com.example.test.Retrofit.Instance;
+package com.example.test.Sandbox.Instance;
 
 import com.example.test.Entity.Tappa;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
-import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

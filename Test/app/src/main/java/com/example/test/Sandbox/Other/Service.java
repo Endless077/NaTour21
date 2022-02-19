@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.Sandbox.Other;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,24 +14,21 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.test.Retrofit.Enumeration.API;
-import com.example.test.Retrofit.Instance.ServerUtils;
-import com.example.test.Retrofit.RequestGenerator;
+import com.example.test.Callback;
+import com.example.test.Sandbox.Enumeration.API;
+import com.example.test.Sandbox.Instance.ServerUtils;
+import com.example.test.Sandbox.RequestGenerator;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
-import java.net.URL;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
