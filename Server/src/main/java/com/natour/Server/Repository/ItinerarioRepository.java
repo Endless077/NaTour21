@@ -17,7 +17,7 @@ public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 	@Query(value = "SELECT * FROM itinerario i WHERE i.id_utente = ?1", nativeQuery = true)
 	List<Itinerario> findByUsername(@Param(value = "username") String username);
 	
-	@Query(value = "SELECT * FROM itinerario ORDER BY  ", nativeQuery = true)
+	@Query(value = "SELECT * FROM itinerario ORDER BY id_itinerario DESC", nativeQuery = true)
 	List<Itinerario> findAllByRecent();
 	
 	@Query(value = "SELECT *"
@@ -27,10 +27,10 @@ public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 	
 	@Query(value = "SELECT *"
 			+ " FROM itinerario i"
-			+ " WHERE i.puntoiniziale = :puntoiniziale"
+			+ " WHERE i.puntoinizio = :puntoiniziale"
 			+ " AND i.latitudine_pi = :latitudineI"
 			+ " AND i.longitudine_pi = :longitudineI"
-			+ " AND i.puntofinale = :puntofinale"
+			+ " AND i.puntofine = :puntofinale"
 			+ " AND i.latitudine_pf = :latitudineF"
 			+ " AND i.longitudine_pf = :longitudineF", nativeQuery = true)
 	Optional<String> checkEquals(@Param(value = "puntoiniziale") String puntoiniziale,

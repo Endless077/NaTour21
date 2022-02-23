@@ -99,7 +99,7 @@ public class FotoItinerarioController {
 	//Post Mapping
 	@PostMapping(path = "pubblicaFoto")
 	@ResponseBody
-	public ResponseEntity<String> pubblshFoto(@RequestBody FotoItinerarioDTO fotoDTO) {
+	public ResponseEntity<String> publshFoto(@RequestBody FotoItinerarioDTO fotoDTO) {
 
 		FotoItinerario fotoItinerario = this.convertDtoToEntity(fotoDTO);
 
