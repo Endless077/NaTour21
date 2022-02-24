@@ -74,6 +74,10 @@ public class ItinerarioService implements IItinerarioService {
 		}
 		return true;
 	}
+	
+	public Optional<Long> getLastId(String username) {
+		return this.itinerarioRep.getLastId(username);
+	}
 
 	@Override
 	public boolean modificaItinerario(Itinerario updateItinerario) {

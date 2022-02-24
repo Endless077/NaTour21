@@ -168,6 +168,8 @@ public class ItinerarioController {
 		boolean creato = this.itinerarioService.creaItinerario(itinerario);
 		if(creato) {
 			Headers h = new Headers("Itinerario salvato.");
+			Optional<Long> id = this.itinerarioService.getLastId(itinerario.getUtente().getUsername());
+			h.addHeader("id_itinerario", id.get().toString());
 			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Itinerario non salvato.", HttpStatus.BAD_REQUEST);

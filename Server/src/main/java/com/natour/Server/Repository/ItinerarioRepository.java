@@ -25,6 +25,9 @@ public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 			+ " WHERE UPPER(i.titolo) LIKE concat('%', UPPER(?1), '%')", nativeQuery = true)
 	List<Itinerario> findAllByName(@Param(value = "nomeItinerario") String nomeItinerario);
 	
+	@Query(value = "SELECT max(i.id_itinerario) FROM itinerario i WHERE i.id_utente LIKE :username", nativeQuery = true)
+	Optional<Long> getLastId(@Param(value = "username") String username);
+	
 	@Query(value = "SELECT *"
 			+ " FROM itinerario i"
 			+ " WHERE i.puntoinizio = :puntoiniziale"
@@ -57,4 +60,5 @@ public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 									@Param(value = "difficulty") String difficulty,
 									@Param(value = "accessoDisabili") boolean accessoDisabili,
 									@Param(value = "areageografica") String areageografica);
+	
 }
