@@ -11,7 +11,7 @@ public interface ICompilationService {
 	List<Compilation> getAllCompilation();
 	Optional<Compilation> getCompilationByID(Long idcompilation);
 	List<Compilation> getCompilationByUsername(String username);
-	List<String> getItinerariInCompilation(Long idCompilation);
+	List<Long> getItinerariInCompilation(Long idCompilation);
 	
 	//Methods POST
 	boolean creaCompilation(Compilation utente);

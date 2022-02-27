@@ -1,5 +1,9 @@
 package com.natour.Server.Controller;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.Compilation;
+import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.CompilationDTO;
+import com.natour.Server.Model.DTO.ItinerarioDTO;
 import com.natour.Server.Service.CompilationService;
+import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Service.UserService;
 import com.natour.Server.Utils.Headers;
 
@@ -35,7 +42,7 @@ public class CompilationController {
 	@Autowired
 	@Qualifier("mainCompilationService")
 	private CompilationService compilationService;
-
+	
 	@Autowired
 	@Qualifier("mainUserService")
 	private UserService userService;
@@ -59,7 +66,7 @@ public class CompilationController {
 
 		if(result.isEmpty())
 			throw new RequestApiException("Compilation non trovata.", HttpStatus.NOT_FOUND);
-
+		
 		CompilationDTO compilation = convertEntityToDto(result.get());
 		return compilation;
 
@@ -82,12 +89,16 @@ public class CompilationController {
 
 	@GetMapping(path = "getComplation/itinerari/{idCompilation}")
 	@ResponseBody
-	public List<String> getItinerariInCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation) {
-		List<String> itinerariInCompilation = this.compilationService.getItinerariInCompilation(idCompilation);
-
-		if(itinerariInCompilation.isEmpty())
+	public List<ItinerarioDTO> getItinerariInCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation) {
+		Optional<Compilation> compilation = this.compilationService.getCompilationByID(idCompilation);
+		
+		if(compilation.get().getItinerari().isEmpty())
 			throw new RequestApiException("Compilation vuota.", HttpStatus.NOT_FOUND);
-
+		
+		List<ItinerarioDTO> itinerariInCompilation = new ArrayList<>();
+		for(Itinerario i : compilation.get().getItinerari())
+			itinerariInCompilation.add(utils(i));
+		
 		return itinerariInCompilation;
 	}
 
@@ -210,5 +221,18 @@ public class CompilationController {
 		compilation.setUtente(utente);
 		return compilation;
 	}
-
+	
+	private ItinerarioDTO utils(Itinerario itinerario) {
+		modelMapper.getConfiguration()
+		.setMatchingStrategy(MatchingStrategies.LOOSE);
+		ItinerarioDTO itinerarioDTO = new ItinerarioDTO();
+		itinerarioDTO = modelMapper.map(itinerario, ItinerarioDTO.class);
+		
+		//Mapping
+		String username = itinerario.getUtente().getUsername();
+		itinerarioDTO.setId_utente(username);
+		itinerarioDTO.setDurata(itinerario.getDurata().toString());
+		return itinerarioDTO;
+	}
+	
 }

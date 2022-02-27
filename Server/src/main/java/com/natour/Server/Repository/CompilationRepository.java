@@ -16,10 +16,10 @@ public interface CompilationRepository extends JpaRepository<Compilation,Long> {
 	@Query(value = "SELECT * FROM compilation c WHERE c.id_utente = :username", nativeQuery = true)
 	List<Compilation> findByUsername(@Param(value = "username") String username);
 	
-	@Query(value = "SELECT i.id_itinerario, i.titolo, i.areageografica, i.difficulty, i.id_utente"
+	@Query(value = "SELECT i.id_itinerario"
 			+" FROM compilation_itinerario_map AS c JOIN itinerario AS i ON c.id_itinerario_map = i.id_itinerario"
 			+" WHERE id_compilation_map = :idCompilation", nativeQuery = true)
-	List<String> getItinerarioInCompilation(@Param(value = "idCompilation") long idCompilation);
+	List<Long> getItinerarioInCompilation(@Param(value = "idCompilation") long idCompilation);
 	
 	@Query(value = "INSERT INTO compilation_itinerario_map VALUES (:idCompilation,:idItinerario)", nativeQuery = true)
 	void insertItinerarioInCompilation(@Param(value = "idCompilation") long idCompilation,

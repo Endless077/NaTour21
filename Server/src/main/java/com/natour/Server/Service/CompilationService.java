@@ -35,7 +35,7 @@ public class CompilationService implements ICompilationService{
 	}
 
 	@Override
-	public List<String> getItinerariInCompilation(Long idCompilation) {
+	public List<Long> getItinerariInCompilation(Long idCompilation) {
 		return this.compilationRep.getItinerarioInCompilation(idCompilation);
 	}
 
