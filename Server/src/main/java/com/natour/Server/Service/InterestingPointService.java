@@ -43,8 +43,21 @@ public class InterestingPointService implements IInterestingPointService {
 	@Override
 	public boolean creaInterestingPoint(InterestingPoint interestingPoint) {
 		try {
-			if(this.interestingPointRep.existsById(interestingPoint.getId_interestingpoint()))
+			if(!this.interestingPointRep.existsById(interestingPoint.getId_interestingpoint()))
 				this.interestingPointRep.save(interestingPoint);
+			else
+				return false;
+		}catch(IllegalArgumentException e){
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean creaInterestingPoints(List<InterestingPoint> interestingPoint) {
+		try {
+			if(!interestingPoint.isEmpty())
+				this.interestingPointRep.saveAll(interestingPoint);
 			else
 				return false;
 		}catch(IllegalArgumentException e){

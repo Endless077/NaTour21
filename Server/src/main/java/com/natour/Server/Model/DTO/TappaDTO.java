@@ -12,21 +12,18 @@ public class TappaDTO {
 	private String nometappa;
 	private Double latitudine;
 	private Double longitudine;
-	private String tipotappa;
 	private Integer sequenza;
 
 	/*********************************************************************************************/
 	
 	//Constructor
-	public TappaDTO(Long id_tappa, Long id_itinerario, String nometappa, Double latitudine, Double longitudine,
-			String tipotappa, Integer sequenza) {
+	public TappaDTO(Long id_tappa, Long id_itinerario, String nometappa, Double latitudine, Double longitudine, Integer sequenza) {
 		super();
 		this.id_tappa = id_tappa;
 		this.id_itinerario = id_itinerario;
 		this.nometappa = nometappa;
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
-		this.tipotappa = tipotappa;
 		this.sequenza = sequenza;
 	}
 	
@@ -73,14 +70,6 @@ public class TappaDTO {
 
 	public void setLongitudine(Double longitudine) {
 		this.longitudine = longitudine;
-	}
-
-	public String getTipotappa() {
-		return tipotappa;
-	}
-
-	public void setTipotappa(String tipotappa) {
-		this.tipotappa = tipotappa;
 	}
 
 	public Integer getSequenza() {

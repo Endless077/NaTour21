@@ -57,7 +57,7 @@ public class CompilationService implements ICompilationService{
 
 		Optional<String> str = this.compilationRep.ifExistIC(idCompilation, idItinerario);
 
-		if(!str.isEmpty()) {
+		if(str.isEmpty()) {
 			this.compilationRep.insertItinerarioInCompilation(idCompilation,idItinerario);
 			return true;
 		}

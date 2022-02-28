@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.InterestingPoint;
 import com.natour.Server.Model.Itinerario;
+import com.natour.Server.Model.Tappa;
 import com.natour.Server.Model.DTO.InterestingPointDTO;
+import com.natour.Server.Model.DTO.TappaDTO;
 import com.natour.Server.Service.InterestingPointService;
 import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Utils.Headers;
@@ -90,7 +92,7 @@ public class InterestingPointController {
 		return interestingPoint.getUrlfoto();
 	}
 
-	@GetMapping(path = "getInterestingPoint/getMultipleFoto/{idInterestingPoint}")
+	@GetMapping(path = "getInterestingPoint/getMultipleFoto/{idItinerario}")
 	@ResponseBody
 	public List<String> getFotoItinerarioMultiple(@PathVariable(name = "idItinerario") Long idItinerario) {
 		List<InterestingPointDTO> listaInterestingPoint = this.getInterestingPointByItinerario(idItinerario);
@@ -107,7 +109,7 @@ public class InterestingPointController {
 	//Post Mapping
 	@PostMapping(path = "createInterestingPoint")
 	@ResponseBody
-	public ResponseEntity<String> createCompilation(@RequestBody InterestingPointDTO interestingPointDTO) {
+	public ResponseEntity<String> createInterestingPoint(@RequestBody InterestingPointDTO interestingPointDTO) {
 
 		InterestingPoint interestingPoint = this.convertDtoToEntity(interestingPointDTO);
 
@@ -116,9 +118,26 @@ public class InterestingPointController {
 			Headers h = new Headers("Interesting point salvato.");
 			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 		}else
-			throw new RequestApiException("Compilation non salvata.", HttpStatus.BAD_REQUEST);
+			throw new RequestApiException("Interesting point non salvato.", HttpStatus.BAD_REQUEST);
 	}
 
+	@PostMapping(path = "createInterestingPoints")
+	@ResponseBody
+	public ResponseEntity<String> createInterestingPoints(@RequestBody List<InterestingPointDTO> interestingPointDTO) {
+
+		List<InterestingPoint> interestingPoint = new ArrayList<InterestingPoint>();
+		for(InterestingPointDTO ip : interestingPointDTO)
+			interestingPoint.add(convertDtoToEntity(ip));
+
+		boolean creato = this.interestingpointService.creaInterestingPoints(interestingPoint);
+		if(creato) {
+			Headers h = new Headers("InterestingPoint salvati.");
+			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
+		}else
+			throw new RequestApiException("InterestingPoint non salvati.", HttpStatus.BAD_REQUEST);
+		
+	}
+	
 	//Put Mapping
 	@PutMapping(path = "modifyInterestingPoint")
 	@ResponseBody

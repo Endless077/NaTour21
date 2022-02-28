@@ -3,7 +3,10 @@ package com.natour.Server.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,6 +24,8 @@ public interface CompilationRepository extends JpaRepository<Compilation,Long> {
 			+" WHERE id_compilation_map = :idCompilation", nativeQuery = true)
 	List<Long> getItinerarioInCompilation(@Param(value = "idCompilation") long idCompilation);
 	
+	@Modifying(clearAutomatically = true)
+	@Transactional
 	@Query(value = "INSERT INTO compilation_itinerario_map VALUES (:idCompilation,:idItinerario)", nativeQuery = true)
 	void insertItinerarioInCompilation(@Param(value = "idCompilation") long idCompilation,
 									  	@Param(value = "idItinerario") long idItinerario);
@@ -31,6 +36,8 @@ public interface CompilationRepository extends JpaRepository<Compilation,Long> {
 	Optional<String> ifExistIC(@Param(value = "idCompilation") long idCompilation,
 							   	@Param(value = "idItinerario") long idItinerario);
 	
+	@Modifying(clearAutomatically = true)
+	@Transactional
 	@Query(value = "DELETE FROM compilation_itinerario_map"
 			+ " WHERE id_compilation_map = :idCompilation"
 			+ " AND id_itinerario_map = :idItinerario", nativeQuery = true)

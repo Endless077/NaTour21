@@ -138,7 +138,6 @@ public class ItinerarioController {
 			Date d = new Date(formatter.parse(filtro.getDurata()).getTime());
 			durata = new Timestamp(d.getTime());
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -148,7 +147,7 @@ public class ItinerarioController {
 											filtro.getAccessodisabili(), filtro.getAreageografica());
 		
 		if(listaItinerari.isEmpty())
-			throw new RequestApiException("L'utente non possiede itinerari.", HttpStatus.NOT_FOUND);
+			throw new RequestApiException("Nessun itinerario trovato.", HttpStatus.NOT_FOUND);
 
 		List<ItinerarioDTO> ret = new ArrayList<ItinerarioDTO>();
 

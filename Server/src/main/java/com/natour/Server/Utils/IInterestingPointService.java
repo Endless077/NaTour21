@@ -14,6 +14,7 @@ public interface IInterestingPointService {
 	
 	//Methods POST
 	boolean creaInterestingPoint(InterestingPoint interestingPoint);
+	boolean creaInterestingPoints(List<InterestingPoint> interestingPoint);
 	
 	//Methods PUT
 	boolean modificaInterestingPoint(InterestingPoint interestingPoint);
@@ -21,6 +22,5 @@ public interface IInterestingPointService {
 	//Methods DELETE
 	boolean cancellaInterestingPoint(Long idInterestingPoint);
 	boolean cancellaFotoInterestingPoint(Long idInterestingPoint);
-	
 
 }
