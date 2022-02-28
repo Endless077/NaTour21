@@ -171,6 +171,16 @@ public class ItinerarioDTO {
 	public void setAreageografica(String areageografica) {
 		this.areageografica = areageografica;
 	}
+
+	@Override
+	public String toString() {
+		return "ItinerarioDTO [id_itinerario=" + id_itinerario + ", id_utente=" + id_utente + ", titolo=" + titolo
+				+ ", descrizione=" + descrizione + ", puntoinizio=" + puntoinizio + ", latitudine_pi=" + latitudine_pi
+				+ ", longitudine_pi=" + longitudine_pi + ", puntofine=" + puntofine + ", latitudine_pf=" + latitudine_pf
+				+ ", longitudine_pf=" + longitudine_pf + ", accessodisabili=" + accessodisabili + ", difficulty="
+				+ difficulty + ", durata=" + durata + ", lunghezza=" + lunghezza + ", areageografica=" + areageografica
+				+ "]";
+	}
 	
 	/*********************************************************************************************/
 

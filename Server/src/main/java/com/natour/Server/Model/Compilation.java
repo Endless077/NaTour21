@@ -38,7 +38,7 @@ public class Compilation implements Serializable {
 	          	joinColumns = @JoinColumn(name = "id_compilation_map", referencedColumnName = "id_compilation"),
 	          	inverseJoinColumns = @JoinColumn(name = "id_itinerario_map", referencedColumnName = "id_itinerario")
 	)
-	private List<Itinerario> itinerari = new ArrayList<Itinerario>();;
+	private List<Itinerario> itinerari = new ArrayList<Itinerario>();
 	
 	//Campi Locali
 	@Column(name="titolo", nullable = false)

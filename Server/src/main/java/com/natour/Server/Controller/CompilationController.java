@@ -1,9 +1,5 @@
 package com.natour.Server.Controller;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +27,6 @@ import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.CompilationDTO;
 import com.natour.Server.Model.DTO.ItinerarioDTO;
 import com.natour.Server.Service.CompilationService;
-import com.natour.Server.Service.ItinerarioService;
 import com.natour.Server.Service.UserService;
 import com.natour.Server.Utils.Headers;
 
@@ -72,7 +67,7 @@ public class CompilationController {
 
 	}
 
-	@GetMapping(path = "getComplation/byUsername/{username}")
+	@GetMapping(path = "getCompilation/byUsername/{username}")
 	@ResponseBody
 	public List<CompilationDTO> getCompilationByUsername(@PathVariable(name = "username") String username) {
 		List<Compilation> listaCompilation = this.compilationService.getCompilationByUsername(username);
@@ -87,7 +82,7 @@ public class CompilationController {
 		return ret;
 	}
 
-	@GetMapping(path = "getComplation/itinerari/{idCompilation}")
+	@GetMapping(path = "getCompilation/itinerari/{idCompilation}")
 	@ResponseBody
 	public List<ItinerarioDTO> getItinerariInCompilationByID(@PathVariable(name = "idCompilation") Long idCompilation) {
 		Optional<Compilation> compilation = this.compilationService.getCompilationByID(idCompilation);
@@ -95,7 +90,7 @@ public class CompilationController {
 		if(compilation.get().getItinerari().isEmpty())
 			throw new RequestApiException("Compilation vuota.", HttpStatus.NOT_FOUND);
 		
-		List<ItinerarioDTO> itinerariInCompilation = new ArrayList<>();
+		List<ItinerarioDTO> itinerariInCompilation = new ArrayList<ItinerarioDTO>();
 		for(Itinerario i : compilation.get().getItinerari())
 			itinerariInCompilation.add(utils(i));
 		
