@@ -38,6 +38,12 @@ public class CompilationService implements ICompilationService{
 	public List<Long> getItinerariInCompilation(Long idCompilation) {
 		return this.compilationRep.getItinerarioInCompilation(idCompilation);
 	}
+	
+	
+	@Override
+	public List<Compilation> getValidCompilation(String username, long idItinerario) {
+		return this.compilationRep.getValidCompilation(username, idItinerario);
+	}
 
 	@Override
 	public boolean creaCompilation(Compilation compilation) {
@@ -113,6 +119,7 @@ public class CompilationService implements ICompilationService{
 	public void setCompilationRep(CompilationRepository compilationRep) {
 		this.compilationRep = compilationRep;
 	}
+	
 
 	/*********************************************************************************************/
 

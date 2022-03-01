@@ -67,7 +67,7 @@ public class TappaController {
 		List<Tappa> listaTappe = this.tappaService.getTappaByItinerario(idItinerario);
 
 		if(listaTappe.isEmpty())
-			throw new RequestApiException("L'itinerario non possiede compilation.", HttpStatus.NOT_FOUND);
+			throw new RequestApiException("L'itinerario non possiede tappe.", HttpStatus.NOT_FOUND);
 
 		List<TappaDTO> ret = new ArrayList<TappaDTO>();
 		for(Tappa t : listaTappe)

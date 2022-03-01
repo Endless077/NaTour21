@@ -12,6 +12,7 @@ public interface ICompilationService {
 	Optional<Compilation> getCompilationByID(Long idcompilation);
 	List<Compilation> getCompilationByUsername(String username);
 	List<Long> getItinerariInCompilation(Long idCompilation);
+	List<Compilation> getValidCompilation(String username, long idItinerario);
 	
 	//Methods POST
 	boolean creaCompilation(Compilation utente);
@@ -23,6 +24,5 @@ public interface ICompilationService {
 	//Methods DELETE
 	boolean cancellaCompilation(Long id_compilation);
 	boolean removeItinerarioInCompilation(Long idCompilation, Long idItinerario);
-	
 
 }

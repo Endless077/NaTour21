@@ -96,7 +96,23 @@ public class CompilationController {
 		
 		return itinerariInCompilation;
 	}
-
+	
+	@GetMapping(path = "getCompilation/validsave/{username}/{idItinerario}")
+	@ResponseBody
+	public List<String> getCompilationValidSave(@PathVariable("username") String username,
+												@PathVariable("idItinerario") long idItinerario) {
+		List<Compilation> compilationValide = this.compilationService.getValidCompilation(username,idItinerario);
+		
+		if(compilationValide.isEmpty())
+			throw new RequestApiException("L'utente non possiede compilation.", HttpStatus.NOT_FOUND);
+		
+		List<String> codici = new ArrayList<String>();
+		for(Compilation c : compilationValide)
+			codici.add("C"+c.getId_compilation()+"-"+c.getTitolo());
+		
+		return codici;
+	}
+	
 	//Post Mapping
 	@PostMapping(path = "createCompilation")
 	@ResponseBody

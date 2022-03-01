@@ -24,6 +24,16 @@ public interface CompilationRepository extends JpaRepository<Compilation,Long> {
 			+" WHERE id_compilation_map = :idCompilation", nativeQuery = true)
 	List<Long> getItinerarioInCompilation(@Param(value = "idCompilation") long idCompilation);
 	
+	@Query(value = "SELECT DISTINCT *"
+			+ "	FROM compilation AS co"
+			+ "	WHERE co.id_utente LIKE :username"
+			+ "	EXCEPT"
+			+ "	SELECT DISTINCT co.id_compilation, co.descrizione, co.titolo, co.id_utente"
+			+ "	FROM compilation_itinerario_map AS c JOIN compilation AS co ON c.id_compilation_map = co.id_compilation"
+			+ "	WHERE co.id_utente LIKE :username AND c.id_itinerario_map = :idItinerario", nativeQuery = true)
+	List<Compilation> getValidCompilation(@Param(value = "username") String username,
+										  @Param(value = "idItinerario") long idItinerario);
+	
 	@Modifying(clearAutomatically = true)
 	@Transactional
 	@Query(value = "INSERT INTO compilation_itinerario_map VALUES (:idCompilation,:idItinerario)", nativeQuery = true)
