@@ -90,7 +90,19 @@ public class UserController {
 	}
 
 	//Put Mapping
-	//Not implemented.
+	@PostMapping(path = "modificaUtente")
+	@ResponseBody
+	public ResponseEntity<String> modifyUser(@RequestBody UserDTO utente) {
+
+		User newUser = convertDtoToEntity(utente);
+		
+		boolean creato = this.userService.creaUtente(newUser);
+		if(creato) {
+			Headers h = new Headers("Utente modificato.");
+			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
+		}else
+			throw new RequestApiException("Utente non salvato.", HttpStatus.BAD_REQUEST);
+	}
 
 	//Delete Mapping
 	@DeleteMapping(path = "deleteUtente/{username}")

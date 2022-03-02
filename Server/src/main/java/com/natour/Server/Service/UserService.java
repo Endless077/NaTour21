@@ -46,7 +46,15 @@ public class UserService implements IUserService {
 	
 	@Override
 	public boolean modificaUtente(User utente) {
-		throw new UnsupportedOperationException();
+		try {
+			if(this.userRep.existsById(utente.getUsername()))
+				this.userRep.save(utente);
+			else
+				return false;
+		}catch(IllegalArgumentException e){
+			return false;
+		}
+		return true;
 	}
 
 	@Override
