@@ -23,12 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.InterestingPoint;
 import com.natour.Server.Model.Itinerario;
-import com.natour.Server.Model.Tappa;
 import com.natour.Server.Model.DTO.InterestingPointDTO;
-import com.natour.Server.Model.DTO.TappaDTO;
 import com.natour.Server.Service.InterestingPointService;
 import com.natour.Server.Service.ItinerarioService;
-import com.natour.Server.Utils.Headers;
+import com.natour.Server.Utils.UtilsHeader;
 
 @RestController
 @RequestMapping(path = "api/interestingpoint", produces = { "application/json" })
@@ -115,7 +113,7 @@ public class InterestingPointController {
 
 		boolean creato = this.interestingpointService.creaInterestingPoint(interestingPoint);
 		if(creato) {
-			Headers h = new Headers("Interesting point salvato.");
+			UtilsHeader h = new UtilsHeader("Interesting point salvato.");
 			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Interesting point non salvato.", HttpStatus.BAD_REQUEST);
@@ -131,7 +129,7 @@ public class InterestingPointController {
 
 		boolean creato = this.interestingpointService.creaInterestingPoints(interestingPoint);
 		if(creato) {
-			Headers h = new Headers("InterestingPoint salvati.");
+			UtilsHeader h = new UtilsHeader("InterestingPoint salvati.");
 			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("InterestingPoint non salvati.", HttpStatus.BAD_REQUEST);
@@ -147,7 +145,7 @@ public class InterestingPointController {
 
 		boolean modificato = this.interestingpointService.modificaInterestingPoint(interestingPoint);
 		if(modificato) {
-			Headers h = new Headers("Interesting point modificato.");
+			UtilsHeader h = new UtilsHeader("Interesting point modificato.");
 			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Compilation non modificata.", HttpStatus.BAD_REQUEST);
@@ -160,7 +158,7 @@ public class InterestingPointController {
 
 		boolean eliminato = this.interestingpointService.cancellaInterestingPoint(idInterestingPoint);
 		if(eliminato) {
-			Headers h = new Headers("Interesting point eliminato.");
+			UtilsHeader h = new UtilsHeader("Interesting point eliminato.");
 			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("InterestingPoint non eliminato.", HttpStatus.BAD_REQUEST);
@@ -172,7 +170,7 @@ public class InterestingPointController {
 
 		boolean eliminato = this.interestingpointService.cancellaFotoInterestingPoint(idInterestingPoint);	
 		if(eliminato) {
-			Headers h = new Headers("Foto dell' interesting point eliminata.");
+			UtilsHeader h = new UtilsHeader("Foto dell' interesting point eliminata.");
 			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Foto di InterestingPoint non eliminata.", HttpStatus.BAD_REQUEST);

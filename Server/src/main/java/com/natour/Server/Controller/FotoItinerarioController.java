@@ -25,7 +25,7 @@ import com.natour.Server.Model.Itinerario;
 import com.natour.Server.Model.DTO.FotoItinerarioDTO;
 import com.natour.Server.Service.FotoItinerarioService;
 import com.natour.Server.Service.ItinerarioService;
-import com.natour.Server.Utils.Headers;
+import com.natour.Server.Utils.UtilsHeader;
 
 @RestController
 @RequestMapping(path = "api/fotoItinerario", produces = { "application/json" })
@@ -105,7 +105,7 @@ public class FotoItinerarioController {
 
 		boolean creato = this.fotoItinerarioService.inserisciFotoItinerario(fotoItinerario);
 		if(creato) {
-			Headers h = new Headers("Foto dell'itinerario salvata.");
+			UtilsHeader h = new UtilsHeader("Foto dell'itinerario salvata.");
 			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Foto dell'itinerario non salvata.", HttpStatus.BAD_REQUEST);
@@ -122,7 +122,7 @@ public class FotoItinerarioController {
 		
 		boolean eliminato = this.fotoItinerarioService.eliminaFotoItinerario(idFoto);
 		if(eliminato) {
-			Headers h = new Headers("Foto dell'itinerario salvata.");
+			UtilsHeader h = new UtilsHeader("Foto dell'itinerario salvata.");
 			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Itinerario non eliminato.", HttpStatus.BAD_REQUEST);

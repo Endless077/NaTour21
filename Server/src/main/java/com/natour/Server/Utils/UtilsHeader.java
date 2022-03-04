@@ -2,12 +2,12 @@ package com.natour.Server.Utils;
 
 import org.springframework.http.HttpHeaders;
 
-public class Headers {
+public class UtilsHeader {
 	
 	public HttpHeaders headers;
 
 	//Constructor
-	public Headers() {
+	public UtilsHeader() {
 		super();
 		this.headers = new HttpHeaders();
 		headers.add("Information-Service", "Personal Header");
@@ -17,7 +17,7 @@ public class Headers {
 
 	}
 
-	public Headers(String message) {
+	public UtilsHeader(String message) {
 		super();
 		this.headers = new HttpHeaders();
 		headers.add("Information-Service", message);

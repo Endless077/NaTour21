@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.natour.Server.Exception.RequestApiException;
 import com.natour.Server.Model.User;
 import com.natour.Server.Model.DTO.UserDTO;
-import com.natour.Server.Utils.Headers;
+import com.natour.Server.Utils.UtilsHeader;
 import com.natour.Server.Utils.IUserService;
 
 @RestController
@@ -66,12 +66,12 @@ public class UserController {
 			User newUser = convertDtoToEntity(utente);
 			boolean creato = this.userService.creaUtente(newUser);
 			if(creato) {
-				Headers h = new Headers("Utente social salvato.");
+				UtilsHeader h = new UtilsHeader("Utente social salvato.");
 				return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 			}else
 				throw new RequestApiException("Utente social non salvato.", HttpStatus.BAD_REQUEST);
 		}
-		Headers h = new Headers("Utente social già esistente.");
+		UtilsHeader h = new UtilsHeader("Utente social già esistente.");
 		return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 	}
 	  
@@ -84,7 +84,7 @@ public class UserController {
 		
 		boolean creato = this.userService.creaUtente(newUser);
 		if(creato) {
-			Headers h = new Headers("Utente salvato.");
+			UtilsHeader h = new UtilsHeader("Utente salvato.");
 			return ResponseEntity.status(HttpStatus.CREATED).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Utente non salvato.", HttpStatus.BAD_REQUEST);
@@ -99,7 +99,7 @@ public class UserController {
 		
 		boolean modificato = this.userService.modificaUtente(newUser);
 		if(modificato) {
-			Headers h = new Headers("Utente modificato.");
+			UtilsHeader h = new UtilsHeader("Utente modificato.");
 			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Utente non salvato.", HttpStatus.BAD_REQUEST);
@@ -112,7 +112,7 @@ public class UserController {
 
 		boolean eliminato = this.userService.deleteUtente(username);
 		if(eliminato) {
-			Headers h = new Headers("Utente eliminato.");
+			UtilsHeader h = new UtilsHeader("Utente eliminato.");
 			return ResponseEntity.status(HttpStatus.OK).headers(h.getHeaders()).build();
 		}else
 			throw new RequestApiException("Utente non eliminato.", HttpStatus.BAD_REQUEST);
