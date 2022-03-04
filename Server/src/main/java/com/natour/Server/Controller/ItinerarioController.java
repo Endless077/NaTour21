@@ -131,7 +131,7 @@ public class ItinerarioController {
 	
 	@GetMapping(path = "getItinerario/byFilter")
 	@ResponseBody
-	public List<ItinerarioDTO> getItinerarioByFilter(@RequestParam Map<String, String> filters) {
+	public List<ItinerarioDTO> getItinerarioByFilter(@RequestParam Map<String,String> filters) {
 		
 		Map<String,String> realFilter = checkFilter(filters);
 		
