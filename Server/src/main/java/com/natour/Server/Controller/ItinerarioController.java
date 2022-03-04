@@ -254,6 +254,7 @@ public class ItinerarioController {
 		map.put("difficulty","");
 		map.put("accessodisabili","false");
         map.put("areageografica","");
+        map.put("url","q?titolo=&puntoinizio=&puntofine=&durata=&lenght=&difficulty=&accessodisabili=");
 		return map;
 	}
 
