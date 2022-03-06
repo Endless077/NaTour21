@@ -10,6 +10,8 @@ public class FotoItinerarioDTO {
 
 	//Campi Locali
 	private String urlfoto;
+//	private String latitudine_foto;
+//	private String longitudine_foto;
 
 	/*********************************************************************************************/
 	
@@ -55,6 +57,26 @@ public class FotoItinerarioDTO {
 	public void setUrlfoto(String urlfoto) {
 		this.urlfoto = urlfoto;
 	}
+
+	
+//	public String getLatitudine_foto() {
+//		return latitudine_foto;
+//	}
+//
+//
+//	public void setLatitudine_foto(String latitudine_foto) {
+//		this.latitudine_foto = latitudine_foto;
+//	}
+//
+//
+//	public String getLongitudine_foto() {
+//		return longitudine_foto;
+//	}
+//
+//
+//	public void setLongitudine_foto(String longitudine_foto) {
+//		this.longitudine_foto = longitudine_foto;
+//	}
 	
 	/*********************************************************************************************/
 	

@@ -31,6 +31,10 @@ public class FotoItinerario implements Serializable {
 	//Campi Locali
 	@Column(name = "urlfoto", nullable = false)
 	private String urlfoto;
+//	@Column(name = "latitudine_foto", nullable = false)
+//	private String latitudine_foto;
+//	@Column(name = "longitudine_foto", nullable = false)
+//	private String longitudine_foto;
 
 	//altri attributi di foto (i.e Metadati)
 
@@ -72,6 +76,22 @@ public class FotoItinerario implements Serializable {
 	public void setUrlfoto(String urlfoto) {
 		this.urlfoto = urlfoto;
 	}
+
+//	public String getLatitudine_foto() {
+//		return latitudine_foto;
+//	}
+//
+//	public void setLatitudine_foto(String latitudine_foto) {
+//		this.latitudine_foto = latitudine_foto;
+//	}
+//
+//	public String getLongitudine_foto() {
+//		return longitudine_foto;
+//	}
+//
+//	public void setLongitudine_foto(String longitudine_foto) {
+//		this.longitudine_foto = longitudine_foto;
+//	}
 
 	/*********************************************************************************************/
 
