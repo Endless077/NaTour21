@@ -14,7 +14,7 @@ import com.natour.Server.Model.Itinerario;
 @Repository
 public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 	
-	@Query(value = "SELECT * FROM itinerario i WHERE i.id_utente = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM itinerario i WHERE i.id_utente = :username", nativeQuery = true)
 	List<Itinerario> findByUsername(@Param(value = "username") String username);
 	
 	@Query(value = "SELECT * FROM itinerario ORDER BY id_itinerario DESC", nativeQuery = true)
@@ -22,7 +22,7 @@ public interface ItinerarioRepository extends JpaRepository<Itinerario,Long> {
 	
 	@Query(value = "SELECT *"
 			+ " FROM itinerario i"
-			+ " WHERE UPPER(i.titolo) LIKE concat('%', UPPER(?1), '%')", nativeQuery = true)
+			+ " WHERE UPPER(i.titolo) LIKE concat('%', UPPER(:nomeItinerario), '%')", nativeQuery = true)
 	List<Itinerario> findAllByName(@Param(value = "nomeItinerario") String nomeItinerario);
 	
 	@Query(value = "SELECT max(i.id_itinerario) FROM itinerario i WHERE i.id_utente LIKE :username", nativeQuery = true)
