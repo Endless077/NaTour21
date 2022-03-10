@@ -1,8 +1,0 @@
-com.natour.Server
-com.natour.Server.Controller
-com.natour.Server.Exception
-com.natour.Server.Model
-com.natour.Server.Model.DTO
-com.natour.Server.Repository
-com.natour.Server.Service
-com.natour.Server.Utils

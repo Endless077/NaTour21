@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.natour.Server"},{"l":"com.natour.Server.Controller"},{"l":"com.natour.Server.Exception"},{"l":"com.natour.Server.Model"},{"l":"com.natour.Server.Model.DTO"},{"l":"com.natour.Server.Repository"},{"l":"com.natour.Server.Service"},{"l":"com.natour.Server.Utils"}];updateSearchResults();
