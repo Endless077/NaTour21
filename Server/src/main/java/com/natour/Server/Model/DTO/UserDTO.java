@@ -1,7 +1,7 @@
 package com.natour.Server.Model.DTO;
 
 public class UserDTO {
-
+	
 	//Class Primary Key
 	private String username;
 	
