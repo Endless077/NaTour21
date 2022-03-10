@@ -150,7 +150,7 @@ public class ItinerarioController {
 				realFilter.get("puntoinizio"),
 				realFilter.get("puntofine"),
 				durata,
-				Double.parseDouble(realFilter.get("lenght")),
+				Double.parseDouble(realFilter.get("length")),
 				realFilter.get("difficulty"),
 				Boolean.parseBoolean(realFilter.get("accessodisabili")),
 				realFilter.get("areageografica"));
@@ -250,7 +250,7 @@ public class ItinerarioController {
 		map.put("puntoinizio","");
 		map.put("puntofine","");
 		map.put("durata","23:59:00");
-		map.put("lenght","100");
+		map.put("length","100");
 		map.put("difficulty","");
 		map.put("accessodisabili","false");
         map.put("areageografica","");
