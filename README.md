@@ -120,8 +120,8 @@ Intanto la presentazione non l'abbiamo terminata (intorno
 ai 7 minuti ci hanno stoppato), secondo loro la documentazione
 era perfetta, fatta bene ed era ciò che volevano.
 
-- C: "Vedo scritto <Mago di Oz>, come avete fatto? è simulato?"
-- S: "Vedo scritto <Mock> cosa vuol dire? a cosa è riferito?"
+- FC: "Vedo scritto Mago di Oz, come avete fatto? è simulato?"
+- SDM: "Vedo scritto Mock cosa vuol dire? a cosa è riferito?"
 
 #### Vi hanno fatto runnare la demo?
 
