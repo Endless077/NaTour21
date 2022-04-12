@@ -1,7 +1,6 @@
 
 ![Logo](https://github.com/Endless077/NaTour21/blob/main/Varie/Logo/app_logo.png)
 
-
 # NaTour21
 
 NaTour21 è un moderno social network per dispositivi mobile che nasce come supporto di condivisione di materiale per amanti di trekking ed escursionismo.
@@ -72,14 +71,15 @@ La presentazione PPT è disponibile in [qui](https://github.com/Endless077/NaTou
 
 ## Authors
 
-- [Garofalo Antonio](https://github.com/Endless077) - N86003129
-- [Bianco Luca](https://github.com/Luca-Bianco) - N86003200
+- [Garofalo Antonio](https://github.com/Endless077)
+- [Bianco Luca](https://github.com/Luca-Bianco)
 
 
 ## Support
 
 Support e feedback contattando support.natour21@libero.it
 oppure uno dei collaboratori.
+
 
 ## License
 
@@ -90,6 +90,7 @@ oppure uno dei collaboratori.
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
+
 ## FAQ
 
 #### Funziona l'applicativo?
@@ -99,7 +100,6 @@ No, il backend è shutdown, bisogna ricostruirlo seguendo la documentazione appo
 #### Quanto avete avuto al progetto?
 
 30
-
 
 #### Su cosa vi siete concentrati?
 
@@ -126,7 +126,6 @@ era perfetta, fatta bene ed era ciò che volevano.
 #### Vi hanno fatto runnare la demo?
 
 No, per nulla ma per i posteri consiglio di essere pronti a farlo.
-
 
 
 ## Used By
