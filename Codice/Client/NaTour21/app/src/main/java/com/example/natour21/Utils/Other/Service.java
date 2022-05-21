@@ -210,7 +210,6 @@ public class Service {
 
     private static void requestGPS(Activity context, int requestCode) {
         Log.i(TAG, "requestGPS: started.");
-        Log.i(TAG, "requestStorage: started.");
         new MaterialAlertDialogBuilder(context, R.style.MyThemeOverlay_MaterialComponents_MaterialAlertDialog)
                 .setTitle("Utilizzo accesso posizionale necessario.")
                 .setMessage("Impostazioni->App->NaTour21->Permessi e Autorizzazioni.")
