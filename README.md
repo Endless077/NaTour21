@@ -33,7 +33,7 @@ e molti altri ancora presenti in documentazione e presentazione ppt.
 
 ## Deployment
 
-Comandi di Amplify
+Utilizzare Amplify:
 
 ```bash
   npm install @amplify/cli
@@ -64,9 +64,9 @@ o sviluppato in futuro.
 
 ## Documentation
 
-La documentazione è diponibile in [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pdf).
+La documentazione è disponibile [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pdf).
 
-La presentazione PPT è disponibile in [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pptx).
+La presentazione PPT è disponibile [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pptx).
 
 
 ## Authors
