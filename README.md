@@ -1,11 +1,12 @@
 
-![Logo](https://github.com/Endless077/NaTour21/blob/main/Varie/Logo/app_logo.png)
+![Wallpaper](https://github.com/Endless077/NaTour21/blob/main/other/logo/app_logo.png)
 
-# NaTour21
+# 🌲 NaTour21
 
 NaTour21 è un moderno social network per dispositivi mobile che nasce come supporto di condivisione di materiale per amanti di trekking ed escursionismo.
 
-## Features
+
+## 🚀 Features
 
 - Google e Facebook auth (oltre a quello locale).
 
@@ -21,7 +22,8 @@ NaTour21 è un moderno social network per dispositivi mobile che nasce come supp
 
 Tanto altro ancora…in fase di sviluppo.
 
-## Acknowledgements
+
+## ✔️ Acknowledgements
 
 - [Latex](https://www.overleaf.com/learn/latex/Tutorials)
 - [RxJava](https://github.com/ReactiveX/RxJava)
@@ -31,7 +33,8 @@ Tanto altro ancora…in fase di sviluppo.
 
 e molti altri ancora presenti in documentazione e presentazione ppt.
 
-## Deployment
+
+## 🖥️ Deployment
 
 Utilizzare Amplify:
 
@@ -54,44 +57,15 @@ per configurare amplify CLI sulla propria macchina.
 Seguire la guida [qui](https://docs.amplify.aws/lib/q/platform/android/).
 
 
-## Appendice
+## 📖 Appendix
 
 Il progetto è stato creato ESCLUSIVAMENTE a scopo
 didattico e non è diretto alla pubblicazione, può
 essere usato come spunto per l'esame in questione 
-o sviluppato in futuro.
+o sviluppato autonomamente in futuro.
 
 
-## Documentation
-
-La documentazione è disponibile [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pdf).
-
-La presentazione PPT è disponibile [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pptx).
-
-
-## Authors
-
-- [Garofalo Antonio](https://github.com/Endless077)
-- [Bianco Luca](https://github.com/Luca-Bianco)
-
-
-## Support
-
-Support e feedback contattando support.natour21@libero.it
-oppure uno dei collaboratori.
-
-
-## License
-
-[GNU v3.0](https://choosealicense.com/licenses/gpl-3.0/)
-
-
-## Badge
-
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-
-
-## FAQ
+## ❓ FAQ
 
 #### Funziona l'applicativo?
 
@@ -105,7 +79,7 @@ No, il backend è shutdown, bisogna ricostruirlo seguendo la documentazione appo
 
 Per passare l'esame la maggior parte del tempo è dedicata
 alla realizzazione di una documentazione quanto meno corretta,
-maggiori dettagli sulla parte di TESTING  e USABILITÀ.
+maggiori dettagli sulla parte di TESTING e USABILITÀ.
 
 #### Cosa avete usato per il progetto?
 
@@ -128,9 +102,23 @@ era perfetta, fatta bene ed era ciò che volevano.
 No, per nulla ma per i posteri consiglio di essere pronti a farlo.
 
 
-## Used By
+## 📝 Documentation
 
-Usato dalle seguenti compagnie:
+La documentazione è disponibile [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pdf).
 
-- Me stesso medesimo.
-- Nessuno (neanche SoftEngUniNA).
+La presentazione PPT è disponibile [qui](https://github.com/Endless077/NaTour21/blob/main/Varie/NaTour21.pptx).
+
+
+## 🖐 Authors
+
+- [Garofalo Antonio](https://github.com/Endless077)
+- [Bianco Luca](https://github.com/Luca-Bianco)
+
+📧 Support e feedback contattando uno dei collaboratori.
+
+
+## 💾 About
+
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+
+©️ GNU General Public License (GPL), more details [here](https://www.gnu.org/licenses/gpl-3.0.en.html).
